@@ -1,0 +1,23 @@
+{
+  "name": "components",
+  "version": "1.0.0",
+  "description": "Liquid component library module for platformOS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tailwindcss -i ./styles/index.css -o ../public/assets/components.css --watch",
+    "build": "tailwindcss -i ./styles/index.css -o ../public/assets/components.css --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Platform-OS/pos-module-components.git"
+  },
+  "author": "platformOS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Platform-OS/pos-module-components/issues"
+  },
+  "homepage": "https://github.com/Platform-OS/pos-module-components#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.1.8"
+  }
+}
