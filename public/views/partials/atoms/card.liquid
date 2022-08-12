@@ -1,0 +1,19 @@
+{% comment %}
+params:
+  tag: HTML tag (default: div)
+  variant: default | highlighted (default: 'default')
+  content: string
+{% endcomment %}
+{% liquid
+  assign tag = tag | default: 'div'
+  assign variant = variant | default: 'default'
+  assign classes = 'px-3 py-2 rounded-md '
+  if variant == 'highlighted'
+    assign classes = classes | append: 'bg-amber-100'
+  else
+    assign classes = classes | append: 'bg-white'
+  endif
+%}
+<{{tag}} class="{{classes}}">
+  {{content}}
+</{{tag}}>

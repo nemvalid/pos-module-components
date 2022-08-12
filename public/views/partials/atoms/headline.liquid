@@ -1,0 +1,26 @@
+{% comment %}
+params:
+  tag: HTML tag
+  variant: h1 | h2 | h3 | h4 | h5 | h6
+  content: string
+{% endcomment %}
+{% liquid
+  assign tag = tag | default: 'h1'
+  assign variant = variant | default: 'h1'
+  assign classes = 'font-bold '
+  if variant == 'h1'
+    assign classes = classes | append: 'text-5xl'
+  elsif variant == 'h2'
+    assign classes = classes | append: 'text-4xl'
+  elsif variant == 'h3'
+    assign classes = classes | append: 'text-3xl'
+  elsif variant == 'h4'
+    assign classes = classes | append: 'text-2xl'
+  elsif variant == 'h5'
+    assign classes = classes | append: 'text-xl'
+  elsif variant == 'h6'
+    assign classes = classes | append: 'text-xl'
+  endif
+%}
+<{{tag}} class="{{classes}}">{{content}}</{{tag}}>
+
