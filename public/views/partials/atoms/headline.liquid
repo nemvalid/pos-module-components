@@ -3,6 +3,7 @@ params:
   tag: HTML tag
   variant: h1 | h2 | h3 | h4 | h5 | h6
   content: string
+  attributes: object
 {% endcomment %}
 {% liquid
   assign tag = tag | default: 'h1'
@@ -22,5 +23,11 @@ params:
     assign classes = classes | append: 'text-xl'
   endif
 %}
-<{{tag}} class="{{classes}}">{{content}}</{{tag}}>
+<{{tag}}
+  class="{{classes}}"
+  {% for attribute in attributes %}
+  {{ attribute[0] }}="{{ attribute[1] }}"
+  {% endfor %}
+>{{content}}</{{tag}}>
+
 
