@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     {% liquid
-      try_rc
+      function theme_manager_exists = 'modules/core/lib/queries/module/exists', name: 'theme-manager', type: 'module'
+      if theme_manager_exists
         include 'modules/theme-manager/theme_headscripts'
-      endtry_rc
+      endif
     %}
     <link rel="stylesheet" href="{{ 'modules/components/components.css' | asset_url }}">
     <style>
