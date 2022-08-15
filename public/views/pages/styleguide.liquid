@@ -16,14 +16,16 @@ layout: modules/components/styleguide
       {% for param_group in component.metadata.params %}
         {% liquid
           assign paramtype = param_group[1] | type_of
+          assign rendertype = paramtype
           assign key = param_group[0]
           if paramtype == 'Array'
             hash_assign default_render_params[key] = param_group[1].first
+            assign rendertype = param_group[1].first | type_of
           else
             hash_assign default_render_params[key] = param_group[1]
           endif
         %}
-        <p><span class="font-bold">{{ param_group[0] | humanize }} ({{ paramtype }}):</span>
+        <p><span class="font-bold">{{ param_group[0] | humanize }} ({{ rendertype }}):</span>
         {% if paramtype == 'Array' %}
           {{ param_group[1] | join: ' | '}}
         {% else %}
