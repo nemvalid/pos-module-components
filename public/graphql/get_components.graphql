@@ -1,0 +1,18 @@
+query Components {
+  atoms: admin_liquid_partials(
+    filter: {path: {contains: "components/atoms/"}}
+  ) {
+    results {
+      path
+      metadata
+    }
+  }
+  molecules: admin_liquid_partials(
+    filter: {path: {contains: "components/molecules/"}}
+  ) {
+    results {
+      path
+      metadata
+    }
+  }
+}

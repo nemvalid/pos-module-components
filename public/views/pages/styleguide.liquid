@@ -1,4 +1,97 @@
 ---
-layout: modules/admin/application
+layout: modules/components/styleguide
 ---
-Styleguide page implementation example
+{% function components_query_result = 'modules/components/lib/queries/get_components' %}
+
+<div class="flex">
+  <div class="pt-4 leading-4 sticky top-0 bg-white z-50 pr-8">
+  {% for component_group in components_query_result %}
+    <a class="border-l-4 border-gray-700 pl-2 hover:bg-gray-300 flex items-center py-3" href="#{{ component_group[0] }}">
+      <span>{{ component_group[0] | humanize }}</span>
+    </a>
+    {% for component in component_group[1].results %}
+    <div class="ml-4 mt-1">
+      <a class="border-l-4 border-red-400 pl-2 hover:bg-gray-300 flex items-center py-3" href="#{{ component.metadata.name }}">
+        <span>{{component.metadata.name | humanize }}
+      </a>
+    </div>
+    {% endfor %}
+  {% endfor %}
+  </div>
+
+  <div class="h-full max-h-screen overflow-y-auto flex-1">
+  {% for component_group in components_query_result %}
+    <section style="padding: 20px">
+      <a name="{{ component_group[0]}}"></a>
+      <h2 class="text-2xl">{{ component_group[0] | humanize }}</h2>
+
+      {% for component in component_group[1].results %}
+      {% assign default_render_params = '{}' | parse_json %}
+      <div style="padding: 20px 0">
+        <div style="border: 2px solid #ddd; padding: 15px; margin: 15px 0; border-radius: 5px;">
+          <a name="{{ component.metadata.name }}">
+            <h3 class="text-xl font-bold">{{component.metadata.name | humanize }}</h3>
+          </a><br>
+          {% for param_group in component.metadata.params %}
+            {% liquid
+              assign paramtype = param_group[1] | type_of
+              assign rendertype = paramtype
+              assign key = param_group[0]
+              if paramtype == 'Array'
+                hash_assign default_render_params[key] = param_group[1].first
+                assign rendertype = param_group[1].first | type_of
+              else
+                hash_assign default_render_params[key] = param_group[1]
+              endif
+            %}
+            <p><span class="font-bold">{{ param_group[0] | humanize }} ({{ rendertype }}):</span>
+            {% if paramtype == 'Array' %}
+              {{ param_group[1] | join: ' | '}}
+            {% else %}
+              {{ param_group[1] }}
+            {% endif %}
+            </p>
+          {% endfor %}
+
+          <details class="py-6">
+            <summary class="text-xl">Variants & examples</summary>
+            <div>
+
+          {% for param_group in component.metadata.params %}
+              {% assign render_params = '{}' | parse_json | hash_merge: default_render_params %}
+              {% for param_value in param_group[1] %}
+                {% liquid
+                assign paramtype = param_value | type_of
+                if paramtype == 'Boolean' and param_value == param_group[1].first
+                  assign is_default_boolean = true
+                else
+                  assign is_default_boolean = false
+                endif
+                %}
+                {% unless param_group[0] == 'content' or is_default_boolean %}
+                  {% liquid
+                    assign key = param_group[0]
+                    hash_assign render_params[key] = param_value
+                  %}<br>
+                  <b>{{key}}:</b> {{param_value}}
+                  <br>
+                  <div style="margin: 10px 0">
+                    {% include component.path, params: render_params %}
+                  </div>
+                  <pre>{{ render_params | json }}</pre>
+
+                {% endunless %}
+              {% endfor %}
+                  <hr>
+          {% endfor %}
+            </div>
+          </details>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+    <hr />
+  {% endfor %}
+  </div>
+
+</div>

@@ -1,0 +1,33 @@
+---
+metadata:
+  name: Example molecule
+  params:
+    variant:
+      - variant1
+      - variant2
+    content: Test content
+    attributes: {}
+---
+{% liquid
+  assign tag = params.tag | default: 'div'
+  assign variant = params.variant | default: 'default'
+  assign content = params.content
+
+  assign classes = 'border border-slate-200 rounded px-3 py-2 rounded-md '
+
+  if variant == 'variant2'
+    assign classes = classes | append: 'bg-amber-100'
+  else
+    assign classes = classes | append: 'bg-white'
+  endif
+%}
+<div class="{{classes}}">
+  <div class="py-6">{{content}}</div>
+
+  {% assign secondary_button_params = '{}' | parse_json | hash_merge: variant: 'secondary', content: 'Cancel' %}
+  {% theme_render_rc 'components/atoms/button', params: secondary_button_params %}
+
+  {% assign primary_button_params = '{}' | parse_json | hash_merge: variant: 'primary', content: 'Save' %}
+  {% theme_render_rc 'components/atoms/button', params: primary_button_params %}
+
+</div>
