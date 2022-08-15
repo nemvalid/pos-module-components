@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% comment %}
-      TODO: make this dynamic!!!
-    {% endcomment %}
+    {% liquid
+      try_rc
+        include 'modules/theme-manager/theme_headscripts'
+      endtry_rc
+    %}
     <link rel="stylesheet" href="{{ 'modules/components/components.css' | asset_url }}">
     <style>
       body {
@@ -17,7 +19,6 @@
       .main {
         background: #fafafa;
         min-height: 100vh;
-        padding: 20px;
       }
 
       hr {
@@ -29,7 +30,7 @@
   <body>
     <div class="wrapper">
       <main class="main">
-        <h1 class="text-3xl">Component Library</h1><hr />
+        <h1 class="text-3xl p-6">Component Library</h1>
         {{content_for_layout}}
       </main>
     </div>
