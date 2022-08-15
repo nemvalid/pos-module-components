@@ -1,24 +1,38 @@
-{% comment %}
-params:
-  tag: HTML tag (default: button)
-  variant: primary | secondary | tertiary (default: primary)
-  size: normal | small (default: normal)
-  disabled: boolean (default: false)
-  content: string
-  attributes: object
-{% endcomment %}
+---
+metadata:
+  name: Button
+  params:
+    variant:
+      - primary
+      - secondary
+    size:
+      - normal
+      - small
+    disabled:
+      - false
+      - true
+    content: Click me
+---
 {% liquid
-  assign tag = tag | default: 'button'
-  assign variant = variant | default: 'primary'
-  assign size = size | default: 'normal'
-  assign disabled = disabled | default: false
+  assign tag = params.tag | default: 'button'
+  assign variant = params.variant | default: 'primary'
+  assign size = params.size | default: 'normal'
+  assign disabled = params.disabled | default: false
+  assign attributes = params.attributes
+  assign content = params.content
 
-  assign classes = 'font-bold py-2 px-4'
+  assign classes = 'whitespace-nowrap inline-flex items-center justify-center'
 
   if variant == 'primary'
-    assign classes = classes | append: ' bg-blue-500 hover:bg-blue-700 text-white rounded'
+    assign classes = classes | append: ' bg-blue-500 hover:bg-blue-700 text-white rounded-md'
   elsif variant == 'secondary'
-    assign classes = classes | append: ' bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full'
+    assign classes = classes | append: ' bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded-full'
+  endif
+
+  if size == 'small'
+    assign classes = classes | append: ' px-3 py-1 text-sm'
+  else
+    assign classes = classes | append: ' px-5 py-2'
   endif
 
   if disabled == true

@@ -1,14 +1,25 @@
-{% comment %}
-params:
-  tag: HTML tag
-  variant: h1 | h2 | h3 | h4 | h5 | h6
-  content: string
-  attributes: object
-{% endcomment %}
+---
+metadata:
+  name: Headline
+  params:
+    tag: h1
+    variant:
+      - h1
+      - h2
+      - h3
+      - h4
+      - h5
+      - h6
+    content: I'm a headline
+---
 {% liquid
-  assign tag = tag | default: 'h1'
-  assign variant = variant | default: 'h1'
+  assign tag = params.tag | default: 'h1'
+  assign variant = params.variant | default: 'h1'
+  assign attributes = params.attributes
+  assign content = params.content
+
   assign classes = 'font-bold '
+
   if variant == 'h1'
     assign classes = classes | append: 'text-5xl'
   elsif variant == 'h2'

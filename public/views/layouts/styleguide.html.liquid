@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% comment %}
+      TODO: make this dynamic!!!
+    {% endcomment %}
+    <link rel="stylesheet" href="{{ 'modules/components/components.css' | asset_url }}">
+    <style>
+      body {
+        background: #ddd;
+      }
+      .wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .main {
+        background: #fafafa;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      hr {
+        margin: 15px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <main class="main">
+        <h1 class="text-3xl">Component Library</h1><hr />
+        {{content_for_layout}}
+      </main>
+    </div>
+  </body>
+</html>

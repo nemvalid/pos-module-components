@@ -1,4 +1,68 @@
 ---
-layout: modules/admin/application
+layout: modules/components/styleguide
 ---
-Styleguide page implementation example
+
+{% graphql components_query_result = 'modules/components/get_components' %}
+
+{% for component_group in components_query_result %}
+<section style="padding: 20px 0">
+  <h2 class="text-2xl">{{ component_group[0] | humanize }}</h2>
+
+  {% for component in component_group[1].results %}
+  {% assign default_render_params = '{}' | parse_json %}
+  <div style="padding: 20px">
+    <div style="border: 2px solid #ddd; padding: 15px; margin: 15px 0; border-radius: 5px;">
+      <h3 class="text-xl font-bold">{{component.metadata.name | humanize }}</h3><br>
+      {% for param_group in component.metadata.params %}
+        {% liquid
+          assign paramtype = param_group[1] | type_of
+          assign key = param_group[0]
+          if paramtype == 'Array'
+            hash_assign default_render_params[key] = param_group[1].first
+          else
+            hash_assign default_render_params[key] = param_group[1]
+          endif
+        %}
+        <p><span class="font-bold">{{ param_group[0] | humanize }} ({{ paramtype }}):</span>
+        {% if paramtype == 'Array' %}
+          {{ param_group[1] | join: ' | '}}
+        {% else %}
+          {{ param_group[1] }}
+        {% endif %}
+        </p>
+      {% endfor %}
+      <hr />
+
+      {% for param_group in component.metadata.params %}
+          {% assign render_params = '{}' | parse_json | hash_merge: default_render_params %}
+          {% for param_value in param_group[1] %}
+            {% liquid
+            assign paramtype = param_value | type_of
+            if paramtype == 'Boolean' and param_value == param_group[1].first
+              assign is_default_boolean = true
+            else
+              assign is_default_boolean = false
+            endif
+            %}
+            {% unless param_group[0] == 'content' or is_default_boolean %}
+              {% liquid
+                assign key = param_group[0]
+                hash_assign render_params[key] = param_value
+              %}<br>
+              <b>{{key}}:</b> {{param_value}}
+              <br>
+              <div style="margin: 10px 0">
+                {% include component.path, params: render_params %}
+              </div>
+              <pre>{{ render_params | json }}</pre>
+
+            {% endunless %}
+          {% endfor %}
+              <hr>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</section>
+<hr />
+{% endfor %}
