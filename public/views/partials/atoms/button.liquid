@@ -5,6 +5,7 @@ metadata:
     tag:
       - button
       - a
+    classes: ''
     variant:
       - primary
       - secondary
@@ -24,7 +25,7 @@ metadata:
   assign attributes = params.attributes
   assign content = params.content
 
-  assign classes = 'whitespace-nowrap inline-flex items-center justify-center transition-colors rounded-full uppercase'
+  assign classes = 'border whitespace-nowrap inline-flex items-center justify-center transition-colors rounded-md uppercase ' | append: params.classes
 
   if variant == 'primary'
     assign classes = classes | append: ' bg-button-primary hover:bg-button-primary-hover text-button-primary-foreground hover:text-button-primary-hover-foreground'

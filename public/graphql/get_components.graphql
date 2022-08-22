@@ -15,4 +15,12 @@ query Components {
       metadata
     }
   }
+  organisms: admin_liquid_partials(
+    filter: {path: {contains: "components/organisms/"}}
+  ) {
+    results {
+      path
+      metadata
+    }
+  }
 }
