@@ -20,9 +20,6 @@ metadata:
         content: Search
 ---
 {% liquid
-  assign tag = params.tag | default: 'div'
-  assign variant = params.variant | default: 'default'
-  assign content = params.content
   assign input_params = params.input_params | hash_merge: classes: 'pr-8'
   assign button_params = params.button_params | hash_merge: classes: 'border-2'
 
