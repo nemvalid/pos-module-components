@@ -1,6 +1,6 @@
 const iconComponentsWrapper = document.querySelector('[data-styleguide-component="Icon"]');
 if (iconComponentsWrapper) {
-  document.querySelectorAll('svg', iconComponentsWrapper).forEach(svgElement => {
+  iconComponentsWrapper.querySelectorAll('svg').forEach(svgElement => {
     const name = svgElement.getAttribute('data-icon');
     svgElement.parentElement.insertAdjacentHTML('beforeend', name);
     svgElement.parentElement.style.display = 'inline-grid';

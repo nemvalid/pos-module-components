@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  hr:not(.pos-clean) {
+    @apply my-4 border-t-divider;
+  }
+}
