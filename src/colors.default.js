@@ -12,7 +12,7 @@ module.exports = {
   "interactive-text": "138, 40, 142",
   "interactive-hover": "101, 45, 144",
   "interactive-disabled": "77, 71, 195", // .3
-  "colorful": "77, 71, 195",
+  "colorful": "231, 236, 243",
   "colorful-hover": "64, 59, 166",
   "colorful-foreground": "255, 255, 255",
   "colorful-supplementary": "255, 255, 255", // .5
@@ -23,7 +23,7 @@ module.exports = {
   "input": "255, 255, 255",
   "input-border": "107, 114, 128",
   "input-foreground": "55, 65, 81",
-  "button-primary": "77, 71, 195",
+  "button-primary": "29, 78, 216",
   "button-primary-hover": "101, 45, 144",
   "button-primary-foreground": "255, 255, 255",
   "button-primary-foreground-hover": "255, 255, 255",

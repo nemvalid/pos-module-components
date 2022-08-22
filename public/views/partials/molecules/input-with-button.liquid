@@ -2,9 +2,22 @@
 metadata:
   name: Input with button
   params:
-    classes: ''
-    input_params: {}
-    button_params: {}
+    classes: 'w-1/2'
+    input_params:
+      name: input
+      placeholder: Type here
+    button_params:
+      variant: primary
+      content: Search
+  styleguide:
+    params:
+      classes: 'w-1/2'
+      input_params:
+        name: input
+        placeholder: Type here
+      button_params:
+        variant: primary
+        content: Search
 ---
 {% liquid
   assign tag = params.tag | default: 'div'
