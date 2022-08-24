@@ -1,11 +1,1 @@
-const iconComponentsWrapper = document.querySelector('[data-styleguide-component="Icon"]');
-if (iconComponentsWrapper) {
-  iconComponentsWrapper.querySelectorAll('svg').forEach(svgElement => {
-    const name = svgElement.getAttribute('data-icon');
-    svgElement.parentElement.insertAdjacentHTML('beforeend', name);
-    svgElement.parentElement.style.display = 'inline-grid';
-    svgElement.parentElement.style.justifyItems = 'center';
-    svgElement.parentElement.style.width = '180px';
-    svgElement.parentElement.style.marginBottom = '16px';
-  });
-};
+!function(){const e=document.querySelector('[data-styleguide-component="Icon"]');e&&e.querySelectorAll("svg").forEach((e=>{const t=e.getAttribute("data-icon");e.parentElement.insertAdjacentHTML("beforeend",t),e.parentElement.style.display="inline-grid",e.parentElement.style.justifyItems="center",e.parentElement.style.width="180px",e.parentElement.style.marginBottom="16px"})),console.log("styleguide")}();
