@@ -66,14 +66,19 @@ metadata:
 
 ## Development
 
-The component library is a standalone module and it has its own frontend stack and frontend build.
-It uses Tailwind CSS under the hood but that doesn't mean that you have to use it in your project. During the frontend build it generates its own minified CSS bundle which you can add to the `<head>` of your app source: https://github.com/Platform-OS/pos-module-components/blob/master/public/assets/components.css.
+The component library is a standalone module and it has its own frontend stack and frontend build system.  
+It uses Tailwind CSS under the hood but that doesn't mean that you have to use it in your project. During the frontend build it generates its own minified CSS bundle which you can add to the `<head>` of your app source: https://github.com/Platform-OS/pos-module-components/blob/master/public/assets/components.css.  
 If you take a look at the [Tailwind config file](https://github.com/Platform-OS/pos-module-components/blob/master/src/tailwind.config.js) you'll notice that it doesn't have any hardcoded colors or other design tokens. It uses [CSS custom properties (CSS variables)](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) instead which makes it possible to change the look&feel of the components in run time -- by providing the necessary CSS propery declarations in your app. This is exactly how the Theme Manager Module provides the theme configuration to your app.
 
-If you also prefer to use Tailwind in your platformOS project then you can reuse the Tailwind config file from the component library source folder and add it to your root app's frontend build. The only thing you need to remember is to add a default colorscheme file and modify your Tailwind content configuration in your main frontend build to include CSS rules from the Component Library Module's view files (and other sources if needed). For more details on content configation see https://tailwindcss.com/docs/content-configuration 
+If you also prefer to use Tailwind in your platformOS project then you can reuse the Tailwind config file from the component library source folder and add it to your root app's frontend build. The only thing you need to remember is to add a default colorscheme file and modify your Tailwind content configuration in your main frontend build to include CSS rules from the Component Library Module's view files (and other sources if needed). For more details on content configation see https://tailwindcss.com/docs/content-configuration.  
 In this case you don't need to add the production CSS bundle from the component library, as your main project CSS will contain everything you need.
 
-Please never change the source files or the configuration in the `modules/components` folder (this is also true for every other module). 
-Monkey-patching can lead to unexpected results or make it hard to update your modules.
-If you need a component to look different you can always create an override for that specific component in your app or as a custom module in your project repository.
+The frontend build uses [Parcel.js](https://parceljs.org/) as a module bundler.  
+You can start Parcel’s builtin dev server in development mode by running `npm run start` from the `src` folder. 
+This way Parcel will pick up your JS and CSS changes and update development bundle which you can sync to your instance via `pos-cli sync [environment]`.  
+For a production build you should run `npm run build`.  
+
+Please never change the source files or the configuration in the `modules/components` folder (this is also true for every other module).  
+Monkey-patching can lead to unexpected results or make it hard to update your modules.  
+If you need a component to look different you can always create an override for that specific component in your app or as a custom module in your project repository.  
 If you find a bug or you have a suggestion please open a GitHub issue. Thank you! 

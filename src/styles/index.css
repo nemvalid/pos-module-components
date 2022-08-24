@@ -1,9 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "./elements.css";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@layer components {
-  hr:not(.pos-clean) {
-    @apply my-4 border-t-divider;
-  }
-}

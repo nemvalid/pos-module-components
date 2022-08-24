@@ -14,7 +14,11 @@ function parseColor(colorName) {
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["../public/views/**/*.liquid"],
+  content: [
+    "../public/views/partials/{atoms,molecules,organisms,pages,templates}/*.liquid}",
+    "../../**/public/views/partials/**/*.liquid",
+    "./scripts/*.js"
+  ],
   theme: {
     extend: {
       colors: {
