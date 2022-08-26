@@ -1,3 +1,5 @@
+import './styles/styleguide.css';
+
 const iconComponentsWrapper = document.querySelector('[data-styleguide-component="Icon"]');
 if (iconComponentsWrapper) {
   iconComponentsWrapper.querySelectorAll('svg').forEach(svgElement => {

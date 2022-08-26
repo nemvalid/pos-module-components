@@ -1,2 +1,3 @@
-import './styles/index.css';
+import './styles/components.css';
 
+console.log('components');
