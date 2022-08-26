@@ -85,4 +85,26 @@ The parcel build produces two separate bundles for the main Component lib and fo
 Please never change the source files or the configuration in the `modules/components` folder (this is also true for every other module).  
 Monkey-patching can lead to unexpected results or make it hard to update your modules.  
 If you need a component to look different you can always create an override for that specific component in your app or as a custom module in your project repository.  
-If you find a bug or you have a suggestion please open a GitHub issue. Thank you!
+If you find a bug or you have a suggestion please open a GitHub issue. Thank you! 
+
+## Contribution rules and standards
+
+### Atomic
+As a core contributor you should follow the [Atomic Design pattern](https://atomicdesign.bradfrost.com/table-of-contents/). Sometimes it's not easy to categorize a component but you should try to do your best to provide atomic, reusable, customizable building blocks as you write the core components in this library.  
+
+### Try to be DRY
+Don't Repeat Yourself (DRY)  
+If you repeat anything that has already been defined in code, refactor it so that it only ever has one representation in the codebase. If you stick to this principle, you will ensure that you will only ever need to change one implementation of a feature without worrying about needing to change any other part of the code.  
+The rule of thumb here is: Don't over-engineer it, but at least try to be DRY.
+
+### Readability
+The code must be easily readable and understandable by ourselves and other developers. Follow the principles of ['Keep It Simple, Stupid' (KISS)](https://en.wikipedia.org/wiki/KISS_principle). Hard to read or obfuscated code is difficult to maintain and debug. Don't be too clever, write code to be read.
+
+### Accessibility
+Accessibility is a first-class citizen in the component library.  
+Some useful resources and examples:  
+https://developer.mozilla.org/en-US/docs/Learn/Accessibility/WAI-ARIA_basics#practical_wai-aria_implementations  
+https://www.w3.org/WAI/ARIA/apg/  
+
+### Code styling and Linters 
+Make sure to enable `.editorconfig` support in your IDE: https://editorconfig.org/#download  
