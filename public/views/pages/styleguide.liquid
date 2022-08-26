@@ -3,104 +3,138 @@ layout: modules/components/styleguide
 ---
 {% function components_query_result = 'modules/components/lib/queries/get_components' %}
 
-<div class="flex">
-  <div class="pt-4 leading-4 sticky top-0 bg-white z-50 pr-8">
-  {% for component_group in components_query_result %}
-    <a class="border-l-4 border-gray-700 pl-2 hover:bg-gray-300 flex items-center py-3" href="#{{ component_group[0] }}">
-      <span>{{ component_group[0] | humanize }}</span>
-    </a>
-    {% for component in component_group[1].results %}
-    <div class="ml-4 mt-1">
-      <a class="border-l-4 border-red-400 pl-2 hover:bg-gray-300 flex items-center py-3" href="#{{ component.metadata.name }}">
-        <span>{{component.metadata.name | humanize }}
-      </a>
-    </div>
-    {% endfor %}
-  {% endfor %}
-  </div>
+<div class="flex antialiased text-gray-900 bg-gray-100">
+  <aside class="flex-shrink-0 w-64 bg-white border-r md:block">
+    <div class="flex flex-col h-full fixed">
+      <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
+        {% for component_group in components_query_result %}
+        <div>
+          <a href="#{{ component_group[0] }}"
+            class="flex items-center p-2 text-gray-500 transition-colors rounded-md hover:bg-blue-200"
+            role="button" aria-haspopup="true">
+            <span aria-hidden="true">
+              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </span>
+            <span class="ml-2 text-sm"> {{ component_group[0] | humanize }} </span>
 
-  <div class="h-full max-h-screen overflow-y-auto flex-1">
-  {% for component_group in components_query_result %}
-    <section style="padding: 20px">
-      <a name="{{ component_group[0]}}"></a>
-      <h2 class="text-2xl">{{ component_group[0] | humanize }}</h2>
-
-      {% for component in component_group[1].results %}
-      {% assign default_render_params = '{}' | parse_json %}
-      {% assign styleguide_render_params = component.metadata.styleguide.params %}
-      <div style="padding: 20px 0">
-        <div style="border: 2px solid #ddd; padding: 15px; margin: 15px 0; border-radius: 5px;">
-          <a name="{{ component.metadata.name }}">
-            <h3 class="text-xl font-bold">{{component.metadata.name | humanize }}</h3>
           </a>
-
-          <small><b>Implementation:</b> {{ component.path }}.liquid</small>
-          <hr />
-          {% for param_group in component.metadata.params %}
-            {% liquid
-              assign paramtype = param_group[1] | type_of
-              assign rendertype = paramtype
-              assign key = param_group[0]
-              if paramtype == 'Array'
-                hash_assign default_render_params[key] = param_group[1].first
-                assign rendertype = param_group[1].first | type_of
-              else
-                hash_assign default_render_params[key] = param_group[1]
-              endif
-            %}
-            <p><span class="font-bold">{{ param_group[0] | humanize }} ({{ rendertype }}):</span>
-            {% if paramtype == 'Array' %}
-              {{ param_group[1] | join: ' | '}}
-            {% else %}
-              {{ param_group[1] }}
-            {% endif %}
-            </p>
-          {% endfor %}
-          <hr />
-
-          <details class="py-6">
-            <summary class="text-xl">Variants & examples</summary>
-            <div data-styleguide-component="{{component.metadata.name}}">
-              {% if styleguide_render_params %}
-                  {% include component.path, params: styleguide_render_params %}
-                <pre>{{ styleguide_render_params | json }}</pre>
-              {% else %}
-                {% for param_group in component.metadata.params %}
-                    {% assign render_params = '{}' | parse_json | hash_merge: default_render_params %}
-                    {% for param_value in param_group[1] %}
-                      {% liquid
-                      assign paramtype = param_value | type_of
-                      if paramtype == 'Boolean' and param_value == param_group[1].first
-                        assign is_default_boolean = true
-                      else
-                        assign is_default_boolean = false
-                      endif
-                      %}
-                      {% unless param_group[0] == 'content' or is_default_boolean %}
-                        {% liquid
-                          assign key = param_group[0]
-                          hash_assign render_params[key] = param_value
-                        %}<br>
-                        <b>{{key}}:</b> {{param_value}}
-                        <br>
-                        <div style="margin: 10px 0">
-                          {% include component.path, params: render_params %}
-                        </div>
-                        <pre>{{ render_params | json }}</pre>
-
-                      {% endunless %}
-                    {% endfor %}
-                        <hr>
-                {% endfor %}
-              {% endif %}
-            </div>
-          </details>
+          <div class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
+            {% for component in component_group[1].results %}
+            <a href="#{{ component.metadata.name }}" role="menuitem"
+              class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md hover:text-gray-700 hover:bg-blue-100">
+              {{component.metadata.name | humanize }}
+            </a>
+            {% endfor %}
+          </div>
         </div>
+        {% endfor %}
+      </nav>
+    </div>
+  </aside>
+  <section tabindex="-1" class="inset-y-0 z-10 flex-shrink-0 w-64 bg-white border-r focus:outline-none" >
+    <div class="flex flex-col h-screen">
+      <!-- Panel header -->
+      <div class="flex-shrink-0">
+          <div class="px-4 pt-4 border-b dark:border-indigo-800">
+          <h2 class="pb-4 font-semibold">[component_name]</h2>
+          </div>
       </div>
-      {% endfor %}
-    </section>
-    <hr />
-  {% endfor %}
-  </div>
 
+      <!-- Panel content -->
+      <div class="flex-1 pt-4 overflow-y-hidden hover:overflow-y-auto">
+          <div class="space-y-4">
+          <!-- Content -->
+          <p class="px-4">[component_docs_section]</p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex-1">
+    {% for component_group in components_query_result %}
+      <section style="padding: 20px">
+        <a name="{{ component_group[0]}}"></a>
+        <h2 class="text-2xl">{{ component_group[0] | humanize }}</h2>
+
+        {% for component in component_group[1].results %}
+        {% assign default_render_params = '{}' | parse_json %}
+        {% assign styleguide_render_params = component.metadata.styleguide.params %}
+        <div style="padding: 20px 0">
+          <div style="border: 2px solid #ddd; padding: 15px; margin: 15px 0; border-radius: 5px;">
+            <a name="{{ component.metadata.name }}">
+              <h3 class="text-xl font-bold">{{component.metadata.name | humanize }}</h3>
+            </a>
+
+            <small><b>Implementation:</b> {{ component.path }}.liquid</small>
+            <hr />
+            {% for param_group in component.metadata.params %}
+              {% liquid
+                assign paramtype = param_group[1] | type_of
+                assign rendertype = paramtype
+                assign key = param_group[0]
+                if paramtype == 'Array'
+                  hash_assign default_render_params[key] = param_group[1].first
+                  assign rendertype = param_group[1].first | type_of
+                else
+                  hash_assign default_render_params[key] = param_group[1]
+                endif
+              %}
+              <p><span class="font-bold">{{ param_group[0] | humanize }} ({{ rendertype }}):</span>
+              {% if paramtype == 'Array' %}
+                {{ param_group[1] | join: ' | '}}
+              {% else %}
+                {{ param_group[1] }}
+              {% endif %}
+              </p>
+            {% endfor %}
+            <hr />
+
+            <details class="py-6">
+              <summary class="text-xl">Variants & examples</summary>
+              <div data-styleguide-component="{{component.metadata.name}}">
+                {% if styleguide_render_params %}
+                    {% include component.path, params: styleguide_render_params %}
+                  <pre>{{ styleguide_render_params | json }}</pre>
+                {% else %}
+                  {% for param_group in component.metadata.params %}
+                      {% assign render_params = '{}' | parse_json | hash_merge: default_render_params %}
+                      {% for param_value in param_group[1] %}
+                        {% liquid
+                        assign paramtype = param_value | type_of
+                        if paramtype == 'Boolean' and param_value == param_group[1].first
+                          assign is_default_boolean = true
+                        else
+                          assign is_default_boolean = false
+                        endif
+                        %}
+                        {% unless param_group[0] == 'content' or is_default_boolean %}
+                          {% liquid
+                            assign key = param_group[0]
+                            hash_assign render_params[key] = param_value
+                          %}<br>
+                          <b>{{key}}:</b> {{param_value}}
+                          <br>
+                          <div style="margin: 10px 0">
+                            {% include component.path, params: render_params %}
+                          </div>
+                          <pre>{{ render_params | json }}</pre>
+
+                        {% endunless %}
+                      {% endfor %}
+                          <hr>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </details>
+          </div>
+        </div>
+        {% endfor %}
+      </section>
+      <hr />
+    {% endfor %}
+  </div>
 </div>
