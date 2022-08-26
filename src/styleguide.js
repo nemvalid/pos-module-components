@@ -1,3 +1,8 @@
+/* The main entry file for the styleguide page bundle */
+/* TODO: further breakdown into imports */
+
+import './styles/styleguide.css';
+
 const iconComponentsWrapper = document.querySelector('[data-styleguide-component="Icon"]');
 if (iconComponentsWrapper) {
   iconComponentsWrapper.querySelectorAll('svg').forEach(svgElement => {

@@ -77,6 +77,7 @@ The frontend build uses [Parcel.js](https://parceljs.org/) as a module bundler.
 You can start Parcel’s builtin dev server in development mode by running `npm run start` from the `src` folder. 
 This way Parcel will pick up your JS and CSS changes and update development bundle which you can sync to your instance via `pos-cli sync [environment]`.  
 For a production build you should run `npm run build`.  
+The parcel build produces two separate bundles for the main Component lib and for the style guide. The main entry point for the library is `modules/components/src/components.js`, the entry point for the style guide related modules is `modules/components/src/styleguide.js`.  
 
 Please never change the source files or the configuration in the `modules/components` folder (this is also true for every other module).  
 Monkey-patching can lead to unexpected results or make it hard to update your modules.  
