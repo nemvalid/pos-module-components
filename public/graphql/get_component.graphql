@@ -1,0 +1,10 @@
+query Components ($component: String) {
+  results: admin_liquid_partials(
+    filter: {path: {contains: $component }}
+  ) {
+    results {
+      path
+      metadata
+    }
+  }
+}

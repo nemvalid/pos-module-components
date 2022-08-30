@@ -1,7 +1,10 @@
 ---
 layout: modules/components/styleguide
+slug: styleguide(/:component)
 ---
 {% function components_query_result = 'modules/components/lib/queries/get_components' %}
+{% function component_search_result = 'modules/components/lib/queries/get_component', component: context.params.component %}
+{% assign component = component_search_result.results.results[0] %}
 
 <div class="flex antialiased text-gray-900 bg-gray-100">
   <aside class="flex-shrink-0 w-64 bg-white border-r md:block">
@@ -9,7 +12,7 @@ layout: modules/components/styleguide
       <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
         {% for component_group in components_query_result %}
         <div>
-          <a href="#{{ component_group[0] }}"
+          <a href="/styleguide/#{{ component_group[0] }}"
             class="flex items-center p-2 text-gray-500 transition-colors rounded-md hover:bg-blue-200"
             role="button" aria-haspopup="true">
             <span aria-hidden="true">
@@ -24,7 +27,7 @@ layout: modules/components/styleguide
           </a>
           <div class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
             {% for component in component_group[1].results %}
-            <a href="#{{ component.metadata.name }}" role="menuitem"
+            <a href="/styleguide/{{ component.metadata.name }}" role="menuitem"
               class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md hover:text-gray-700 hover:bg-blue-100">
               {{component.metadata.name | humanize }}
             </a>
@@ -35,12 +38,14 @@ layout: modules/components/styleguide
       </nav>
     </div>
   </aside>
+
+  {% if context.params.component != blank %}
   <section tabindex="-1" class="inset-y-0 z-10 flex-shrink-0 w-64 bg-white border-r focus:outline-none" >
     <div class="flex flex-col h-screen">
       <!-- Panel header -->
       <div class="flex-shrink-0">
-          <div class="px-4 pt-4 border-b dark:border-indigo-800">
-          <h2 class="pb-4 font-semibold">[component_name]</h2>
+          <div class="px-4 pt-4 border-b">
+          <h2 class="pb-4 font-semibold">{{context.params.component | humanize}}</h2>
           </div>
       </div>
 
@@ -48,12 +53,84 @@ layout: modules/components/styleguide
       <div class="flex-1 pt-4 overflow-y-hidden hover:overflow-y-auto">
           <div class="space-y-4">
           <!-- Content -->
-          <p class="px-4">[component_docs_section]</p>
+            <p class="px-4">
+              <b>Implementation:</b> {{ component.path }}.liquid
+              <hr />
+              {% assign default_render_params = '{}' | parse_json %}
+              {% assign styleguide_render_params = component.metadata.styleguide.params %}
+              {% for param_group in component.metadata.params %}
+              {% liquid
+                assign paramtype = param_group[1] | type_of
+                assign rendertype = paramtype
+                assign key = param_group[0]
+                if paramtype == 'Array'
+                  hash_assign default_render_params[key] = param_group[1].first
+                  assign rendertype = param_group[1].first | type_of
+                else
+                  hash_assign default_render_params[key] = param_group[1]
+                endif
+              %}
+              <p><span class="font-bold">{{ param_group[0] | humanize }} ({{ rendertype }}):</span>
+              {% if paramtype == 'Array' %}
+                {{ param_group[1] | join: ' | '}}
+              {% else %}
+                {{ param_group[1] }}
+              {% endif %}
+              </p>
+              {% endfor %}
+            </p>
           </div>
       </div>
     </div>
   </section>
 
+  <div class="flex-1">
+    <section style="padding: 20px">
+      <div style="padding: 20px 0">
+        <div style="border: 2px solid #ddd; padding: 15px; margin: 15px 0; border-radius: 5px;">
+            <p class="text-xl">Variants & examples</p>
+            <div data-styleguide-component="{{component.metadata.name}}">
+              {% if styleguide_render_params %}
+                  {% include component.path, params: styleguide_render_params %}
+                <pre>{{ styleguide_render_params | json }}</pre>
+              {% else %}
+                {% for param_group in component.metadata.params %}
+                    {% assign render_params = '{}' | parse_json | hash_merge: default_render_params %}
+                    {% for param_value in param_group[1] %}
+                      {% liquid
+                      assign paramtype = param_value | type_of
+                      if paramtype == 'Boolean' and param_value == param_group[1].first
+                        assign is_default_boolean = true
+                      else
+                        assign is_default_boolean = false
+                      endif
+                      %}
+                      {% unless param_group[0] == 'content' or is_default_boolean %}
+                        {% liquid
+                          assign key = param_group[0]
+                          hash_assign render_params[key] = param_value
+                        %}<br>
+                        <b>{{key}}:</b> {{param_value}}
+                        <br>
+                        <div style="margin: 10px 0">
+                          {% include component.path, params: render_params %}
+                        </div>
+                        <pre>{{ render_params | json }}</pre>
+
+                      {% endunless %}
+                    {% endfor %}
+                        <hr>
+                {% endfor %}
+              {% endif %}
+            </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  {% endif %}
+
+  {% if context.params.component == blank %}
   <div class="flex-1">
     {% for component_group in components_query_result %}
       <section style="padding: 20px">
@@ -137,4 +214,9 @@ layout: modules/components/styleguide
       <hr />
     {% endfor %}
   </div>
+  {% endif %}
+  {% if context.params.component != blank %}
+    sadasda
+  {% endif %}
+
 </div>
