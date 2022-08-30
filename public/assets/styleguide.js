@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"k6yjh":[function(require,module,exports) {
+})({"4fmTn":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = "localhost";
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "916932b22e4085ab";
-module.bundle.HMR_BUNDLE_ID = "d458604ab15f728e";
+module.bundle.HMR_BUNDLE_ID = "a4296581eedb9de1";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
@@ -544,6 +544,6 @@ if (iconComponentsWrapper) iconComponentsWrapper.querySelectorAll("svg").forEach
 });
 console.log("styleguide");
 
-},{"./styles/styleguide.css":"7VIgE"}],"7VIgE":[function() {},{}]},["k6yjh","kdPx3"], "kdPx3", "parcelRequire2e46")
+},{"./styles/styleguide.css":"7VIgE"}],"7VIgE":[function() {},{}]},["4fmTn","kdPx3"], "kdPx3", "parcelRequire2e46")
 
 //# sourceMappingURL=styleguide.js.map

@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"4L0Nr":[function(require,module,exports) {
+})({"5jh77":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = "localhost";
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "916932b22e4085ab";
-module.bundle.HMR_BUNDLE_ID = "fa439206916c0e1b";
+module.bundle.HMR_BUNDLE_ID = "ef4575e27703cadd";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
@@ -535,6 +535,6 @@ function hmrAcceptRun(bundle, id) {
 /* The main entry file for the production (components) bundle */ var _componentsCss = require("./styles/components.css");
 console.log("components");
 
-},{"./styles/components.css":"bS4ep"}],"bS4ep":[function() {},{}]},["4L0Nr","jAI1y"], "jAI1y", "parcelRequire2e46")
+},{"./styles/components.css":"bS4ep"}],"bS4ep":[function() {},{}]},["5jh77","jAI1y"], "jAI1y", "parcelRequire2e46")
 
 //# sourceMappingURL=components.js.map

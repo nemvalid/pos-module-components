@@ -53,40 +53,41 @@ slug: styleguide(/:component)
       <div class="flex-1 pt-4 overflow-y-hidden hover:overflow-y-auto">
           <div class="space-y-4">
           <!-- Content -->
-            <p class="px-4">
-              <b>Implementation:</b> {{ component.path }}.liquid
+            <div class="px-4">
+              <b>Implementation:</b>
+              <span class="text-sm">{{ component.path }}.liquid</span>
               <hr />
               {% assign default_render_params = '{}' | parse_json %}
               {% assign styleguide_render_params = component.metadata.styleguide.params %}
               {% for param_group in component.metadata.params %}
-              {% liquid
-                assign paramtype = param_group[1] | type_of
-                assign rendertype = paramtype
-                assign key = param_group[0]
-                if paramtype == 'Array'
-                  hash_assign default_render_params[key] = param_group[1].first
-                  assign rendertype = param_group[1].first | type_of
-                else
-                  hash_assign default_render_params[key] = param_group[1]
-                endif
-              %}
-              <p><span class="font-bold">{{ param_group[0] | humanize }} ({{ rendertype }}):</span>
-              {% if paramtype == 'Array' %}
-                {{ param_group[1] | join: ' | '}}
-              {% else %}
-                {{ param_group[1] }}
-              {% endif %}
-              </p>
+                {% liquid
+                  assign paramtype = param_group[1] | type_of
+                  assign rendertype = paramtype
+                  assign key = param_group[0]
+                  if paramtype == 'Array'
+                    hash_assign default_render_params[key] = param_group[1].first
+                    assign rendertype = param_group[1].first | type_of
+                  else
+                    hash_assign default_render_params[key] = param_group[1]
+                  endif
+                %}
+                <p class="pt-4"><span class="font-bold">{{ param_group[0] | humanize }} ({{ rendertype }}):</span>
+                {% if paramtype == 'Array' %}
+                  {{ param_group[1] | join: ' | '}}
+                {% else %}
+                  {{ param_group[1] }}
+                {% endif %}
+                </p>
               {% endfor %}
-            </p>
+              </div>
           </div>
       </div>
     </div>
   </section>
 
   <div class="flex-1">
-    <section style="padding: 20px">
-      <div style="padding: 20px 0">
+    <section style="padding-left: 20px">
+      <div>
         <div style="border: 2px solid #ddd; padding: 15px; margin: 15px 0; border-radius: 5px;">
             <p class="text-xl">Variants & examples</p>
             <div data-styleguide-component="{{component.metadata.name}}">
@@ -215,8 +216,4 @@ slug: styleguide(/:component)
     {% endfor %}
   </div>
   {% endif %}
-  {% if context.params.component != blank %}
-    sadasda
-  {% endif %}
-
 </div>
