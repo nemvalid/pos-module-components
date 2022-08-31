@@ -96,9 +96,9 @@ slug: styleguide(/:component)
   </section>
 
   <div class="flex-1">
-    <section style="padding-left: 20px">
+    <section class="px-4">
       <div>
-        <div style="border: 2px solid #ddd; padding: 15px; margin: 15px 0; border-radius: 5px;">
+        <div class="border-2 border-gray-900 px-4 py-4 mt-4 mb-4 rounded-md">
             <p class="text-xl">Variants & examples</p>
             <div data-styleguide-component="{{component.metadata.name}}">
               {% if styleguide_render_params %}
@@ -123,10 +123,10 @@ slug: styleguide(/:component)
                         %}<br>
                         <b>{{key}}:</b> {{param_value}}
                         <br>
-                        <div style="margin: 10px 0">
+                        <div class="mt-4">
                           {% include component.path, params: render_params %}
                         </div>
-                        <pre>{{ render_params | json }}</pre>
+                        <pre class="mt-4">{{ render_params | json }}</pre>
 
                       {% endunless %}
                     {% endfor %}
@@ -144,15 +144,15 @@ slug: styleguide(/:component)
   {% if context.params.component == blank %}
   <div class="flex-1">
     {% for component_group in components_query_result %}
-      <section style="padding: 20px">
+      <section class="px-4 py-4">
         <a name="{{ component_group[0]}}"></a>
         <h2 class="text-2xl">{{ component_group[0] | humanize }}</h2>
 
         {% for component in component_group[1].results %}
         {% assign default_render_params = '{}' | parse_json %}
         {% assign styleguide_render_params = component.metadata.styleguide.params %}
-        <div style="padding: 20px 0">
-          <div style="border: 2px solid #ddd; padding: 15px; margin: 15px 0; border-radius: 5px;">
+        <div>
+          <div class="border-2 border-gray-900 px-4 py-4 mt-4 mb-4 rounded-md">
             <a name="{{ component.metadata.name }}">
               <h3 class="text-xl font-bold">{{component.metadata.name | humanize }}</h3>
             </a>
@@ -206,10 +206,10 @@ slug: styleguide(/:component)
                           %}<br>
                           <b>{{key}}:</b> {{param_value}}
                           <br>
-                          <div style="margin: 10px 0">
+                          <div class="mt-4">
                             {% include component.path, params: render_params %}
                           </div>
-                          <pre>{{ render_params | json }}</pre>
+                          <pre class="mt-4">{{ render_params | json }}</pre>
 
                         {% endunless %}
                       {% endfor %}
