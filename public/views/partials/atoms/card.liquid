@@ -13,12 +13,12 @@ metadata:
   assign variant = params.variant | default: 'default'
   assign content = params.content
 
-  assign classes = 'p-6 rounded'
+  assign classes = 'p-6 rounded shadow-card'
 
   if variant == 'highlighted'
     assign classes = classes | append: ' bg-highlighted'
   else
-    assign classes = classes | append: ' bg-panel shadow-panel'
+    assign classes = classes | append: ' bg-panel'
   endif
 %}
 <{{tag}} class="{{classes}}">
