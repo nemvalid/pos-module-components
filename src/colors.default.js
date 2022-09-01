@@ -17,6 +17,7 @@ module.exports = {
   "gradient2-from": "29, 78, 216",
   "gradient2-to": "52, 71, 133",
   "panel": "255, 255, 255",
+  "panel-shadow": "0, 0, 0, .1",
   "base": "243, 244, 246",
   "highlighted": "231, 236, 243",
   "divider": "226, 232, 240",
