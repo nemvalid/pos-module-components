@@ -68,7 +68,7 @@ module.exports = {
         'warning-disabled': parseColor('warning-disabled')
       },
       boxShadow: {
-        'card': `0px 0px 5px rgba(${defaultColors['panel-shadow']})`
+        'panel': `0px 0px 5px rgba(${defaultColors['panel-shadow']})`
       }
     },
   },
