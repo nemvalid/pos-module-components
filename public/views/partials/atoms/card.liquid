@@ -13,15 +13,14 @@ metadata:
   assign variant = params.variant | default: 'default'
   assign content = params.content
 
-  assign classes = 'px-3 py-2 rounded-md shadow-xl'
+  assign classes = 'p-6 rounded'
 
   if variant == 'highlighted'
     assign classes = classes | append: ' bg-highlighted'
   else
-    assign classes = classes | append: ' bg-panel'
+    assign classes = classes | append: ' bg-panel shadow-card'
   endif
 %}
 <{{tag}} class="{{classes}}">
   {{content}}
 </{{tag}}>
-{% comment %} ' px-10 py-4' {% endcomment %}
