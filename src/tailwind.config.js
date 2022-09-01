@@ -24,10 +24,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'panel': parseColor('panel'),
-        'base': parseColor('base'),
-        'highlighted': parseColor('highlighted'),
-        'divider': parseColor('divider'),
         'prominent': parseColor('prominent'),
         'normal': parseColor('normal'),
         'supplementary': parseColor('supplementary'),
@@ -45,6 +41,11 @@ module.exports = {
         'gradient1-to': parseColor('gradient1-to'),
         'gradient2-from': parseColor('gradient2-from'),
         'gradient2-to': parseColor('gradient2-to'),
+        'panel': parseColor('panel'),
+        'panel-shadow': parseColor('panel-shadow'),
+        'base': parseColor('base'),
+        'highlighted': parseColor('highlighted'),
+        'divider': parseColor('divider'),
         'input': parseColor('input'),
         'input-border': parseColor('input-border'),
         'input-foreground': parseColor('input-foreground'),
@@ -65,6 +66,9 @@ module.exports = {
         'warning': parseColor('warning'),
         'warning-hover': parseColor('warning-hover'),
         'warning-disabled': parseColor('warning-disabled')
+      },
+      boxShadow: {
+        'panel': `0px 0px 5px rgba(${defaultColors['panel-shadow']})`
       }
     },
   },
