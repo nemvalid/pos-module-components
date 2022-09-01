@@ -1,0 +1,53 @@
+---
+metadata:
+  name: Chip
+  params:
+    tag: "span"
+    variant:
+      - default
+      - clickable
+      - selected
+      - error
+      - success
+      - warning
+    closable:
+      - false
+      - true
+    content: Chip
+---
+{% liquid
+  assign tag = params.tag | default: 'div'
+  assign closable = params.closable | default: false
+  assign variant = params.variant | default: 'default'
+  assign content = params.content
+
+  assign classes = 'px-3 py-2 rounded-md'
+
+  if variant == 'selected'
+    assign classes = classes | append: ' text-white bg-normal'
+  elsif variant == 'error'
+    assign classes = classes | append: ' border-2 border-important bg-important-disabled'
+  elsif variant == 'success'
+    assign classes = classes | append: ' border-2 border-confirmation  bg-confirmation-disabled'
+  elsif variant == 'warning'
+    assign classes = classes | append: ' border-2 border-warning bg-warning-disabled'
+  else
+    assign classes = classes | append: ' bg-highlighted'
+  endif
+%}
+<{{tag}} class="{{classes}}">
+  {{content}}
+  {% if closable == true %}
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    class="fill-current w-4 h-4"
+    focusable="false"
+    role="img"
+    xmlns="http://www.w3.org/2000/svg"
+    >
+    <path d="M23.25 23.999a.743.743 0 01-.53-.22L12 13.06 1.28 23.779a.744.744 0 01-1.06 0 .752.752 0 010-1.061l10.72-10.72L.22 1.279C.078 1.138 0 .949 0 .749S.078.36.22.219c.141-.142.33-.22.53-.22s.389.078.53.22L12 10.938 22.72.218a.744.744 0 011.06 0 .747.747 0 010 1.061l-10.72 10.72 10.72 10.72a.752.752 0 010 1.061.746.746 0 01-.53.219z"/>
+  </svg>
+  {% endif %}
+</{{tag}}>
+{% comment %} ' px-10 py-4' {% endcomment %}
