@@ -42,7 +42,7 @@ module.exports = {
         'gradient2-from': parseColor('gradient2-from'),
         'gradient2-to': parseColor('gradient2-to'),
         'panel': parseColor('panel'),
-        'panel-shadow': parseColor('panel-shadow'),
+        'card-shadow': parseColor('card-shadow'),
         'base': parseColor('base'),
         'highlighted': parseColor('highlighted'),
         'divider': parseColor('divider'),
@@ -68,7 +68,7 @@ module.exports = {
         'warning-disabled': parseColor('warning-disabled')
       },
       boxShadow: {
-        'panel': `0px 0px 5px rgba(${defaultColors['panel-shadow']})`
+        'card': `0px 0px 5px rgba(${defaultColors['card-shadow']})`
       }
     },
   },
