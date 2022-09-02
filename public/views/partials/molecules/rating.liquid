@@ -1,0 +1,31 @@
+---
+metadata:
+  name: Rating
+  params:
+    max_value: 5
+    value:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+
+---
+{% liquid
+  assign icon_params = '{}' | parse_json | hash_merge: name: 'star', class: 'w-4 h-4 text-input-border mr-2'
+  assign icon_params_filled = '{}' | parse_json | hash_merge: name: 'starFull', class: 'w-4 h-4 text-warning stroke-input-border mr-2'
+
+  assign classes = 'inline-flex w-full '
+
+%}
+<div class="m-input-with-button {{classes}}">
+  <div class="flex">
+    {% for i in (1..params.max_value) %}
+      {% if i <= params.value %}
+        {% theme_render_rc 'components/atoms/icon', params: icon_params_filled %}
+      {% else %}
+        {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
