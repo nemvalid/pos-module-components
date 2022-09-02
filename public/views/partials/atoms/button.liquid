@@ -6,51 +6,77 @@ metadata:
       - button
       - a
     classes: ''
-    variant:
+    weight:
       - primary
       - secondary
+    variant:
+      - normal
+      - important
+      - confirmation
+      - inverted
     size:
       - normal
       - small
-    disabled:
-      - false
-      - true
     content: Click me
 ---
 {% liquid
   assign tag = params.tag | default: 'button'
-  assign variant = params.variant | default: 'primary'
+  assign weight = params.weight | default: 'primary'
+  assign variant = params.variant | default: 'normal'
   assign size = params.size | default: 'normal'
   assign disabled = params.disabled | default: false
   assign attributes = params.attributes
   assign content = params.content
+  assign href = params.href
 
-  assign classes = 'border whitespace-nowrap inline-flex items-center justify-center transition-colors rounded-md uppercase ' | append: params.classes
+  assign classes = 'inline-flex items-center justify-center gap-3 rounded whitespace-nowrap transition-colors' | append: params.classes
 
-  if variant == 'primary'
-    assign classes = classes | append: ' bg-button-primary hover:bg-button-primary-hover text-button-primary-foreground hover:text-button-primary-hover-foreground'
-  elsif variant == 'secondary'
-    assign classes = classes | append: ' bg-transparent border-2 text-button-secondary-foreground hover:text-button-secondary-foreground-hover border-button-secondary hover:border-button-secondary-hover'
+
+  if weight == 'primary'
+    case variant
+      when 'normal'
+        assign classes = classes | append: ' border-button-primary hover:border-button-primary-hover bg-button-primary hover:bg-button-primary-hover text-button-primary-foreground hover:text-button-primary-hover-foreground'
+      when 'inverted'
+        assign classes = classes | append: ' border-button-primary-foreground bg-button-primary-foreground text-button-primary hover:text-button-primary-hover'
+      when 'important'
+        assign classes = classes | append: ' border-important hover:border-important-hover bg-important hover:bg-important-hover text-button-primary-foreground hover:text-button-primary-hover-foreground'
+      when 'confirmation'
+        assign classes = classes | append: ' border-confirmation hover:border-confirmation-hover bg-confirmation hover:bg-confirmation-hover text-button-primary-foreground hover:text-button-primary-hover-foreground'
+    endcase
+
+  elsif weight == 'secondary'
+    case variant
+      when 'normal'
+        assign classes = classes | append: ' border-button-secondary hover:border-button-secondary-hover text-button-secondary-foreground hover:text-button-secondary-foreground-hover'
+      when 'inverted'
+        assign classes = classes | append: ' border-inverted text-inverted'
+      when 'important'
+        assign classes = classes | append: ' border-important hover:border-important-hover text-important hover:text-important-hover'
+      when 'confirmation'
+        assign classes = classes | append: ' border-confirmation hover:border-confirmation-hover text-confirmation hover:text-confirmation-hover'
+    endcase
   endif
+
 
   if size == 'small'
-    assign classes = classes | append: ' px-3 py-1 text-sm'
+    assign classes = classes | append: ' px-3 py-1 border text-sm'
   else
-    assign classes = classes | append: ' px-5 py-2'
+    assign classes = classes | append: ' px-5 py-2 border-2'
   endif
 
+
   if disabled == true
-    comment "hover:bg-button-primary hover:bg-button-secondary"
-    endcomment
-    assign classes = classes | append: ' opacity-50 cursor-not-allowed hover:bg-button-' | append: variant
+    assign classes = classes | append: ' cursor-default'
+  else
+    assign classes = classes | append: ' cursor-pointer'
   endif
 
 %}
 <{{tag}}
   class="{{classes}}"
   {% for attribute in attributes %}
-  {{ attribute[0] }}="{{ attribute[1] }}"
+    {{ attribute[0] }}="{{ attribute[1] }}"
   {% endfor %}
-  {% if disabled %}disabled{% endif %}
+  {% if tag == 'button' and disabled %}disabled{% endif %}
 >{{content}}</{{tag}}>
 
