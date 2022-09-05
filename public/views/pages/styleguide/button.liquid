@@ -44,6 +44,26 @@ layout: modules/components/styleguide
     theme_render_rc 'components/atoms/button', params: button_params
   %}
 
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'important', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'confirmation', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'inverted', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
 </div>
 
 
@@ -97,6 +117,30 @@ layout: modules/components/styleguide
     theme_render_rc 'components/atoms/button', params: button_params
   %}
 
+  {% liquid
+    assign button_attributes = '{}' | parse_json | hash_merge: href: 'https://platformos.com', target: '_blank'
+    assign button_params = '{}' | parse_json | hash_merge: tag: 'a', attributes: button_attributes, weight: 'secondary', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_attributes = '{}' | parse_json | hash_merge: href: 'https://platformos.com', target: '_blank'
+    assign button_params = '{}' | parse_json | hash_merge: tag: 'a', attributes: button_attributes, weight: 'secondary', variant: 'important', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_attributes = '{}' | parse_json | hash_merge: href: 'https://platformos.com', target: '_blank'
+    assign button_params = '{}' | parse_json | hash_merge: tag: 'a', attributes: button_attributes, weight: 'secondary', variant: 'confirmation', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_attributes = '{}' | parse_json | hash_merge: href: 'https://platformos.com', target: '_blank'
+    assign button_params = '{}' | parse_json | hash_merge: tag: 'a', attributes: button_attributes, weight: 'secondary', variant: 'inverted', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
 </div>
 
 
@@ -139,6 +183,26 @@ layout: modules/components/styleguide
 
   {% liquid
     assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'inverted', content: 'Click me', disabled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', content: 'Click me', disabled: true, filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'important', content: 'Click me', disabled: true, filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'confirmation', content: 'Click me', disabled: true, filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'inverted', content: 'Click me', disabled: true, filled: true
     theme_render_rc 'components/atoms/button', params: button_params
   %}
 
@@ -187,6 +251,26 @@ layout: modules/components/styleguide
     theme_render_rc 'components/atoms/button', params: button_params
   %}
 
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', size: 'small', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', size: 'small', variant: 'important', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', size: 'small', variant: 'confirmation', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
+  {% liquid
+    assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', size: 'small', variant: 'inverted', content: 'Click me', filled: true
+    theme_render_rc 'components/atoms/button', params: button_params
+  %}
+
 </div>
 
 
@@ -231,6 +315,26 @@ layout: modules/components/styleguide
 
     {% liquid
       assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'inverted', content: 'Click me'
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+      {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', content: 'Click me', filled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'important', content: 'Click me', filled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'confirmation', content: 'Click me', filled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'inverted', content: 'Click me', filled: true
       theme_render_rc 'components/atoms/button', params: button_params
     %}
 
@@ -287,6 +391,30 @@ layout: modules/components/styleguide
       theme_render_rc 'components/atoms/button', params: button_params
     %}
 
+    {% liquid
+      assign button_attributes = '{}' | parse_json | hash_merge: href: 'https://platformos.com', target: '_blank', filled: true
+      assign button_params = '{}' | parse_json | hash_merge: tag: 'a', attributes: button_attributes, weight: 'secondary', content: 'Click me'
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_attributes = '{}' | parse_json | hash_merge: href: 'https://platformos.com', target: '_blank', filled: true
+      assign button_params = '{}' | parse_json | hash_merge: tag: 'a', attributes: button_attributes, weight: 'secondary', variant: 'important', content: 'Click me'
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_attributes = '{}' | parse_json | hash_merge: href: 'https://platformos.com', target: '_blank', filled: true
+      assign button_params = '{}' | parse_json | hash_merge: tag: 'a', attributes: button_attributes, weight: 'secondary', variant: 'confirmation', content: 'Click me'
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_attributes = '{}' | parse_json | hash_merge: href: 'https://platformos.com', target: '_blank', filled: true
+      assign button_params = '{}' | parse_json | hash_merge: tag: 'a', attributes: button_attributes, weight: 'secondary', variant: 'inverted', content: 'Click me'
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
   </div>
 
 
@@ -332,6 +460,26 @@ layout: modules/components/styleguide
       theme_render_rc 'components/atoms/button', params: button_params
     %}
 
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', content: 'Click me', disabled: true, filled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'important', content: 'Click me', disabled: true, filled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'confirmation', content: 'Click me', disabled: true, filled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'inverted', content: 'Click me', disabled: true, filled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
   </div>
 
 
@@ -374,6 +522,26 @@ layout: modules/components/styleguide
 
     {% liquid
       assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', size: 'small', variant: 'inverted', content: 'Click me'
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', size: 'small', content: 'Click me', filled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', size: 'small', variant: 'important', content: 'Click me', filled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', size: 'small', variant: 'confirmation', content: 'Click me', filled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', size: 'small', variant: 'inverted', content: 'Click me', filled: true
       theme_render_rc 'components/atoms/button', params: button_params
     %}
 

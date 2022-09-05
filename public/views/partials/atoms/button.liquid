@@ -26,6 +26,7 @@ metadata:
   assign tag = params.tag | default: 'button'
   assign weight = params.weight | default: 'primary'
   assign variant = params.variant | default: 'normal'
+  assign filled = params.filled | default: false
   assign size = params.size | default: 'normal'
   assign disabled = params.disabled | default: false
   assign attributes = params.attributes
@@ -58,6 +59,10 @@ metadata:
       when 'confirmation'
         assign classes = classes | append: ' border-confirmation hover:border-confirmation-hover text-confirmation hover:text-confirmation-hover'
     endcase
+
+    if filled
+      assign classes = classes | append: ' bg-button-secondary-background'
+    endif
   endif
 
 

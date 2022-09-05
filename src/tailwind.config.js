@@ -53,6 +53,7 @@ module.exports = {
         'button-primary-hover': parseColor('button-primary-hover'),
         'button-primary-foreground': parseColor('button-primary-foreground'),
         'button-primary-foreground-hover': parseColor('button-primary-foreground-hover'),
+        'button-secondary-background': parseColor('button-secondary-background'),
         'button-secondary': parseColor('button-secondary'),
         'button-secondary-hover': parseColor('button-secondary-hover'),
         'button-secondary-foreground': parseColor('button-secondary-foreground'),
