@@ -29,6 +29,7 @@ module.exports = {
   "button-secondary-hover": "52, 102, 227",
   "button-secondary-foreground": "29, 78, 216",
   "button-secondary-foreground-hover": "52, 102, 227",
+  "button-secondary-background": "255, 255, 255",
   "input-border": "107, 114, 128",
   "input": "255, 255, 255",
   "input-foreground": "55, 65, 81",
