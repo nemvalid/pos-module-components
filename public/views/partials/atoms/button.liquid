@@ -14,12 +14,15 @@ metadata:
       - important
       - confirmation
       - inverted
+    filled:
+      - false
+      - true
     size:
       - normal
       - small
     disabled:
-      - true
       - false
+      - true
     content: Click me
 ---
 {% liquid
@@ -33,7 +36,7 @@ metadata:
   assign content = params.content
   assign href = params.href
 
-  assign classes = 'inline-flex items-center justify-center gap-3 rounded whitespace-nowrap transition-colors disabled:opacity-30 disabled:pointer-events-none' | append: params.classes
+  assign classes = params.classes | append: ' inline-flex items-center justify-center gap-3 rounded whitespace-nowrap transition-colors disabled:opacity-30 disabled:pointer-events-none'
 
 
   if weight == 'primary'
