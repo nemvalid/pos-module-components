@@ -293,6 +293,51 @@ layout: modules/components/styleguide
   <div class="mt-4 flex items-center justify-center flex-wrap gap-4">
 
     {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'primary', content: 'Click me', disabled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'primary', variant: 'important', content: 'Click me', disabled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'primary', variant: 'confirmation', content: 'Click me', disabled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'primary', variant: 'inverted', content: 'Click me', disabled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', content: 'Click me', disabled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'important', content: 'Click me', disabled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'confirmation', content: 'Click me', disabled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+    {% liquid
+      assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', variant: 'inverted', content: 'Click me', disabled: true
+      theme_render_rc 'components/atoms/button', params: button_params
+    %}
+
+  </div>
+
+
+  <div class="mt-4 flex items-center justify-center flex-wrap gap-4">
+
+    {% liquid
       assign button_params = '{}' | parse_json | hash_merge: weight: 'primary', size: 'small', content: 'Click me'
       theme_render_rc 'components/atoms/button', params: button_params
     %}
