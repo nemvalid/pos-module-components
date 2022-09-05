@@ -1,0 +1,40 @@
+---
+metadata:
+  name: Checkbox
+  params:
+    name: 'my-checbox'
+    checked:
+      - false
+      - true
+    id: 'my-checbox'
+    disabled:
+      - false
+      - true
+---
+{% liquid
+  assign checked = params.checked | default: false
+  assign id = params.id
+  assign name = params.name
+  assign disabled = params.disabled | default: false
+
+  assign basic_classes = 'pos-checkbox appearance-none bg-no-repeat bg-center bg-contain w-4 h-4 bg-white ring-2 ring-input-border cursor-pointer '
+  assign checked_classes = 'checked:bg-interactive-graphic checked:ring-interactive-graphic '
+  assign disabled_classes = 'disabled:ring-interactive-disabled '
+  assign disabled_checked_classes = 'disabled:bg-interactive-disabled disabled:ring-interactive-disabled '
+  assign classes = basic_classes | append: checked_classes
+
+  if disabled == true and checked == false
+    assign classes = classes | append: disabled_classes
+  endif
+  if disabled == true and checked == true
+    assign classes = classes | append: disabled_checked_classes
+  endif
+%}
+<input class="{{classes}}"
+  type="checkbox"
+  id="{{id}}"
+  name="{{name}}"
+  {% if checked %}checked{% endif %}
+  {% if disabled %}disabled{% endif %}
+/>
+
