@@ -2,11 +2,10 @@
 layout: modules/components/styleguide
 slug: styleguide/:component_id
 ---
-{% function components_query_result = 'modules/components/lib/queries/components/get_all' %}
-{% function component_search_result = 'modules/components/lib/queries/components/get', id: context.params.component_id %}
-{% assign component = component_search_result.results.results[0] %}
+{% liquid
+  function component_groups = 'modules/components/lib/queries/components/get_all'
+  function component = 'modules/components/lib/queries/components/get', id: context.params.component_id
+  assign component = component.results.first
 
-<div class="flex antialiased text-gray-900 bg-gray-100">
-  {% render 'modules/components/components/sidebar', component_groups: components_query_result %}
-  {% include 'modules/components/components/view', component: component, example_position: 'right' %}
-</div>
+  include 'modules/components/pages/styleguide/show', component: component, component_groups: component_groups
+%}

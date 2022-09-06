@@ -2,22 +2,8 @@
 layout: modules/components/styleguide
 slug: styleguide
 ---
-{% function components_query_result = 'modules/components/lib/queries/components/get_all' %}
+{% liquid
+  function component_groups = 'modules/components/lib/queries/components/get_all'
 
-<div class="flex antialiased text-gray-900 bg-gray-100">
-  {% render 'modules/components/components/sidebar', component_groups: components_query_result %}
-
-  <div class="flex-1">
-    {% for component_group in components_query_result %}
-      <section class="px-4 py-4">
-        <a name="{{ component_group[0]}}"></a>
-        <h2 class="text-2xl">{{ component_group[0] | humanize }}</h2>
-
-        {% for component in component_group[1].results %}
-          {% include 'modules/components/components/view', component: component, example_position: 'bottom' %}
-        {% endfor %}
-      </section>
-      <hr />
-    {% endfor %}
-  </div>
-</div>
+  include 'modules/components/pages/styleguide/index', component_groups: component_groups
+%}
