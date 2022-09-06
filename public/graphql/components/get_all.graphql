@@ -1,24 +1,27 @@
-query Components {
+query {
   atoms: admin_liquid_partials(
-    filter: {path: {contains: "components/atoms/"}}
+    filter: { path: { contains: "components/atoms/" } }
   ) {
     results {
+      id
       path
       metadata
     }
   }
   molecules: admin_liquid_partials(
-    filter: {path: {contains: "components/molecules/"}}
+    filter: { path: { contains: "components/molecules/" } }
   ) {
     results {
+      id
       path
       metadata
     }
   }
   organisms: admin_liquid_partials(
-    filter: {path: {contains: "components/organisms/"}}
+    filter: { path: { contains: "components/organisms/" } }
   ) {
     results {
+      id
       path
       metadata
     }

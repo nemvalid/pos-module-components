@@ -1,0 +1,11 @@
+---
+layout: modules/components/styleguide
+slug: styleguide/:component_id
+---
+{% liquid
+  function component_groups = 'modules/components/lib/queries/components/get_all'
+  function component = 'modules/components/lib/queries/components/get', id: context.params.component_id
+  assign component = component.results.first
+
+  include 'modules/components/pages/styleguide/show', component: component, component_groups: component_groups
+%}
