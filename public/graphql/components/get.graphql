@@ -1,4 +1,4 @@
-query ($id: ID) {
+query ($id: ID!) {
   results: admin_liquid_partials(filter: { id: { value: $id } }) {
     results {
       path
