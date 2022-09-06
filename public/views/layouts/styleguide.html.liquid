@@ -1,40 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Component Library</title>
     {% liquid
       function theme_manager_exists = 'modules/core/lib/queries/module/exists', name: 'theme-manager', type: 'module'
       if theme_manager_exists
         include 'modules/theme-manager/theme_headscripts'
       endif
     %}
-    <link rel="stylesheet" href="{{ 'modules/components/components.css' | asset_url }}">
-    <style>
-      body {
-        background: #ddd;
-      }
-      .wrapper {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .main {
-        background: #fafafa;
-        min-height: 100vh;
-      }
-
-      hr {
-        margin: 15px 0;
-      }
-    </style>
+    <link rel="stylesheet" href="{{ 'modules/components/styleguide.css' | asset_url }}">
   </head>
 
   <body>
-    <div class="wrapper">
-      <main class="main">
-        <h1 class="text-3xl p-6">Component Library</h1>
-        {{content_for_layout}}
-      </main>
-    </div>
+    <main class="main">
+      {{content_for_layout}}
+    </main>
   <script src="{{ 'modules/components/styleguide.js' | asset_url }}"></script>
   </body>
 </html>

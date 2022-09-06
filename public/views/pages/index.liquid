@@ -1,0 +1,9 @@
+---
+layout: modules/components/styleguide
+slug: styleguide
+---
+{% liquid
+  function component_groups = 'modules/components/lib/queries/components/get_all'
+
+  include 'modules/components/pages/styleguide/index', component_groups: component_groups
+%}
