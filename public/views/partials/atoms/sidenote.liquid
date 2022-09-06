@@ -1,0 +1,19 @@
+---
+metadata:
+  name: Sidenote
+  params:
+    classes: ''
+    content: I'm a sidenote
+---
+{% liquid
+  assign attributes = params.attributes
+  assign content = params.content
+  assign classes = params.classes | append: ' text-xs text-supplementary'
+%}
+<small
+  class="{{classes}}"
+  {% for attribute in attributes %}
+  {{ attribute[0] }}="{{ attribute[1] }}"
+  {% endfor %}
+>{{content}}</small>
+

@@ -1,0 +1,8 @@
+---
+layout: modules/components/styleguide
+---
+
+{% liquid
+  assign sidenote_params = '{}' | parse_json | hash_merge: content: 'Testing the sidenote component'
+  theme_render_rc 'components/atoms/sidenote', params: sidenote_params
+%}
