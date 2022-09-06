@@ -50,180 +50,20 @@ slug: styleguide(/:component_id)
   </aside>
 
   {% if context.params.component_id != blank %}
-  <section tabindex="-1" class="inset-y-0 z-10 flex-shrink-0 w-64 bg-white border-r focus:outline-none" >
-    <div class="flex flex-col h-screen">
-      <!-- Panel header -->
-      <div class="flex-shrink-0">
-          <div class="px-4 pt-4 border-b">
-          <h2 class="pb-4 font-semibold">{{ component.metadata.name }}</h2>
-          </div>
-      </div>
+    {% render 'modules/components/components/view', component: component, example_position: 'right' %}
+  {% else  %}
+    <div class="flex-1">
+      {% for component_group in components_query_result %}
+        <section class="px-4 py-4">
+          <a name="{{ component_group[0]}}"></a>
+          <h2 class="text-2xl">{{ component_group[0] | humanize }}</h2>
 
-      <!-- Panel content -->
-      <div class="flex-1 pt-4 overflow-y-hidden hover:overflow-y-auto">
-          <div class="space-y-4">
-          <!-- Content -->
-            <div class="px-4">
-              <b>Implementation:</b>
-              <span class="text-sm break-words">{{ component.path }}.liquid</span>
-              <hr />
-              {% assign default_render_params = '{}' | parse_json %}
-              {% assign styleguide_render_params = component.metadata.styleguide.params %}
-              {% for param_group in component.metadata.params %}
-                {% liquid
-                  assign paramtype = param_group[1] | type_of
-                  assign rendertype = paramtype
-                  assign key = param_group[0]
-                  if paramtype == 'Array'
-                    hash_assign default_render_params[key] = param_group[1].first
-                    assign rendertype = param_group[1].first | type_of
-                  else
-                    hash_assign default_render_params[key] = param_group[1]
-                  endif
-                %}
-                <p class="pt-4"><span class="font-bold">{{ param_group[0] | humanize }} ({{ rendertype }}):</span>
-                {% if paramtype == 'Array' %}
-                  {{ param_group[1] | join: ' | '}}
-                {% else %}
-                  {{ param_group[1] }}
-                {% endif %}
-                </p>
-              {% endfor %}
-              </div>
-          </div>
-      </div>
+          {% for component in component_group[1].results %}
+            {% render 'modules/components/components/view', component: component, example_position: 'bottom' %}
+          {% endfor %}
+        </section>
+        <hr />
+      {% endfor %}
     </div>
-  </section>
-
-  <div class="flex-1">
-    <section class="px-4">
-      <div>
-        <div class="border-2 border-gray-900 px-4 py-4 mt-4 mb-4 rounded-md">
-            <p class="text-xl">Variants & examples</p>
-            <div data-styleguide-component="{{component.metadata.name}}">
-              {% if styleguide_render_params %}
-                  {% include component.path, params: styleguide_render_params %}
-                <pre>{{ styleguide_render_params | json }}</pre>
-              {% else %}
-                {% for param_group in component.metadata.params %}
-                    {% assign render_params = '{}' | parse_json | hash_merge: default_render_params %}
-                    {% for param_value in param_group[1] %}
-                      {% liquid
-                      assign paramtype = param_value | type_of
-                      if paramtype == 'Boolean' and param_value == param_group[1].first
-                        assign is_default_boolean = true
-                      else
-                        assign is_default_boolean = false
-                      endif
-                      %}
-                      {% unless param_group[0] == 'content' or is_default_boolean %}
-                        {% liquid
-                          assign key = param_group[0]
-                          hash_assign render_params[key] = param_value
-                        %}<br>
-                        <b>{{key}}:</b> {{param_value}}
-                        <br>
-                        <div class="mt-4">
-                          {% include component.path, params: render_params %}
-                        </div>
-                        <pre class="mt-4">{{ render_params | json }}</pre>
-
-                      {% endunless %}
-                    {% endfor %}
-                        <hr>
-                {% endfor %}
-              {% endif %}
-            </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  {% endif %}
-
-  {% if context.params.component_id == blank %}
-  <div class="flex-1">
-    {% for component_group in components_query_result %}
-      <section class="px-4 py-4">
-        <a name="{{ component_group[0]}}"></a>
-        <h2 class="text-2xl">{{ component_group[0] | humanize }}</h2>
-
-        {% for component in component_group[1].results %}
-        {% assign default_render_params = '{}' | parse_json %}
-        {% assign styleguide_render_params = component.metadata.styleguide.params %}
-        <div>
-          <div class="border-2 border-gray-900 px-4 py-4 mt-4 mb-4 rounded-md">
-            <a name="{{ component.metadata.name }}">
-              <h3 class="text-xl font-bold">{{component.metadata.name | humanize }}</h3>
-            </a>
-
-            <small><b>Implementation:</b> {{ component.path }}.liquid</small>
-            <hr />
-            {% for param_group in component.metadata.params %}
-              {% liquid
-                assign paramtype = param_group[1] | type_of
-                assign rendertype = paramtype
-                assign key = param_group[0]
-                if paramtype == 'Array'
-                  hash_assign default_render_params[key] = param_group[1].first
-                  assign rendertype = param_group[1].first | type_of
-                else
-                  hash_assign default_render_params[key] = param_group[1]
-                endif
-              %}
-              <p><span class="font-bold">{{ param_group[0] | humanize }} ({{ rendertype }}):</span>
-              {% if paramtype == 'Array' %}
-                {{ param_group[1] | join: ' | '}}
-              {% else %}
-                {{ param_group[1] }}
-              {% endif %}
-              </p>
-            {% endfor %}
-            <hr />
-
-            <details class="py-6">
-              <summary class="text-xl">Variants & examples</summary>
-              <div data-styleguide-component="{{component.metadata.name}}">
-                {% if styleguide_render_params %}
-                    {% include component.path, params: styleguide_render_params %}
-                  <pre>{{ styleguide_render_params | json }}</pre>
-                {% else %}
-                  {% for param_group in component.metadata.params %}
-                      {% assign render_params = '{}' | parse_json | hash_merge: default_render_params %}
-                      {% for param_value in param_group[1] %}
-                        {% liquid
-                        assign paramtype = param_value | type_of
-                        if paramtype == 'Boolean' and param_value == param_group[1].first
-                          assign is_default_boolean = true
-                        else
-                          assign is_default_boolean = false
-                        endif
-                        %}
-                        {% unless param_group[0] == 'content' or is_default_boolean %}
-                          {% liquid
-                            assign key = param_group[0]
-                            hash_assign render_params[key] = param_value
-                          %}<br>
-                          <b>{{key}}:</b> {{param_value}}
-                          <br>
-                          <div class="mt-4">
-                            {% include component.path, params: render_params %}
-                          </div>
-                          <pre class="mt-4">{{ render_params | json }}</pre>
-
-                        {% endunless %}
-                      {% endfor %}
-                          <hr>
-                  {% endfor %}
-                {% endif %}
-              </div>
-            </details>
-          </div>
-        </div>
-        {% endfor %}
-      </section>
-      <hr />
-    {% endfor %}
-  </div>
   {% endif %}
 </div>
