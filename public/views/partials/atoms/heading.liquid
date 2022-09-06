@@ -1,0 +1,44 @@
+---
+metadata:
+  name: Heading
+  params:
+    level:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+    classes: ''
+    content: I'm a heading
+---
+{% liquid
+  assign level = params.level | default: 2
+  assign attributes = params.attributes
+  assign content = params.content
+
+  assign classes = params.classes | append: ' font-bold'
+
+
+  if level == 1
+    assign classes = classes | append: ' text-5xl'
+  elsif level == 2
+    assign classes = classes | append: ' text-3xl'
+  elsif level == 3
+    assign classes = classes | append: ' text-2xl'
+  elsif level == 4
+    assign classes = classes | append: ' text-xl'
+  elsif level == 5
+    assign classes = classes | append: ' text-xl'
+  elsif level == 6
+    assign classes = classes | append: ' text-xl'
+  endif
+%}
+<h{{level}}
+  class="{{classes}}"
+  {% for attribute in attributes %}
+  {{ attribute[0] }}="{{ attribute[1] }}"
+  {% endfor %}
+>{{content}}</h{{level}}>
+
+
