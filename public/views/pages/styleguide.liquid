@@ -50,7 +50,7 @@ slug: styleguide(/:component_id)
   </aside>
 
   {% if context.params.component_id != blank %}
-    {% render 'modules/components/components/view', component: component, example_position: 'right' %}
+    {% include 'modules/components/components/view', component: component, example_position: 'right' %}
   {% else  %}
     <div class="flex-1">
       {% for component_group in components_query_result %}
@@ -59,7 +59,7 @@ slug: styleguide(/:component_id)
           <h2 class="text-2xl">{{ component_group[0] | humanize }}</h2>
 
           {% for component in component_group[1].results %}
-            {% render 'modules/components/components/view', component: component, example_position: 'bottom' %}
+            {% include 'modules/components/components/view', component: component, example_position: 'bottom' %}
           {% endfor %}
         </section>
         <hr />
