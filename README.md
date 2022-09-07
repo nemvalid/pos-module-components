@@ -16,8 +16,8 @@ theme_search_paths:
 In your project, you can render the component like this: 
 ```
 {% liquid 
-  assign button_params = '{}' | parse_json | hash_merge: variant: 'primary', content: 'Click me'
-  theme_render_rc 'components/atoms/button', params: params.button_params
+  assign button_params = '{}' | parse_json | hash_merge: weight: 'primary', content: 'Click me'
+  theme_render_rc 'components/atoms/button', params: button_params
 %}
 ```
 
