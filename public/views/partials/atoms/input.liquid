@@ -39,7 +39,7 @@ metadata:
   assign id = params.attributes.id | default: name
   assign attributes = params.attributes
 
-  assign classes = 'w-full py-[0.57rem] px-2 inline-block border focus:border-interactive-hover bg-input disabled:opacity-40 outline-none text-input-foreground transition-colors ' | append: params.classes
+  assign classes = 'py-[0.57rem] px-2 inline-block border focus:border-interactive-hover bg-input disabled:opacity-40 outline-none text-input-foreground transition-colors ' | append: params.classes
 
   case variant
     when 'confirmation'
