@@ -3,7 +3,9 @@ metadata:
   name: Input
   params:
     variant:
-      - primary
+      - normal
+      - confirmation
+      - error
     type:
       - text
       - email
@@ -15,21 +17,18 @@ metadata:
       - hidden
     name: my-input
     placeholder: Type here
-    value: default value
+    value: ''
     required:
       - false
       - true
     disabled:
       - false
       - true
-    error:
-      - false
-      - true
     classes: ''
     attributes: {}
 ---
 {% liquid
-  assign variant = params.variant | default: 'primary'
+  assign variant = params.variant | default: 'normal'
   assign type = params.type | default: 'text'
   assign name = params.name
   assign value = params.value
@@ -37,27 +36,25 @@ metadata:
   assign disabled = params.disabled | default: false
   assign error = params.error | default: false
   assign placeholder = params.placeholder
+  assign id = params.attributes.id | default: name
   assign attributes = params.attributes
 
-  assign classes = 'w-full py-2 px-1 transition-colors bg-input border border-input-border text-input-foreground focus:border-colorful focus:ring-0 ' | append: params.classes
+  assign classes = 'py-[0.57rem] px-2 inline-block border focus:border-interactive-hover bg-input disabled:opacity-40 outline-none text-input-foreground transition-colors ' | append: params.classes
 
-  if variant == 'primary'
-    assign classes = classes | append: ''
-  endif
-
-  if disabled == true
-    assign classes = classes | append: ' border-divider bg-input-border'
-  endif
-
-  if error == true
-    assign classes = classes | append: ' border-important'
-  endif
-
+  case variant
+    when 'confirmation'
+      assign classes = classes | append: ' border-confirmation'
+    when 'important'
+      assign classes = classes | append: ' border-important'
+    else
+      assign classes = classes | append: ' border-input-border'
+  endcase
 %}
 <input
-  class="{{classes}}"
   type="{{type}}"
   name="{{name}}"
+  class="{{classes}}"
+  id="{{id}}"
   {% if required %}required{% endif %}
   {% if value != blank %}value="{{value}}"{% endif %}
   {% if placeholder != blank %}placeholder="{{placeholder}}"{% endif %}
@@ -65,5 +62,4 @@ metadata:
   {% for attribute in attributes %}
   {{ attribute[0] }}="{{ attribute[1] }}"
   {% endfor %}
-/>
-
+>
