@@ -74,6 +74,9 @@ module.exports = {
       },
       boxShadow: {
         'card': `0px 0px 5px rgba(${defaultColors['card-shadow']})`
+      },
+      ringWidth: {
+        '1': '1px',
       }
     },
   },
