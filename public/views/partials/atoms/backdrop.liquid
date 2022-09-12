@@ -1,0 +1,14 @@
+---
+metadata:
+  name: Backdrop
+  params:
+    content: ''
+---
+{% liquid
+  assign content = params.content
+
+  assign classes = params.classes | append: ' w-screen h-screen fixed inset-0 flex items-center justify-center bg-colorful bg-opacity-30'
+%}
+<div
+  class="{{classes}}"
+>{{content}}</div>
