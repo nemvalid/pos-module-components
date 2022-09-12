@@ -1,3 +1,4 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
 const defaultColors = require('./colors.default');
 
 function parseColor(colorName) {
@@ -23,6 +24,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['Mulish', ...defaultTheme.fontFamily.sans]
+      },
       colors: {
         'prominent': parseColor('prominent'),
         'normal': parseColor('normal'),
