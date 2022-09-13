@@ -6,6 +6,7 @@ Provides [atomic](https://atomicdesign.bradfrost.com/table-of-contents/) Liquid 
 
 Once you installed the module you can use the atomic buiding blocks with [theme_render_rc](https://documentation.platformos.com/api-reference/liquid/platformos-tags#theme_render_rc) or a standard `render` tag.
 If you'd like to use the component override functionality provided by `theme_render_rc` you can set up the search path preference order in your project's `config.yml`:
+
 ```
 theme_search_paths:
   - overrides
@@ -13,9 +14,10 @@ theme_search_paths:
   - modules
 ```
 
-In your project, you can render the component like this: 
+In your project, you can render the component like this:
+
 ```
-{% liquid 
+{% liquid
   assign button_params = '{}' | parse_json | hash_merge: weight: 'primary', content: 'Click me'
   theme_render_rc 'components/atoms/button', params: button_params
 %}
@@ -31,12 +33,12 @@ The last path is `modules` which (based on the Component Library Module's machin
 ## Colors and configuration
 
 If you use a standard theme and the Theme Manager Module then they can provide you the necessary configuration context from the current theme.  
-Check the Theme Manager Module's documentation: https://github.com/Platform-OS/pos-module-theme-manager/blob/master/README.md for more details. 
+Check the Theme Manager Module's documentation: https://github.com/Platform-OS/pos-module-theme-manager/blob/master/README.md for more details.
 
 ## Hooks
 
 The Component Libarary Module implements the `hook_admin_menu` hook to add the style guide page link to the admin if the [Admin Module](https://github.com/Platform-OS/pos-module-admin) is added to your project.
-It also implements the `hook_module_info` hook to register itself to the Module registry provided by the [Core Module](https://github.com/Platform-OS/pos-module-core).
+It also implements the `hook_module_info` hook to register itself to the Module registry provided by the [Core Module](https://github.com/Platform-OS/pos-module-core) and implements `hook_permission` to use [access control](https://github.com/Platform-OS/pos-module-permission) in the styleguide page.
 
 ## Style guide and Component meta
 
@@ -47,6 +49,7 @@ The style guide uses the component metadata to show the docs section for every c
 The component meta is a standard frontmatter section in the component source which serves two purposes: It shows the available params you can pass to the component, and it acts as a "component config blueprint" for the style guide for the component variants.
 
 It's possible that for a component we don't want to show every combination of the possible param values in the style guide. In this case, you as a component developer can provide a _styleguide params_ object in the following format:
+
 ```
 ---
 metadata:
@@ -56,7 +59,7 @@ metadata:
     param2:
       - param2 value 1
       - param2 value 2
-    content: Example content 
+    content: Example content
   styleguide:
     params:
       param1: param1 value to be used in the styleguide
@@ -74,12 +77,12 @@ If you also prefer to use Tailwind in your platformOS project then you can reuse
 In this case you don't need to add the production CSS bundle from the component library, as your main project CSS will contain everything you need.
 
 The frontend build uses [Parcel.js](https://parceljs.org/) as a module bundler.  
-You can start Parcel’s builtin dev server in development mode by running `npm run start` from the `src` folder. 
+You can start Parcel’s builtin dev server in development mode by running `npm run start` from the `src` folder.
 This way Parcel will pick up your JS and CSS changes and update development bundle which you can sync to your instance via `pos-cli sync [environment]`.  
 For a production build you should run `npm run build`.  
-The parcel build produces two separate bundles for the main Component lib and for the style guide. The main entry point for the library is `modules/components/src/components.js`, the entry point for the style guide related modules is `modules/components/src/styleguide.js`.  
+The parcel build produces two separate bundles for the main Component lib and for the style guide. The main entry point for the library is `modules/components/src/components.js`, the entry point for the style guide related modules is `modules/components/src/styleguide.js`.
 
 Please never change the source files or the configuration in the `modules/components` folder (this is also true for every other module).  
 Monkey-patching can lead to unexpected results or make it hard to update your modules.  
 If you need a component to look different you can always create an override for that specific component in your app or as a custom module in your project repository.  
-If you find a bug or you have a suggestion please open a GitHub issue. Thank you! 
+If you find a bug or you have a suggestion please open a GitHub issue. Thank you!

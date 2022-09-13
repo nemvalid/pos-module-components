@@ -3,6 +3,9 @@ layout: modules/components/styleguide
 slug: styleguide/:component_id
 ---
 {% liquid
+  function current_user = 'modules/user/lib/queries/user/current'
+  include 'modules/permission/lib/helpers/can_do_or_unauthorized', requester: current_user, do: 'styleguide.view'
+
   function component_groups = 'modules/components/lib/queries/components/get_all'
   function component = 'modules/components/lib/queries/components/get', id: context.params.component_id
   assign component = component.results.first
