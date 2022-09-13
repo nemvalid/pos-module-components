@@ -3,8 +3,16 @@
     @apply my-4 border-t-divider;
   }
 
-  input:checked[type=checkbox]:not(.pos-clean) ~ .checkmark {
+  input:enabled:checked[type=checkbox]:not(.pos-clean) ~ .checkmark {
     @apply bg-interactive-graphic
+  }
+
+  input:disabled:checked[type=checkbox]:not(.pos-clean) ~ .checkmark {
+    @apply bg-interactive-disabled
+  }
+
+  input:disabled[type=checkbox]:not(.pos-clean) ~ .checkmark {
+    @apply border-interactive-disabled
   }
 
   input:checked[type=checkbox]:not(.pos-clean) ~ .checkmark:after {

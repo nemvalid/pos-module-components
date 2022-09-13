@@ -2,11 +2,11 @@
 metadata:
   name: Checkbox
   params:
-    name: 'my-checbox'
+    name: 'my-checkbox'
     checked:
       - false
       - true
-    id: 'my-checbox'
+    id: 'my-checkbox'
     disabled:
       - false
       - true
@@ -19,10 +19,7 @@ metadata:
 
   assign container_classes = 'block relative '
   assign input_classes = 'hidden'
-  assign basic_classes = 'checkmark border w-4 h-4 border-input-border cursor-pointer block '
-  assign checked_classes = 'enabled:checked:bg-interactive-graphic  '
-
-  assign classes = basic_classes | append: checked_classes
+  assign checkmark_classes = 'checkmark border w-4 h-4 border-input-border cursor-pointer block '
 %}
 <label class="{{container_classes}}">
   <input class="{{input_classes}}"
@@ -32,6 +29,6 @@ metadata:
     {% if checked %}checked{% endif %}
     {% if disabled %}disabled{% endif %}
   />
-  <span class="{{classes}}"></span>
+  <span class="{{checkmark_classes}}"></span>
 </label>
 
