@@ -20,13 +20,13 @@ metadata:
         content: Search
 ---
 {% liquid
-  assign input_params = params.input_params | hash_merge: classes: 'pr-8'
+  assign input_params = params.input_params | hash_merge: classes: 'w-full pr-8'
   assign button_params = params.button_params | hash_merge: classes: '-ml-7'
 
-  assign classes = 'inline-flex w-full ' | append: params.classes
+  assign classes = '' | append: params.classes
 
 %}
-<div class="{{classes}}">
+<div class="inline-flex {{classes}}">
   {% theme_render_rc 'components/atoms/input', params: input_params %}
   {% theme_render_rc 'components/atoms/button', params: button_params %}
 </div>
