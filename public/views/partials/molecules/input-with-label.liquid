@@ -1,0 +1,93 @@
+---
+metadata:
+  name: Input with label
+  params:
+    tag: 'fieldset'
+    classes: ''
+    validation:
+      passed:
+        - true
+        - false
+      messages: []
+    input_params:
+      name: 'text-input-with-label-example'
+      placeholder: Type here
+    label_params:
+      content: Text input with label
+    description_params:
+      content: This is a description
+  styleguide:
+    params:
+      tag: 'div'
+      classes: ''
+      validation:
+        passed: false
+        messages: ['This is a test error message', 'Another error message']
+      input_params:
+        name: 'text-input-with-label-example'
+        placeholder: Type here
+      label_params:
+        content: Text input with label
+      description_params:
+        content: This is a description
+
+---
+{% liquid
+  assign tag = params.tag | default: 'fieldset'
+  assign label_params = params.label_params
+  assign input_attributes = '{}' | parse_json
+    hash_assign input_attributes['aria-describedby'] = '' | append: params.input_params.name | append: '-desc'
+  assign input_params = params.input_params | hash_merge: attributes: input_attributes
+    if params.validation.passed == false
+      hash_assign input_params['variant'] = 'error'
+    endif
+  assign description_params = params.description_params
+  assign validation = params.validation
+
+  assign classes = '' | append: params.classes
+%}
+<{{tag}} class="flex flex-col items-start gap-1 {{classes}}">
+
+  <label for="{{input_params.name}}" class="leading-tight">
+    {{label_params.content}}
+    {% if input_params.required %} <span class="text-important">*</span>{% endif %}
+  </label>
+
+  {% theme_render_rc 'components/atoms/input', params: input_params %}
+
+  {% if description_params.content or validation.messages.size > 0 %}
+    <div id="{{input_params.name}}-desc" class="flex gap-2">
+
+        {% if validation.passed == true %}
+          {% assign icon_params = '{}' | parse_json | hash_merge: name: 'checkBadge' %}
+          <span class="text-confirmation">
+            {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+          </span>
+        {% endif %}
+
+        {% if validation.passed == false %}
+          {% assign icon_params = '{}' | parse_json | hash_merge: name: 'warningCloud' %}
+          <span class="text-important">
+            {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+          </span>
+        {% endif %}
+
+        <div class="leading-none">
+          {% theme_render_rc 'components/atoms/sidenote', params: description_params %}
+
+          {% if validation.passed == false %}
+            <ul>
+              {% for message in validation.messages %}
+                <li class="flex items-center">
+                  {% assign description_params = '{}' | parse_json | hash_merge: content: message, classes: '!text-important' %}
+                  {% theme_render_rc 'components/atoms/sidenote', params: description_params %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+
+    </div>
+  {% endif %}
+
+</{{tag}}>

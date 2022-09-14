@@ -34,7 +34,6 @@ metadata:
   assign value = params.value
   assign required = params.required | default: false
   assign disabled = params.disabled | default: false
-  assign error = params.error | default: false
   assign placeholder = params.placeholder
   assign id = params.attributes.id | default: name
   assign attributes = params.attributes
@@ -44,7 +43,7 @@ metadata:
   case variant
     when 'confirmation'
       assign classes = classes | append: ' border-confirmation'
-    when 'important'
+    when 'error'
       assign classes = classes | append: ' border-important'
     else
       assign classes = classes | append: ' border-input-border'
@@ -59,7 +58,8 @@ metadata:
   {% if value != blank %}value="{{value}}"{% endif %}
   {% if placeholder != blank %}placeholder="{{placeholder}}"{% endif %}
   {% if disabled %}disabled{% endif %}
+  {% if variant == 'error' %}aria-invalid="true"{% endif %}
   {% for attribute in attributes %}
-  {{ attribute[0] }}="{{ attribute[1] }}"
+    {{ attribute[0] }}="{{ attribute[1] }}"
   {% endfor %}
 >
