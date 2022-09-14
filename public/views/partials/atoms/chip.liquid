@@ -21,7 +21,7 @@ metadata:
   assign variant = params.variant | default: 'default'
   assign content = params.content
 
-  assign classes = 'px-3 py-1 leading-5 rounded-md flex align-center border '
+  assign classes = 'px-3 py-1 leading-5 rounded-md flex items-center align-center border '
 
   if variant == 'clickable'
     assign classes = classes | append: ' text-interactive-text border-divider bg-highlighted'
@@ -46,7 +46,7 @@ metadata:
       fill="none"
       width="10"
       height="10"
-      class="fill-current ml-2 mt-2"
+      class="fill-current ml-2"
       focusable="false"
       role="img"
       xmlns="http://www.w3.org/2000/svg"
