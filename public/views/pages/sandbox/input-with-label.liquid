@@ -1,0 +1,34 @@
+---
+layout: modules/components/styleguide
+---
+
+<div class="m-4 flex flex-col justify-center flex-wrap gap-4">
+
+  {% liquid
+    assign input_params = '{}' | parse_json | hash_merge: name: 'input-standalone'
+    assign label_params = '{}' | parse_json | hash_merge: content: 'This is a standard fieldset'
+    assign description_params = '{}' | parse_json | hash_merge: content: 'This is the field description'
+    assign fieldset_params = '{}' | parse_json | hash_merge: label_params: label_params, input_params: input_params, description_params: description_params
+    theme_render_rc 'components/molecules/input-with-label', params: fieldset_params
+  %}
+
+  {% liquid
+    assign input_params = '{}' | parse_json | hash_merge: name: 'input-confirmed'
+    assign label_params = '{}' | parse_json | hash_merge: content: 'This is a confirmed fieldset'
+    assign validation = '{}' | parse_json | hash_merge: passed: true
+    assign description_params = '{}' | parse_json | hash_merge: content: 'This is the field description'
+    assign fieldset_params = '{}' | parse_json | hash_merge: validation: validation, label_params: label_params, input_params: input_params, description_params: description_params
+    theme_render_rc 'components/molecules/input-with-label', params: fieldset_params
+  %}
+
+  {% liquid
+    assign input_params = '{}' | parse_json | hash_merge: name: 'input-error'
+    assign label_params = '{}' | parse_json | hash_merge: content: 'This is a fieldset with some errors'
+    assign error_messages = '["First error message", "Second error message"]' | parse_json
+    assign validation = '{}' | parse_json | hash_merge: passed: false, messages: error_messages
+    assign description_params = '{}' | parse_json | hash_merge: content: 'This is the field description'
+    assign fieldset_params = '{}' | parse_json | hash_merge: validation: validation, label_params: label_params, input_params: input_params, description_params: description_params
+    theme_render_rc 'components/molecules/input-with-label', params: fieldset_params
+  %}
+
+</div>
