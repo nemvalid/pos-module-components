@@ -3,7 +3,29 @@
     @apply my-4 border-t-divider;
   }
 
-  input:checked[type=checkbox]:not(.pos-clean) {
-    background-image: url("data:image/svg+xml,%3Csvg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.17232 6.89991L10.9661 0L12 1.05004L4.17232 9L0 4.76251L1.03389 3.71247L4.17232 6.89991Z' fill='white'/%3E%3C/svg%3E%0A");
+  input:enabled:checked[type=checkbox]:not(.pos-clean) ~ .pos-checkmark {
+    @apply bg-interactive-graphic
+  }
+
+  input:disabled:checked[type=checkbox]:not(.pos-clean) ~ .pos-checkmark {
+    @apply bg-interactive-disabled;
+  }
+
+  input:disabled[type=checkbox]:not(.pos-clean) ~ .pos-checkmark {
+    @apply border-interactive-disabled;
+  }
+
+  input:checked[type=checkbox]:not(.pos-clean) ~ .pos-checkmark:after {
+    @apply border-input;
+    content: "";
+    position: absolute;
+    display: block;
+    left: 5px;
+    top: 0px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
   }
 }

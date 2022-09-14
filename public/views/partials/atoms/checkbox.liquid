@@ -2,11 +2,11 @@
 metadata:
   name: Checkbox
   params:
-    name: 'my-checbox'
+    name: 'my-checkbox'
     checked:
       - false
       - true
-    id: 'my-checbox'
+    id: 'my-checkbox'
     disabled:
       - false
       - true
@@ -17,24 +17,18 @@ metadata:
   assign name = params.name
   assign disabled = params.disabled | default: false
 
-  assign basic_classes = 'pos-checkbox appearance-none bg-no-repeat bg-center bg-contain w-4 h-4 bg-input ring-1 ring-input-border cursor-pointer '
-  assign checked_classes = 'checked:bg-interactive-graphic checked:ring-interactive-graphic '
-  assign disabled_classes = 'disabled:ring-interactive-disabled '
-  assign disabled_checked_classes = 'disabled:bg-interactive-disabled disabled:ring-interactive-disabled '
-  assign classes = basic_classes | append: checked_classes
-
-  if disabled == true and checked == false
-    assign classes = classes | append: disabled_classes
-  endif
-  if disabled == true and checked == true
-    assign classes = classes | append: disabled_checked_classes
-  endif
+  assign container_classes = 'block relative '
+  assign input_classes = 'hidden'
+  assign checkmark_classes = 'pos-checkmark border w-4 h-4 border-input-border cursor-pointer block '
 %}
-<input class="{{classes}}"
-  type="checkbox"
-  id="{{id}}"
-  name="{{name}}"
-  {% if checked %}checked{% endif %}
-  {% if disabled %}disabled{% endif %}
-/>
+<label class="{{container_classes}}">
+  <input class="{{input_classes}}"
+    type="checkbox"
+    id="{{id}}"
+    name="{{name}}"
+    {% if checked %}checked{% endif %}
+    {% if disabled %}disabled{% endif %}
+  />
+  <span class="{{checkmark_classes}}"></span>
+</label>
 
