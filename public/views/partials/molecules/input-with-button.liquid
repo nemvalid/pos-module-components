@@ -2,12 +2,12 @@
 metadata:
   name: Input with button
   params:
-    classes: 'w-1/2'
+    classes: ''
     input_params:
       name: input
       placeholder: Type here
     button_params:
-      variant: primary
+      weight: primary
       content: Search
   styleguide:
     params:
@@ -16,21 +16,17 @@ metadata:
         name: input
         placeholder: Type here
       button_params:
-        variant: primary
+        weight: primary
         content: Search
 ---
 {% liquid
   assign input_params = params.input_params | hash_merge: classes: 'pr-8'
-  assign button_params = params.button_params | hash_merge: classes: 'border-2'
+  assign button_params = params.button_params | hash_merge: classes: '-ml-7'
 
   assign classes = 'inline-flex w-full ' | append: params.classes
 
 %}
-<div class="m-input-with-button {{classes}}">
-  <div class="flex-1">
-    {% theme_render_rc 'components/atoms/input', params: input_params %}
-  </div>
-  <div class="-ml-8">
-  {% theme_render_rc 'components/atoms/button', params: params.button_params %}
-  </div>
+<div class="{{classes}}">
+  {% theme_render_rc 'components/atoms/input', params: input_params %}
+  {% theme_render_rc 'components/atoms/button', params: button_params %}
 </div>
