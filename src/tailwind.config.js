@@ -1,3 +1,4 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
 const defaultColors = require('./colors.default');
 
 function parseColor(colorName) {
@@ -23,6 +24,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['Mulish', ...defaultTheme.fontFamily.sans]
+      },
       colors: {
         'prominent': parseColor('prominent'),
         'normal': parseColor('normal'),
@@ -70,6 +74,9 @@ module.exports = {
       },
       boxShadow: {
         'card': `0px 0px 5px rgba(${defaultColors['card-shadow']})`
+      },
+      ringWidth: {
+        '1': '1px',
       }
     },
   },

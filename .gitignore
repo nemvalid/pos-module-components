@@ -7,4 +7,3 @@ tmp/
 .DS_Store
 yarn-error.log
 public/assets/*
-public/assets/*
