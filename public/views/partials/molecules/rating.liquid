@@ -12,18 +12,25 @@ metadata:
 
 ---
 {% liquid
-  assign icon_params = '{}' | parse_json | hash_merge: name: 'star', class: 'w-4 h-4 text-input-border mr-2'
-  assign icon_params_filled = '{}' | parse_json | hash_merge: name: 'starFull', class: 'w-4 h-4 text-warning stroke-input-border mr-2'
+  assign icon_params = '{}' | parse_json | hash_merge: name: 'star', class: 'pos-rating-empty w-4 h-4 text-input-border mr-2'
+  assign icon_params_filled = '{}' | parse_json | hash_merge: name: 'starFull', class: 'pos-rating-full w-4 h-4 text-warning stroke-input-border mr-2'
 
   assign classes = 'inline-flex '
 
 %}
 <div class="{{classes}}">
   {% for i in (1..params.max_value) %}
-    {% if i <= params.value %}
+    <label for="stars-{{i}}">
       {% theme_render_rc 'components/atoms/icon', params: icon_params_filled %}
-    {% else %}
       {% theme_render_rc 'components/atoms/icon', params: icon_params %}
-    {% endif %}
+    </label>
+    <input
+      type="radio"
+      name="stars"
+      class=""
+      id="stars-{{i}}"
+      {% if i == params.value %}checked{% endif %}
+      value="{{i}}"
+    />
   {% endfor %}
 </div>
