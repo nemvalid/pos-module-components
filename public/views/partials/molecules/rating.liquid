@@ -2,6 +2,7 @@
 metadata:
   name: Rating
   params:
+    name: 'my-rating'
     max_value: 5
     value:
       - 1
@@ -12,6 +13,7 @@ metadata:
 
 ---
 {% liquid
+  assign name = params.name
   assign icon_params = '{}' | parse_json | hash_merge: name: 'star', class: 'pos-rating-empty w-4 h-4 text-input-border mr-2 cursor-pointer'
   assign icon_params_filled = '{}' | parse_json | hash_merge: name: 'starFull', class: 'pos-rating-full w-4 h-4 text-warning stroke-input-border mr-2 cursor-pointer'
 
@@ -20,15 +22,15 @@ metadata:
 %}
 <div class="pos-rating {{classes}}">
   {% for i in (1..params.max_value) %}
-    <label for="stars-{{i}}">
+    <label for="pos-stars-{{i}}">
       {% theme_render_rc 'components/atoms/icon', params: icon_params_filled %}
       {% theme_render_rc 'components/atoms/icon', params: icon_params %}
     </label>
     <input
       type="radio"
-      name="stars"
+      name="{{name}}"
       class="hidden"
-      id="stars-{{i}}"
+      id="pos-stars-{{i}}"
       {% if i == params.value %}checked{% endif %}
       value="{{i}}"
     />
