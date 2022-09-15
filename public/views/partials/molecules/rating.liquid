@@ -18,7 +18,7 @@ metadata:
   assign classes = 'inline-flex '
 
 %}
-<div class="{{classes}}">
+<div class="pos-rating {{classes}}">
   {% for i in (1..params.max_value) %}
     <label for="stars-{{i}}">
       {% theme_render_rc 'components/atoms/icon', params: icon_params_filled %}

@@ -33,11 +33,19 @@
     display: none;
   }
 
-  input:checked[type=radio]:not(.pos-clean) ~ label > .pos-rating-empty {
+  .pos-rating:not(:hover) input:checked[type=radio]:not(.pos-clean) ~ label > .pos-rating-empty {
     display: block;
   }
 
-  input:checked[type=radio]:not(.pos-clean) ~ label > .pos-rating-full {
+  .pos-rating:not(:hover) input:checked[type=radio]:not(.pos-clean) ~ label > .pos-rating-full {
+    display: none;
+  }
+
+  input:hover[type=radio]:not(.pos-clean) ~ label > .pos-rating-empty {
+    display: block;
+  }
+
+  input:hover[type=radio]:not(.pos-clean) ~ label > .pos-rating-full {
     display: none;
   }
 }
