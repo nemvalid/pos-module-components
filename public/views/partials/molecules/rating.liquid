@@ -12,8 +12,8 @@ metadata:
 
 ---
 {% liquid
-  assign icon_params = '{}' | parse_json | hash_merge: name: 'star', class: 'pos-rating-empty w-4 h-4 text-input-border mr-2'
-  assign icon_params_filled = '{}' | parse_json | hash_merge: name: 'starFull', class: 'pos-rating-full w-4 h-4 text-warning stroke-input-border mr-2'
+  assign icon_params = '{}' | parse_json | hash_merge: name: 'star', class: 'pos-rating-empty w-4 h-4 text-input-border mr-2 cursor-pointer'
+  assign icon_params_filled = '{}' | parse_json | hash_merge: name: 'starFull', class: 'pos-rating-full w-4 h-4 text-warning stroke-input-border mr-2 cursor-pointer'
 
   assign classes = 'inline-flex '
 
@@ -27,7 +27,7 @@ metadata:
     <input
       type="radio"
       name="stars"
-      class=""
+      class="hidden"
       id="stars-{{i}}"
       {% if i == params.value %}checked{% endif %}
       value="{{i}}"

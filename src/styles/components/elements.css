@@ -29,16 +29,12 @@
     transform: rotate(45deg);
   }
 
-  input[type=radio]:not(.pos-clean) ~ label > .pos-rating-empty {
+  label > .pos-rating-empty {
     display: none;
   }
 
   input:checked[type=radio]:not(.pos-clean) ~ label > .pos-rating-empty {
     display: block;
-  }
-
-  input:checked[type=radio]:not(.pos-clean) + label > .pos-rating-empty {
-    display: none;
   }
 
   input:checked[type=radio]:not(.pos-clean) ~ label > .pos-rating-full {
