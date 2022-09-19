@@ -16,3 +16,4 @@ jobs:
           owner: platform-os
           repo: gp-style-guide
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          workflow_file_name: main.yaml
