@@ -10,4 +10,4 @@ on:
   with:
     owner: platform-os
     repo: gp-style-guide
-    github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+    github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
