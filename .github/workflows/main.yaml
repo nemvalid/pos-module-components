@@ -1,0 +1,25 @@
+name: main
+
+on:
+  push:
+    branches:
+      - master
+      - ci
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        shell: sh
+        run: |
+          set -e
+          echo building the module
+
+      - uses: convictional/trigger-workflow-and-wait@v1.6.1
+        with:
+          owner: platform-os
+          repo: gp-style-guide
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          workflow_file_name: main.yaml
