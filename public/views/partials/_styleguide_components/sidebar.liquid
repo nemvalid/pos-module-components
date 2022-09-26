@@ -27,9 +27,46 @@
             class="flex items-center p-2 text-gray-500 transition-colors rounded-md hover:bg-blue-200"
             role="button" aria-haspopup="true">
             <span aria-hidden="true">
-              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+            {% case component_group[0] %}
+              {% when 'atoms' %}
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="8.75" y="8.75" width="7.41429" height="7.41429" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              {% when 'molecules' %}
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_8259_129326)">
+                    <rect x="8.75" y="0.75" width="7.41429" height="7.41429" stroke="currentColor" stroke-width="1.5"/>
+                    <rect x="8.75" y="15.8357" width="7.41429" height="7.41429" stroke="currentColor" stroke-width="1.5"/>
+                    <rect x="8.75" y="8.29285" width="7.41429" height="7.41429" stroke="currentColor" stroke-width="1.5"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_8259_129326">
+                      <rect width="24" height="24" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              {% when 'organisms' %}
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_8259_129327)">
+                    <rect x="8.29297" y="0.75" width="7.41429" height="7.41429" stroke="currentColor" stroke-width="1.5"/>
+                    <rect x="8.29297" y="15.8357" width="7.41429" height="7.41429" stroke="currentColor" stroke-width="1.5"/>
+                    <rect x="0.75" y="8.29285" width="7.41429" height="7.41429" stroke="currentColor" stroke-width="1.5"/>
+                    <rect x="8.29297" y="8.29285" width="7.41429" height="7.41429" stroke="currentColor" stroke-width="1.5"/>
+                    <rect x="15.8357" y="8.29285" width="7.41429" height="7.41429" stroke="currentColor" stroke-width="1.5"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_8259_129327">
+                      <rect width="24" height="24" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              {% when 'templates' %}
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 11L1 5.99999V18L12 23V11V11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 11L23 5.99999V18L12 23V11V11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M23 6L12 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
+            {% endcase %}
             </span>
             <span class="ml-2 text-sm"> {{ component_group[0] | humanize }} </span>
 
