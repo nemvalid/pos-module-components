@@ -2,6 +2,7 @@
 metadata:
   name: Heading
   params:
+    tag: ''
     level:
       - 1
       - 2
@@ -14,6 +15,8 @@ metadata:
 ---
 {% liquid
   assign level = params.level | default: 2
+  assign defaultTag = 'h' | append: level
+  assign tag = params.tag | default: defaultTag
   assign attributes = params.attributes
   assign content = params.content
 
@@ -34,11 +37,11 @@ metadata:
     assign classes = classes | append: ' text-xl'
   endif
 %}
-<h{{level}}
+<{{tag}}
   class="{{classes}}"
   {% for attribute in attributes %}
   {{ attribute[0] }}="{{ attribute[1] }}"
   {% endfor %}
->{{content}}</h{{level}}>
+>{{content}}</{{tag}}>
 
 

@@ -15,8 +15,7 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start": "parcel watch --host localhost",
-    "build": "parcel build --no-source-maps --no-cache",
-    "buildtw": "tailwindcss -i ./styles/components.css -o ../public/assets/components.css --minify"
+    "build": "parcel build --no-source-maps --no-cache"
   },
   "repository": {
     "type": "git",

@@ -1,8 +1,0 @@
----
-layout: modules/components/styleguide
----
-
-{% liquid
-  assign backdrop_params = '{}' | parse_json | hash_merge: content: 'I am a backdrop'
-  theme_render_rc 'components/atoms/backdrop', params: backdrop_params
-%}

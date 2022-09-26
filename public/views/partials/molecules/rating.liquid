@@ -4,25 +4,41 @@ metadata:
   params:
     name: 'my-rating'
     max_value: 5
+    static:
+      - true
+      - false
     value:
       - 1
       - 2
       - 3
       - 4
       - 5
-
 ---
 {% liquid
   assign name = params.name
-  assign icon_params = '{}' | parse_json | hash_merge: name: 'star', class: 'pos-rating-empty w-4 h-4 text-input-border mr-2 cursor-pointer'
-  assign icon_params_filled = '{}' | parse_json | hash_merge: name: 'starFull', class: 'pos-rating-full w-4 h-4 text-warning stroke-input-border mr-2 cursor-pointer'
-
+  assign icon_params = '{}' | parse_json | hash_merge: name: 'star', class: 'pos-rating-empty w-4 h-4 text-input-border mr-2 '
+  assign icon_params_filled = '{}' | parse_json | hash_merge: name: 'starFull', class: 'pos-rating-full w-4 h-4 text-warning stroke-input-border mr-2 '
+  assign max_value = params.max_value | default: 5
+  assign static = true
+  if params.static == false
+    assign static = false
+    hash_assign icon_params['class'] = icon_params.class | append: 'cursor-pointer'
+    hash_assign icon_params_filled['class'] = icon_params_filled.class | append: 'cursor-pointer'
+  endif
   assign classes = 'inline-flex '
 
 %}
 <div class="pos-rating {{classes}}">
-  {% for i in (1..params.max_value) %}
-    <label for="pos-stars-{{i}}">
+
+  {% for i in (1..max_value) %}
+    {% if static == true %}
+      {% if params.value >= i %}
+        {% theme_render_rc 'components/atoms/icon', params: icon_params_filled %}
+      {% else %}
+        {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+      {% endif %}
+    {% else %}
+    <label for="{{name}}-rating-stars-{{i}}">
       {% theme_render_rc 'components/atoms/icon', params: icon_params_filled %}
       {% theme_render_rc 'components/atoms/icon', params: icon_params %}
     </label>
@@ -30,9 +46,10 @@ metadata:
       type="radio"
       name="{{name}}"
       class="hidden"
-      id="pos-stars-{{i}}"
+      id="{{name}}-rating-stars-{{i}}"
       {% if i == params.value %}checked{% endif %}
       value="{{i}}"
     />
+    {% endif %}
   {% endfor %}
 </div>

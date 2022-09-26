@@ -17,7 +17,7 @@ function parseColor(colorName) {
 module.exports = {
   /* TODO: further optimizations needed */
   content: [
-    "../public/views/partials/{atoms,molecules,organisms,pages,templates}/*.liquid}",
+    "../public/views/partials/**/*.liquid}",
     "../../**/public/views/pages/**/*.liquid",
     "../../**/public/views/partials/**/*.liquid",
     "./scripts/*.js"

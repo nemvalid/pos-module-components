@@ -7,6 +7,23 @@ slug: styleguide
   include 'modules/permission/lib/helpers/can_do_or_unauthorized', requester: current_user, do: 'styleguide.view'
 
   function component_groups = 'modules/components/lib/queries/components/get_all'
-
-  include 'modules/components/pages/styleguide/index', component_groups: component_groups
 %}
+{% content_for 'pagetitle' %}Component Library{% endcontent_for %}
+
+<div class="flex antialiased text-normal bg-gray-100">
+  {% render 'modules/components/_styleguide_components/sidebar', component_groups: component_groups %}
+
+  <div class="flex-1">
+    {% for component_group in component_groups %}
+      <section class="px-4 py-4">
+        <a name="{{ component_group[0]}}"></a>
+        <h2 class="text-2xl">{{ component_group[0] | humanize }}</h2>
+
+        {% for component in component_group[1].results %}
+          {% include 'modules/components/_styleguide_components/view', component: component, example_position: 'bottom' %}
+        {% endfor %}
+      </section>
+      <hr />
+    {% endfor %}
+  </div>
+</div>

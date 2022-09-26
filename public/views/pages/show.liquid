@@ -9,6 +9,9 @@ slug: styleguide/:component_id
   function component_groups = 'modules/components/lib/queries/components/get_all'
   function component = 'modules/components/lib/queries/components/get', id: context.params.component_id
   assign component = component.results.first
-
-  include 'modules/components/pages/styleguide/show', component: component, component_groups: component_groups
 %}
+{% content_for 'pagetitle' %}{{component.metadata.name}} - Component Library{% endcontent_for %}
+<div class="flex antialiased bg-gray-100">
+  {% render 'modules/components/_styleguide_components/sidebar', component_groups: component_groups %}
+  {% include 'modules/components/_styleguide_components/view', component: component, example_position: 'right' %}
+</div>
