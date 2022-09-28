@@ -61,45 +61,40 @@
   </section>
 
   <div class="flex-1">
-    <section class="px-4">
-      <div>
-        <div class="border-2 border-gray-900 px-4 py-4 mt-4 mb-4 rounded-md">
-          <p class="text-xl">Variants & examples</p>
-          <div data-styleguide-component="{{component.metadata.name}}">
-            {% if styleguide_render_params %}
-                {% include component.path, params: styleguide_render_params %}
-              <pre>{{ styleguide_render_params | json }}</pre>
-            {% else %}
-              {% for param_group in component.metadata.params %}
-                  {% assign render_params = '{}' | parse_json | hash_merge: default_render_params %}
-                  {% for param_value in param_group[1] %}
-                    {% liquid
-                    assign paramtype = param_value | type_of
-                    if paramtype == 'Boolean' and param_value == param_group[1].first
-                      assign is_default_boolean = true
-                    else
-                      assign is_default_boolean = false
-                    endif
-                    %}
-                    {% unless param_group[0] == 'content' or is_default_boolean %}
-                      {% liquid
-                        assign key = param_group[0]
-                        hash_assign render_params[key] = param_value
-                      %}<br>
-                      <b>{{key}}:</b> {{param_value}}
-                      <br>
-                      <div class="mt-4">
-                        {% include component.path, params: render_params %}
-                      </div>
-                      <div class="mt-4 pb-4">{{ render_params | json }}</div>
+    <section class="p-4">
+      <div data-styleguide-component="{{component.metadata.name}}" class="relative">
+        {% if styleguide_render_params %}
+            {% include component.path, params: styleguide_render_params %}
+          <div class="py-4"><pre class="whitespace-pre-wrap break-all">{{ styleguide_render_params | json }}</pre></div>
+        {% else %}
+          {% for param_group in component.metadata.params %}
+              {% assign render_params = '{}' | parse_json | hash_merge: default_render_params %}
+              {% for param_value in param_group[1] %}
+                {% liquid
+                assign paramtype = param_value | type_of
+                if paramtype == 'Boolean' and param_value == param_group[1].first
+                  assign is_default_boolean = true
+                else
+                  assign is_default_boolean = false
+                endif
+                %}
+                {% unless param_group[0] == 'content' or is_default_boolean %}
+                  {% liquid
+                    assign key = param_group[0]
+                    hash_assign render_params[key] = param_value
+                  %}<br>
+                  <b>{{key}}:</b> {{param_value}}
+                  <br>
+                  <div class="mt-4">
+                    {% include component.path, params: render_params %}
+                  </div>
+                  <div class="py-4"><pre class="whitespace-pre-wrap break-all">{{ render_params | json }}</pre></div>
 
-                    {% endunless %}
-                  {% endfor %}
-                      <hr>
+                {% endunless %}
               {% endfor %}
-            {% endif %}
-          </div>
-        </div>
+                  <hr>
+          {% endfor %}
+        {% endif %}
       </div>
     </section>
   </div>
