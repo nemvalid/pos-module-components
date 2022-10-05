@@ -9,9 +9,11 @@ metadata:
     button_params:
       weight: primary
       content: Search
+      variant: confirmation
+      weight: secondary
     icon_params:
       name: folderUpload
-      class: w-4 h-4 text-white mr-2
+
 ---
 {% liquid
   assign icon_params = params.icon_params
@@ -28,7 +30,7 @@ metadata:
 {% endcapture %}
 
 {% liquid
-  assign button_params = params.button_params | hash_merge: classes: 'ml-7', content: icon_content
+  assign button_params = params.button_params | hash_merge: classes: 'mx-7', content: icon_content
   assign classes = '' | append: params.classes
 %}
 <div class="inline-flex {{classes}}">
