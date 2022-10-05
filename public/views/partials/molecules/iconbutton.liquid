@@ -16,8 +16,11 @@ metadata:
 ---
 {% liquid
   assign icon_params = params.icon_params
-  assign classes = "flex items-center gap-" | append: params.gap
-  if params.alignment == "left"
+  assign gap = params.gap | default: 2
+  assign alignment = params.alignment | default: "right"
+
+  assign classes = "flex items-center gap-" | append: gap
+  if alignment == "left"
     assign classes = classes | append:  " flex-row-reverse"
   endif
 %}
