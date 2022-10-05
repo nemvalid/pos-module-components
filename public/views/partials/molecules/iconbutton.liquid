@@ -2,7 +2,6 @@
 metadata:
   name: Icon button
   params:
-    classes: ''
     alignment:
       - left
       - right
@@ -30,8 +29,5 @@ metadata:
 
 {% liquid
   assign button_params = params.button_params | hash_merge: content: icon_content
-  assign classes = '' | append: params.classes
 %}
-<div class="inline-flex {{classes}}">
-  {% theme_render_rc 'components/atoms/button', params: button_params %}
-</div>
+{% theme_render_rc 'components/atoms/button', params: button_params %}
