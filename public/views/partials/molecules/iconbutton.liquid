@@ -1,0 +1,38 @@
+---
+metadata:
+  name: Icon button
+  params:
+    alignment:
+      - left
+      - right
+    gap: 2
+    button_params:
+      weight: primary
+      content: Upload
+      variant: confirmation
+      weight: secondary
+    icon_params:
+      name: folderUpload
+---
+{% liquid
+  assign icon_params = params.icon_params
+  assign gap = params.gap | default: 2
+  assign alignment = params.alignment | default: "right"
+
+  assign classes = "flex items-center gap-" | append: gap
+  if alignment == "left"
+    assign classes = classes | append:  " flex-row-reverse"
+  endif
+%}
+
+{% capture icon_content %}
+<div class="{{classes}}">
+  <span>{{params.button_params.content}}</span>
+  {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+</div>
+{% endcapture %}
+
+{% liquid
+  assign button_params = params.button_params | hash_merge: content: icon_content
+%}
+{% theme_render_rc 'components/atoms/button', params: button_params %}
