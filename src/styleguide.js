@@ -4,3 +4,4 @@ import './styles/styleguide.css';
 
 import './scripts/styleguide/icon';
 import './scripts/styleguide/backdrop';
+import './scripts/styleguide/colors';
