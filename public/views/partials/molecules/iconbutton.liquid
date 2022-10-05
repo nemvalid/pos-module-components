@@ -3,7 +3,7 @@ metadata:
   name: Icon button
   params:
     classes: ''
-    icon-alignment:
+    alignment:
       - left
       - right
     button_params:
@@ -13,24 +13,23 @@ metadata:
       weight: secondary
     icon_params:
       name: folderUpload
-
 ---
 {% liquid
   assign icon_params = params.icon_params
 %}
 
 {% capture icon_content %}
-  {% if params.icon-alignment == 'right' %}
+  {% if params.alignment == 'right' %}
     {{params.button_params.content}}
   {% endif %}
   {% theme_render_rc 'components/atoms/icon', params: icon_params %}
-  {% if params.icon-alignment == 'left' %}
+  {% if params.alignment == 'left' %}
     {{params.button_params.content}}
   {% endif %}
 {% endcapture %}
 
 {% liquid
-  assign button_params = params.button_params | hash_merge: classes: 'mx-7', content: icon_content
+  assign button_params = params.button_params | hash_merge: content: icon_content
   assign classes = '' | append: params.classes
 %}
 <div class="inline-flex {{classes}}">
