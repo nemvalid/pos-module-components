@@ -3,41 +3,33 @@ metadata:
   name: Icon button
   params:
     classes: ''
-    alignment: left
+    icon-alignment:
+      - left
+      - right
     button_params:
       weight: primary
       content: Search
     icon_params:
-      name: star
-      class: w-4 h-4 text-input-border mr-2
-  styleguide:
-    params:
-      classes: 'w-1/2'
-      alignment:
-        - left
-        - right
-      button_params:
-        weight: primary
-        content: Search
-      icon_params:
-        name: star
-        class: w-4 h-4 text-white mr-2
+      name: folderUpload
+      class: w-4 h-4 text-white mr-2
 ---
 {% liquid
   assign icon_params = params.icon_params
 %}
 
-{% capture card_content %}
-  {{params.button_params.content}}
+{% capture icon_content %}
+  {% if params.icon-alignment == 'right' %}
+    {{params.button_params.content}}
+  {% endif %}
   {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+  {% if params.icon-alignment == 'left' %}
+    {{params.button_params.content}}
+  {% endif %}
 {% endcapture %}
 
 {% liquid
-  assign button_params = params.button_params | hash_merge: classes: 'ml-7', content: card_content
-  assign button_params.content = card_content
-
+  assign button_params = params.button_params | hash_merge: classes: 'ml-7', content: icon_content
   assign classes = '' | append: params.classes
-
 %}
 <div class="inline-flex {{classes}}">
   {% theme_render_rc 'components/atoms/button', params: button_params %}
