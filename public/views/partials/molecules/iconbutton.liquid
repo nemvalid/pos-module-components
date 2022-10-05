@@ -5,6 +5,7 @@ metadata:
     alignment:
       - left
       - right
+    gap: 2
     button_params:
       weight: primary
       content: Upload
@@ -15,16 +16,17 @@ metadata:
 ---
 {% liquid
   assign icon_params = params.icon_params
+  assign classes = "flex items-center gap-" | append: params.gap
+  if params.alignment == "left"
+    assign classes = classes | append:  " flex-row-reverse"
+  endif
 %}
 
 {% capture icon_content %}
-  {% if params.alignment == 'right' %}
-    {{params.button_params.content}}
-  {% endif %}
+<div class="{{classes}}">
+  <span>{{params.button_params.content}}</span>
   {% theme_render_rc 'components/atoms/icon', params: icon_params %}
-  {% if params.alignment == 'left' %}
-    {{params.button_params.content}}
-  {% endif %}
+</div>
 {% endcapture %}
 
 {% liquid
