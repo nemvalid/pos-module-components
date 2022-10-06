@@ -6,7 +6,12 @@ metadata:
     input_params:
       name: input
       placeholder: Type here
-
+  styleguide:
+    params:
+      classes: ''
+      input_params:
+        name: input
+        placeholder: Type here
 
 ---
 {% capture options %}
@@ -20,22 +25,23 @@ metadata:
 
 {% liquid
   assign input_params = params.input_params | hash_merge: classes: 'w-full pr-8'
-  assign classes = '' | append: params.classes
 %}
 
 <div data-pos-component="Select">
-  {% for option in options %}
-  <div class="inline-flex {{classes}}">
-    {% assign chip_params = '{}' | parse_json | hash_merge: closable: true, variant: 'clickable', content: option %}
-    {% theme_render_rc 'components/molecules/chip', params: chip_params %}
+  <div class="flex">
+    {% for option in options %}
+    <div class="hidden" data-pos-select-tag="{{option}}">
+      {% assign chip_params = '{}' | parse_json | hash_merge: closable: true, variant: 'clickable', content: option %}
+      {% theme_render_rc 'components/molecules/chip', params: chip_params %}
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 
   {% for option in options %}
   {% assign checkbox_params = '{}' | parse_json | hash_merge: name: 'test', id: option  %}
   <div class="flex">
     {% theme_render_rc 'components/atoms/checkbox', params: checkbox_params %}
-    <label for="{{option}}" onclick="selectCheckbox()">{{option}}</label>
+    <label for="{{option}}">{{option}}</label>
   </div>
   {% endfor %}
 </div>
