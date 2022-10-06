@@ -28,7 +28,8 @@ metadata:
 %}
 
 <div data-pos-component="Select">
-  <div class="flex">
+  <div class="placeholder">Select an option</div>
+  <div class="tags flex">
     {% for option in options %}
     <div class="hidden" data-pos-select-tag="{{option}}">
       {% assign chip_params = '{}' | parse_json | hash_merge: closable: true, variant: 'clickable', content: option %}
