@@ -24,27 +24,34 @@ metadata:
 {% assign options = options | parse_json %}
 
 {% liquid
-  assign input_params = params.input_params | hash_merge: classes: 'w-full pr-8'
+  assign icon_params = '{}' | parse_json | hash_merge: name: 'dashDown'
 %}
 
 <div data-pos-component="Select">
   <div class="border border-important bg-panel py-2 px-2 inline-block">
-    <div class="placeholder">Select an option</div>
-    <div class="tags flex">
-      {% for option in options %}
-      <div class="hidden mr-2" data-pos-select-tag="{{option}}">
-        {% assign chip_params = '{}' | parse_json | hash_merge: closable: true, variant: 'clickable', content: option %}
-        {% theme_render_rc 'components/molecules/chip', params: chip_params %}
+    <div class="flex">
+      <div class="placeholder">Select an option</div>
+      <div class="tags flex">
+        {% for option in options %}
+        <div class="hidden mr-2" data-pos-select-tag="{{option}}">
+          {% assign chip_params = '{}' | parse_json | hash_merge: closable: true, variant: 'clickable', content: option %}
+          {% theme_render_rc 'components/molecules/chip', params: chip_params %}
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
+      <div class="pos-select-opener cursor-pointer">
+        {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+      </div>
     </div>
   </div>
 
-  {% for option in options %}
-  {% assign checkbox_params = '{}' | parse_json | hash_merge: name: 'test', id: option  %}
-  <div class="flex">
-    {% theme_render_rc 'components/atoms/checkbox', params: checkbox_params %}
-    <label for="{{option}}">{{option}}</label>
+  <div class="pos-select-options hidden">
+    {% for option in options %}
+    {% assign checkbox_params = '{}' | parse_json | hash_merge: name: 'test', id: option  %}
+    <div class="flex">
+      {% theme_render_rc 'components/atoms/checkbox', params: checkbox_params %}
+      <label for="{{option}}">{{option}}</label>
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>

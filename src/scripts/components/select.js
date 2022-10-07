@@ -21,4 +21,10 @@ if (selectComponentsWrapper) {
       }
     });
   });
+
+  const opener = selectComponentsWrapper.querySelector('.pos-select-opener');
+  opener.addEventListener('click', (event) => {
+    const options = selectComponentsWrapper.querySelector('.pos-select-options');
+    options.classList.toggle("hidden");
+  });
 };
