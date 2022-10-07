@@ -1,9 +1,9 @@
 const selectComponentsWrapper = document.querySelector('[data-pos-component="Select"]');
 if (selectComponentsWrapper) {
   const placeholder = selectComponentsWrapper.querySelector('.placeholder');
-  selectComponentsWrapper.querySelectorAll('[type="checkbox"]').forEach(checkbox => {
+  selectComponentsWrapper.querySelectorAll('[type="checkbox"], [type="radio"]').forEach(checkbox => {
     checkbox.addEventListener('change', (event) => {
-      const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
+      const checkBoxes = document.querySelectorAll('input[type="checkbox"], [type="radio"]');
       checkBoxes.forEach(checkBox => {
         const tag = document.querySelector(`[data-pos-select-tag="${checkBox.id}"]`);
         if (checkBox.checked) {
@@ -13,7 +13,7 @@ if (selectComponentsWrapper) {
         }
       });
 
-      const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      const checkedBoxes = document.querySelectorAll('[type="checkbox"]:checked, [type="radio"]:checked');
       if (checkedBoxes.length) {
         placeholder.classList.add('hidden');
       } else {

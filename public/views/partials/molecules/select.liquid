@@ -2,17 +2,13 @@
 metadata:
   name: Select POC
   params:
-    classes: ''
-    input_params:
-      name: input
-      placeholder: Type here
+    variant:
+      - basic
+      - checkbox
+      - radio
   styleguide:
     params:
-      classes: ''
-      input_params:
-        name: input
-        placeholder: Type here
-
+      variant: radio
 ---
 {% capture options %}
   [
@@ -21,7 +17,10 @@ metadata:
     "dolor"
   ]
 {% endcapture %}
-{% assign options = options | parse_json %}
+{% liquid
+  assign options = options | parse_json
+  assign variant = params.variant | default: checkbox
+%}
 
 <div data-pos-component="Select" class="relative inline-block">
   <div class="flex items-center border border-input-border bg-panel py-2 px-2 h-11" tabindex="0">
@@ -48,9 +47,14 @@ metadata:
 
   <div class="pos-select-options hidden absolute bg-panel shadow-card px-6 pt-4">
     {% for option in options %}
-    {% assign checkbox_params = '{}' | parse_json | hash_merge: name: 'test', id: option  %}
+    {% assign input_params = '{}' | parse_json | hash_merge: name: 'test', id: option  %}
     <div class="flex items-center pb-3">
-      {% theme_render_rc 'components/atoms/checkbox', params: checkbox_params %}
+      {% if variant == 'checkbox' %}
+        {% theme_render_rc 'components/atoms/checkbox', params: input_params %}
+      {% endif %}
+      {% if variant == 'radio' %}
+        {% theme_render_rc 'components/atoms/radio', params: input_params %}
+      {% endif %}
       <label class="ml-2 cursor-pointer" for="{{option}}">{{option}}</label>
     </div>
     {% endfor %}
