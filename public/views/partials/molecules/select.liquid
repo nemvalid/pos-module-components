@@ -23,13 +23,9 @@ metadata:
 {% endcapture %}
 {% assign options = options | parse_json %}
 
-{% liquid
-  assign icon_params = '{}' | parse_json | hash_merge: name: 'dashDown'
-%}
-
-<div data-pos-component="Select">
-  <div class="border border-important bg-panel py-2 px-2 inline-block">
-    <div class="flex">
+<div data-pos-component="Select" class="relative inline-block w-96">
+  <div class="border border-input-border bg-panel py-2 px-2 inline-block" tabindex="0">
+    <div class="flex items-center">
       <div class="placeholder">Select an option</div>
       <div class="tags flex">
         {% for option in options %}
@@ -39,13 +35,14 @@ metadata:
         </div>
         {% endfor %}
       </div>
-      <div class="pos-select-opener cursor-pointer">
+      <div class="pos-select-opener ml-3 cursor-pointer">
+        {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashDown' %}
         {% theme_render_rc 'components/atoms/icon', params: icon_params %}
       </div>
     </div>
   </div>
 
-  <div class="pos-select-options hidden">
+  <div class="pos-select-options hidden absolute bg-panel w-full shadow-card">
     {% for option in options %}
     {% assign checkbox_params = '{}' | parse_json | hash_merge: name: 'test', id: option  %}
     <div class="flex">
