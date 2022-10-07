@@ -23,8 +23,8 @@ metadata:
 {% endcapture %}
 {% assign options = options | parse_json %}
 
-<div data-pos-component="Select" class="relative inline-block w-96">
-  <div class="border border-input-border bg-panel py-2 px-2 inline-block" tabindex="0">
+<div data-pos-component="Select" class="relative inline-block">
+  <div class="border border-input-border bg-panel py-2 px-2 inline-block min-w-48 h-11" tabindex="0">
     <div class="flex items-center">
       <div class="placeholder">Select an option</div>
       <div class="tags flex">
@@ -42,12 +42,12 @@ metadata:
     </div>
   </div>
 
-  <div class="pos-select-options hidden absolute bg-panel w-full shadow-card">
+  <div class="pos-select-options hidden absolute bg-panel min-w-48 shadow-card px-6 pt-4">
     {% for option in options %}
     {% assign checkbox_params = '{}' | parse_json | hash_merge: name: 'test', id: option  %}
-    <div class="flex">
+    <div class="flex items-center pb-3">
       {% theme_render_rc 'components/atoms/checkbox', params: checkbox_params %}
-      <label for="{{option}}">{{option}}</label>
+      <label class="ml-2 cursor-pointer" for="{{option}}">{{option}}</label>
     </div>
     {% endfor %}
   </div>
