@@ -37,7 +37,13 @@ metadata:
       </div>
       <div class="pos-select-opener ml-3 cursor-pointer">
         {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashDown' %}
-        {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+        <div>
+          {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+        </div>
+        {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashUp' %}
+        <div class="hidden">
+          {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+        </div>
       </div>
     </div>
   </div>

@@ -26,5 +26,9 @@ if (selectComponentsWrapper) {
   opener.addEventListener('click', (event) => {
     const options = selectComponentsWrapper.querySelector('.pos-select-options');
     options.classList.toggle("hidden");
+
+    const openerIcons = selectComponentsWrapper.querySelectorAll('.pos-select-opener > div');
+    openerIcons[0].classList.toggle("hidden");
+    openerIcons[1].classList.toggle("hidden");
   });
 };
