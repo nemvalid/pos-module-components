@@ -2,20 +2,22 @@
 metadata:
   name: Select POC
   params:
+    id: mySelect
+    name: mySelect
     variant:
       - basic
       - checkbox
       - radio
   styleguide:
     params:
-      variant: radio
+      variant: checkbox
 ---
 {% capture options %}
-  [
-    "lorem",
-    "ipsum",
-    "dolor"
-  ]
+[
+  { "label": "Lorem", "value": "lorem"},
+  { "label": "Ipsum", "value": "ipsum"},
+  { "label": "Dolor", "value": "dolor"}
+ ]
 {% endcapture %}
 {% liquid
   assign options = options | parse_json
@@ -27,8 +29,8 @@ metadata:
     <div class="placeholder">Select an option</div>
     <div class="tags flex">
       {% for option in options %}
-      <label for="{{option}}" class="hidden mr-2 cursor-pointer" data-pos-select-tag="{{option}}">
-        {% assign chip_params = '{}' | parse_json | hash_merge: closable: true, variant: 'clickable', content: option %}
+      <label for="{{option.value}}" class="hidden mr-2 cursor-pointer" data-pos-select-tag="{{option.value}}">
+        {% assign chip_params = '{}' | parse_json | hash_merge: closable: true, variant: 'clickable', content: option.label %}
         {% theme_render_rc 'components/molecules/chip', params: chip_params %}
       </label>
       {% endfor %}
@@ -47,7 +49,7 @@ metadata:
 
   <div class="pos-select-options hidden absolute bg-panel shadow-card px-6 pt-4">
     {% for option in options %}
-    {% assign input_params = '{}' | parse_json | hash_merge: name: 'test', id: option  %}
+    {% assign input_params = '{}' | parse_json | hash_merge: name: 'test', id: option.value  %}
     <div class="flex items-center pb-3">
       {% if variant == 'checkbox' %}
         {% theme_render_rc 'components/atoms/checkbox', params: input_params %}
@@ -55,7 +57,7 @@ metadata:
       {% if variant == 'radio' %}
         {% theme_render_rc 'components/atoms/radio', params: input_params %}
       {% endif %}
-      <label class="ml-2 cursor-pointer" for="{{option}}">{{option}}</label>
+      <label class="ml-2 cursor-pointer" for="{{option.value}}">{{option.label}}</label>
     </div>
     {% endfor %}
   </div>
