@@ -30,6 +30,8 @@ The next search path is `modules/{{ context.constants.THEME }}` which is a dynam
 
 The last path is `modules` which (based on the Component Library Module's machine name being "components") will render the provided component from the Component Library as a fallback.
 
+When you implement a component override in one of your themes, custom modules or you app, you should always keep your custom component backwards compatible with the original component provided by this module. This is to ensure that other themes and modules will work correctly when they render your component override instead of the built-in component. 
+
 ## Colors and configuration
 
 If you use a standard theme and the Theme Manager Module then they can provide you the necessary configuration context from the current theme.  
@@ -37,7 +39,7 @@ Check the Theme Manager Module's documentation: https://github.com/Platform-OS/p
 
 ## Hooks
 
-The Component Libarary Module implements the `hook_admin_menu` hook to add the style guide page link to the admin if the [Admin Module](https://github.com/Platform-OS/pos-module-admin) is added to your project.
+The Component Libarary Module implements the `hook_admin_page` hook to add the style guide page link to the admin if the [Admin Module](https://github.com/Platform-OS/pos-module-admin) is added to your project.
 It also implements the `hook_module_info` hook to register itself to the Module registry provided by the [Core Module](https://github.com/Platform-OS/pos-module-core) and implements `hook_permission` to use [access control](https://github.com/Platform-OS/pos-module-permission) in the styleguide page.
 
 ## Style guide and Component meta
