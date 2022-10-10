@@ -1,11 +1,11 @@
-const selectComponentsWrapper = document.querySelector('[data-pos-component="Select"]');
-if (selectComponentsWrapper) {
+const selectComponentsWrappers = document.querySelectorAll('[data-pos-component="Select"]');
+selectComponentsWrappers.forEach(selectComponentsWrapper => {
   const placeholder = selectComponentsWrapper.querySelector('.placeholder');
   selectComponentsWrapper.querySelectorAll('[type="checkbox"], [type="radio"]').forEach(checkbox => {
     checkbox.addEventListener('change', (event) => {
-      const checkBoxes = document.querySelectorAll('input[type="checkbox"], [type="radio"]');
+      const checkBoxes = selectComponentsWrapper.querySelectorAll('input[type="checkbox"], [type="radio"]');
       checkBoxes.forEach(checkBox => {
-        const tag = document.querySelector(`[data-pos-select-tag="${checkBox.id}"]`);
+        const tag = selectComponentsWrapper.querySelector(`[data-pos-select-tag="${checkBox.id}"]`);
         if (checkBox.checked) {
           tag.classList.remove('hidden');
         } else {
@@ -13,7 +13,7 @@ if (selectComponentsWrapper) {
         }
       });
 
-      const checkedBoxes = document.querySelectorAll('[type="checkbox"]:checked, [type="radio"]:checked');
+      const checkedBoxes = selectComponentsWrapper.querySelectorAll('[type="checkbox"]:checked, [type="radio"]:checked');
       if (checkedBoxes.length) {
         placeholder.classList.add('hidden');
       } else {
@@ -31,4 +31,4 @@ if (selectComponentsWrapper) {
     openerIcons[0].classList.toggle("hidden");
     openerIcons[1].classList.toggle("hidden");
   });
-};
+});
