@@ -1,5 +1,6 @@
 const selectComponentsWrappers = document.querySelectorAll('[data-pos-component="Select"]');
 selectComponentsWrappers.forEach(selectComponentsWrapper => {
+  const selectId = selectComponentsWrapper.getAttribute('id');
   const placeholder = selectComponentsWrapper.querySelector('.placeholder');
   selectComponentsWrapper.querySelectorAll('[type="checkbox"], [type="radio"]').forEach(checkbox => {
     checkbox.addEventListener('change', (event) => {
