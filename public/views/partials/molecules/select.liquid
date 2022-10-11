@@ -28,7 +28,7 @@ metadata:
 
 <div data-pos-component="Select" class="relative inline-block" id="{{id}}">
   <div class="flex items-center border border-input-border bg-panel py-2 px-2 h-11" tabindex="0">
-    <div class="placeholder">Select an option</div>
+    <div class="placeholder cursor-pointer">Select an option</div>
     <div class="tags flex">
       {% for option in options %}
       {% assign tag_id = id | append: '_' | append: option.value %}

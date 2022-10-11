@@ -1,7 +1,8 @@
 const selectComponentsWrappers = document.querySelectorAll('[data-pos-component="Select"]');
 selectComponentsWrappers.forEach(selectComponentsWrapper => {
-  const selectId = selectComponentsWrapper.getAttribute('id');
   const placeholder = selectComponentsWrapper.querySelector('.placeholder');
+  const opener = selectComponentsWrapper.querySelector('.pos-select-opener');
+
   selectComponentsWrapper.querySelectorAll('[type="checkbox"], [type="radio"]').forEach(checkbox => {
     checkbox.addEventListener('change', (event) => {
       const checkBoxes = selectComponentsWrapper.querySelectorAll('input[type="checkbox"], [type="radio"]');
@@ -23,13 +24,16 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
     });
   });
 
-  const opener = selectComponentsWrapper.querySelector('.pos-select-opener');
-  opener.addEventListener('click', (event) => {
+  const open = (event) => {
     const options = selectComponentsWrapper.querySelector('.pos-select-options');
     options.classList.toggle("hidden");
 
     const openerIcons = selectComponentsWrapper.querySelectorAll('.pos-select-opener > div');
     openerIcons[0].classList.toggle("hidden");
     openerIcons[1].classList.toggle("hidden");
-  });
+  };
+
+
+  opener.addEventListener('click', open);
+  placeholder.addEventListener('click', open);
 });
