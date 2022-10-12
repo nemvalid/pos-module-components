@@ -3,6 +3,19 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   const placeholder = selectComponentsWrapper.querySelector('.placeholder');
   const opener = selectComponentsWrapper.querySelector('.pos-select-opener');
 
+  /* open */
+  const toggleOpen = (event) => {
+    const options = selectComponentsWrapper.querySelector('.pos-select-custom__options');
+    options.classList.toggle("hidden");
+    const openerIcons = selectComponentsWrapper.querySelectorAll('.pos-select-opener > div');
+    openerIcons[0].classList.toggle("hidden");
+    openerIcons[1].classList.toggle("hidden");
+  };
+
+  opener.addEventListener('click', toggleOpen);
+  placeholder.addEventListener('click', toggleOpen);
+
+  /* multiselect */
   selectComponentsWrapper.querySelectorAll('[type="checkbox"], [type="radio"]').forEach(checkbox => {
     checkbox.addEventListener('change', (event) => {
       const checkBoxes = selectComponentsWrapper.querySelectorAll('input[type="checkbox"], [type="radio"]');
@@ -24,16 +37,15 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
     });
   });
 
-  const open = (event) => {
-    const options = selectComponentsWrapper.querySelector('.pos-select-options');
-    options.classList.toggle("hidden");
+  /* simple select */
+  const nativeSelect = selectComponentsWrapper.querySelector('.pos-select-native');
 
-    const openerIcons = selectComponentsWrapper.querySelectorAll('.pos-select-opener > div');
-    openerIcons[0].classList.toggle("hidden");
-    openerIcons[1].classList.toggle("hidden");
-  };
+  selectComponentsWrapper.querySelectorAll('.pos-select-custom__options > div').forEach(option => {
+    const value = option.getAttribute("data-value");
+    option.addEventListener('click', () => {
+      nativeSelect.value = value;
+      toggleOpen();
+    });
+  });
 
-
-  opener.addEventListener('click', open);
-  placeholder.addEventListener('click', open);
 });
