@@ -38,13 +38,31 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   });
 
   /* simple select */
+  let optionChecked = "";
   const nativeSelect = selectComponentsWrapper.querySelector('.pos-select-native');
 
   selectComponentsWrapper.querySelectorAll('.pos-select-custom__options > div').forEach(option => {
     const value = option.getAttribute("data-value");
     option.addEventListener('click', () => {
       nativeSelect.value = value;
+      optionChecked = value;
       toggleOpen();
+
+      const tags = selectComponentsWrapper.querySelectorAll('.pos-select-custom__tags > div');
+      tags.forEach(tag => {
+        const tagValue = tag.getAttribute("data-value");
+        if (tagValue == value) {
+          tag.classList.remove('hidden');
+        } else {
+          tag.classList.add('hidden');
+        }
+      })
+
+      if (value) {
+        placeholder.classList.add('hidden');
+      } else {
+        placeholder.classList.remove('hidden');
+      }
     });
   });
 
