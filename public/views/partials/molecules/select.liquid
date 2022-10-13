@@ -65,38 +65,40 @@ metadata:
 {% endif %}
 
 {% if multiple == false %}
-<div data-pos-component="Select" class="pos-select-custom relative inline-block" id="{{id}}">
-  <div class="flex items-center border border-input-border bg-panel py-2 px-2 h-11" tabindex="0">
-    <div class="placeholder cursor-pointer">Select an option</div>
-    <div class="pos-select-custom__tags flex">
+<div data-pos-component="Select" class="relative" id="{{id}}">
+  <div class="pos-select-custom hidden md:inline-block">
+    <div class="flex items-center border border-input-border bg-panel py-2 px-2 h-11" tabindex="0">
+      <div class="placeholder cursor-pointer">Select an option</div>
+      <div class="pos-select-custom__tags flex">
+        {% for option in options %}
+        <div class="hidden mr-2 cursor-pointer" data-value="{{option.value}}">
+          {% assign chip_params = '{}' | parse_json | hash_merge: content: option.label %}
+          {% theme_render_rc 'components/molecules/chip', params: chip_params %}
+        </div>
+        {% endfor %}
+      </div>
+      <div class="pos-select-opener ml-3 cursor-pointer">
+        {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashDown' %}
+        <div>
+          {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+        </div>
+        {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashUp' %}
+        <div class="hidden">
+          {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+        </div>
+      </div>
+    </div>
+
+    <div class="pos-select-custom__options hidden absolute bg-panel shadow-card px-6 pt-4 z-50">
       {% for option in options %}
-      <div class="hidden mr-2 cursor-pointer" data-value="{{option.value}}">
-        {% assign chip_params = '{}' | parse_json | hash_merge: content: option.label %}
-        {% theme_render_rc 'components/molecules/chip', params: chip_params %}
+      <div class="flex items-center pb-3 cursor-pointer hover:bg-interactive-hover" data-value="{{option.value}}">
+        {{option.label}}
       </div>
       {% endfor %}
     </div>
-    <div class="pos-select-opener ml-3 cursor-pointer">
-      {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashDown' %}
-      <div>
-        {% theme_render_rc 'components/atoms/icon', params: icon_params %}
-      </div>
-      {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashUp' %}
-      <div class="hidden">
-        {% theme_render_rc 'components/atoms/icon', params: icon_params %}
-      </div>
-    </div>
   </div>
 
-  <div class="pos-select-custom__options hidden absolute bg-panel shadow-card px-6 pt-4 z-50">
-    {% for option in options %}
-    <div class="flex items-center pb-3 cursor-pointer hover:bg-interactive-hover" data-value="{{option.value}}">
-      {{option.label}}
-    </div>
-    {% endfor %}
-  </div>
-
-  <select class="pos-select-native">
+  <select class="pos-select-native md:hidden">
     <option value="sel" disabled="" selected=""> Select role...</option>
     {% for option in options %}
     <option value="{{option.value}}">{{option.label}}</option>
