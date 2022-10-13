@@ -89,9 +89,9 @@ metadata:
       </div>
     </div>
 
-    <div class="pos-select-custom__options hidden absolute bg-panel shadow-card px-6 pt-4 z-50">
+    <div class="pos-select-custom__options hidden absolute bg-panel shadow-card px-1 py-2 z-50">
       {% for option in options %}
-      <div class="flex items-center pb-3 cursor-pointer hover:bg-interactive-hover" data-value="{{option.value}}">
+      <div class="flex items-center py-2 px-4 cursor-pointer hover:text-inverted hover:bg-interactive-hover" data-value="{{option.value}}">
         {{option.label}}
       </div>
       {% endfor %}

@@ -50,6 +50,16 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
       }
     })
 
+    const options = selectComponentsWrapper.querySelectorAll('.pos-select-custom__options > div');
+    options.forEach(option => {
+      const optionValue = option.getAttribute("data-value");
+      if (optionValue == nativeSelect.value) {
+        option.classList.add('bg-highlighted');
+      } else {
+        option.classList.remove('bg-highlighted');
+      }
+    })
+
     if (nativeSelect.value) {
       placeholder.classList.add('hidden');
     } else {
