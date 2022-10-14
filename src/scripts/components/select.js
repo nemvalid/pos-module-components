@@ -39,6 +39,8 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
 
   /* single select */
   const nativeSelect = selectComponentsWrapper.querySelector('.pos-select-native');
+  const tagWrapper = selectComponentsWrapper.querySelector('.pos-select-custom__tags');
+  tagWrapper.addEventListener('click', toggleOpen);
   const singleSelectTagSelect = () => {
     const tags = selectComponentsWrapper.querySelectorAll('.pos-select-custom__tags > div');
     tags.forEach(tag => {
