@@ -40,7 +40,6 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   /* single select */
   const nativeSelect = selectComponentsWrapper.querySelector('.pos-select-simple-native');
   if (nativeSelect) {
-    console.log('nativeSelect',nativeSelect);
     const tagWrapper = selectComponentsWrapper.querySelector('.pos-select-custom__tags');
     tagWrapper.addEventListener('click', toggleOpen);
     const singleSelectTagSelect = () => {

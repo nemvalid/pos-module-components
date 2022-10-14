@@ -3,6 +3,7 @@ metadata:
   name: Checkbox
   params:
     name: 'my-checkbox'
+    value: ''
     checked:
       - false
       - true
@@ -15,6 +16,7 @@ metadata:
   assign checked = params.checked | default: false
   assign id = params.id
   assign name = params.name
+  assign value = params.value
   assign disabled = params.disabled | default: false
 
   assign container_classes = 'block relative '
@@ -26,6 +28,7 @@ metadata:
     type="checkbox"
     id="{{id}}"
     name="{{name}}"
+    {% if value %}value="{{value}}"{% endif %}
     {% if checked %}checked{% endif %}
     {% if disabled %}disabled{% endif %}
   />

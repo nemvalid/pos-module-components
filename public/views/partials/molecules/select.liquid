@@ -55,7 +55,8 @@ metadata:
   <div class="pos-select-custom__options hidden absolute bg-panel shadow-card px-6 pt-4 z-50">
     {% for option in options %}
     {% assign opt_id = id | append: '_' | append: option.value %}
-    {% assign input_params = '{}' | parse_json | hash_merge: name: name, id: opt_id  %}
+    {% assign input_name = name | append: '[]'  %}
+    {% assign input_params = '{}' | parse_json | hash_merge: name: input_name, value: option.value, id: opt_id  %}
     <div class="flex items-center pb-3">
       {% theme_render_rc 'components/atoms/checkbox', params: input_params %}
       <label class="ml-2 cursor-pointer" for="{{opt_id}}">{{option.label}}</label>
@@ -98,7 +99,7 @@ metadata:
     </div>
   </div>
 
-  <select class="pos-select-simple-native">
+  <select class="pos-select-simple-native" name="{{name}}">
     <option value="sel" disabled="" selected=""> Select role...</option>
     {% for option in options %}
     <option value="{{option.value}}">{{option.label}}</option>
