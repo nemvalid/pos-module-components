@@ -16,11 +16,11 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   placeholder.addEventListener('click', toggleOpen);
 
   /* multiselect */
-  selectComponentsWrapper.querySelectorAll('[type="checkbox"], [type="radio"]').forEach(checkbox => {
+  selectComponentsWrapper.querySelectorAll('[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener('change', (event) => {
-      const checkBoxes = selectComponentsWrapper.querySelectorAll('input[type="checkbox"], [type="radio"]');
+      const checkBoxes = selectComponentsWrapper.querySelectorAll('input[type="checkbox"]');
       checkBoxes.forEach(checkBox => {
-        const tag = selectComponentsWrapper.querySelector(`[data-pos-select-tag="${checkBox.id}"]`);
+        const tag = selectComponentsWrapper.querySelector(`[data-value="${checkBox.value}"]`);
         if (checkBox.checked) {
           tag.classList.remove('hidden');
         } else {
@@ -28,12 +28,20 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
         }
       });
 
-      const checkedBoxes = selectComponentsWrapper.querySelectorAll('[type="checkbox"]:checked, [type="radio"]:checked');
+      const checkedBoxes = selectComponentsWrapper.querySelectorAll('[type="checkbox"]:checked');
       if (checkedBoxes.length) {
         placeholder.classList.add('hidden');
       } else {
         placeholder.classList.remove('hidden');
       }
+    });
+  });
+  const tags = selectComponentsWrapper.querySelectorAll('.pos-select-multi-custom__tags > div');
+  tags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      const tagValue = tag.getAttribute("data-value");
+      const checkbox = selectComponentsWrapper.querySelector(`input[value="${tagValue}"]`);
+      checkbox.click();
     });
   });
 
