@@ -64,7 +64,6 @@ metadata:
   </div>
 
   <select class="pos-select-multi-native" name="{{name}}" multiple>
-    <option value="sel" disabled="" selected=""> Select role...</option>
     {% for option in options %}
     <option value="{{option.value}}">{{option.label}}</option>
     {% endfor %}
@@ -106,7 +105,6 @@ metadata:
   </div>
 
   <select class="pos-select-simple-native" name="{{name}}">
-    <option value="sel" disabled="" selected=""> Select role...</option>
     {% for option in options %}
     <option value="{{option.value}}">{{option.label}}</option>
     {% endfor %}

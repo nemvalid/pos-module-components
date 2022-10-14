@@ -19,6 +19,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   const nativeMultiSelect = selectComponentsWrapper.querySelector('.pos-select-multi-native');
   if (nativeMultiSelect) {
     selectComponentsWrapper.querySelectorAll('[type="checkbox"]').forEach(checkbox => {
+      /* multi select - custom select*/
       checkbox.addEventListener('change', () => {
         const option = selectComponentsWrapper.querySelector(`option[value="${checkbox.value}"]`);
         option.selected = !option.selected;
@@ -44,6 +45,31 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
         const option = selectComponentsWrapper.querySelector(`option[value="${tagValue}"]`);
         option.selected = false;
         tag.classList.add('hidden');
+      });
+    });
+
+    /* multi select - native select*/
+    nativeMultiSelect.addEventListener('change', () => {
+      const selectedOptions = selectComponentsWrapper.querySelectorAll('.pos-select-multi-native > option');
+
+      selectedOptions.forEach(option => {
+        console.log(option);
+        const optionValue = option.value;
+        const checkbox = selectComponentsWrapper.querySelector(`input[value="${optionValue}"]`);
+        const tag = selectComponentsWrapper.querySelector(`[data-value="${optionValue}"]`);
+        if (option.selected) {
+          checkbox.checked = true;
+          tag.classList.remove('hidden');
+        } else {
+          checkbox.checked = false;
+          tag.classList.add('hidden');
+        }
+        const checkedBoxes = selectComponentsWrapper.querySelectorAll('[type="checkbox"]:checked');
+        if (checkedBoxes.length) {
+          placeholder.classList.add('hidden');
+        } else {
+          placeholder.classList.remove('hidden');
+        }
       });
     });
   }
@@ -92,7 +118,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
     });
 
     /* single select - native select*/
-    nativeSelect.addEventListener('change', (event) => {
+    nativeSelect.addEventListener('change', () => {
       singleSelectTagSelect();
     });
   }
