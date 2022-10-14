@@ -72,8 +72,7 @@ metadata:
       <div class="pos-select-custom__tags flex">
         {% for option in options %}
         <div class="hidden mr-2 cursor-pointer" data-value="{{option.value}}">
-          {% assign chip_params = '{}' | parse_json | hash_merge: content: option.label %}
-          {% theme_render_rc 'components/molecules/chip', params: chip_params %}
+          {{option.label}}
         </div>
         {% endfor %}
       </div>
