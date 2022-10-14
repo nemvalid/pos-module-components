@@ -3,7 +3,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   const placeholder = selectComponentsWrapper.querySelector('.placeholder');
   const opener = selectComponentsWrapper.querySelector('.pos-select-opener');
 
-  /* open */
+  /* toggle open for custom select */
   const toggleOpen = (event) => {
     const options = selectComponentsWrapper.querySelector('.pos-select-custom__options');
     options.classList.toggle("hidden");
@@ -16,34 +16,37 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   placeholder.addEventListener('click', toggleOpen);
 
   /* multiselect */
-  selectComponentsWrapper.querySelectorAll('[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', (event) => {
-      const checkBoxes = selectComponentsWrapper.querySelectorAll('input[type="checkbox"]');
-      checkBoxes.forEach(checkBox => {
-        const tag = selectComponentsWrapper.querySelector(`[data-value="${checkBox.value}"]`);
-        if (checkBox.checked) {
-          tag.classList.remove('hidden');
+  const nativeMultiSelect = selectComponentsWrapper.querySelector('.pos-select-multi-native');
+  if (nativeMultiSelect) {
+    selectComponentsWrapper.querySelectorAll('[type="checkbox"]').forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        const option = selectComponentsWrapper.querySelector(`option[value="${checkbox.value}"]`);
+        option.selected = !option.selected;
+
+        const tag = selectComponentsWrapper.querySelector(`[data-value="${checkbox.value}"]`);
+        tag.classList.toggle('hidden');
+
+        const checkedBoxes = selectComponentsWrapper.querySelectorAll('[type="checkbox"]:checked');
+        if (checkedBoxes.length) {
+          placeholder.classList.add('hidden');
         } else {
-          tag.classList.add('hidden');
+          placeholder.classList.remove('hidden');
         }
       });
+    });
 
-      const checkedBoxes = selectComponentsWrapper.querySelectorAll('[type="checkbox"]:checked');
-      if (checkedBoxes.length) {
-        placeholder.classList.add('hidden');
-      } else {
-        placeholder.classList.remove('hidden');
-      }
+    const tags = selectComponentsWrapper.querySelectorAll('.pos-select-multi-custom__tags > div');
+    tags.forEach(tag => {
+      tag.addEventListener('click', () => {
+        const tagValue = tag.getAttribute("data-value");
+        const checkbox = selectComponentsWrapper.querySelector(`input[value="${tagValue}"]`);
+        checkbox.click();
+        const option = selectComponentsWrapper.querySelector(`option[value="${tagValue}"]`);
+        option.selected = false;
+        tag.classList.add('hidden');
+      });
     });
-  });
-  const tags = selectComponentsWrapper.querySelectorAll('.pos-select-multi-custom__tags > div');
-  tags.forEach(tag => {
-    tag.addEventListener('click', () => {
-      const tagValue = tag.getAttribute("data-value");
-      const checkbox = selectComponentsWrapper.querySelector(`input[value="${tagValue}"]`);
-      checkbox.click();
-    });
-  });
+  }
 
   /* single select */
   const nativeSelect = selectComponentsWrapper.querySelector('.pos-select-simple-native');

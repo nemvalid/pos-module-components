@@ -62,6 +62,13 @@ metadata:
     </div>
     {% endfor %}
   </div>
+
+  <select class="pos-select-multi-native" name="{{name}}" multiple>
+    <option value="sel" disabled="" selected=""> Select role...</option>
+    {% for option in options %}
+    <option value="{{option.value}}">{{option.label}}</option>
+    {% endfor %}
+  </select>
 </div>
 {% endif %}
 
