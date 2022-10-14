@@ -66,7 +66,7 @@ metadata:
 
 {% if multiple == false %}
 <div data-pos-component="Select" class="relative" id="{{id}}">
-  <div class="pos-select-custom hidden md:inline-block">
+  <div class="pos-select-custom">
     <div class="flex items-center justify-between border border-input-border bg-panel py-2 px-2 h-11" tabindex="0">
       <div class="placeholder cursor-pointer">Select an option</div>
       <div class="pos-select-custom__tags flex">
@@ -97,7 +97,7 @@ metadata:
     </div>
   </div>
 
-  <select class="pos-select-simple-native md:hidden">
+  <select class="pos-select-simple-native">
     <option value="sel" disabled="" selected=""> Select role...</option>
     {% for option in options %}
     <option value="{{option.value}}">{{option.label}}</option>
