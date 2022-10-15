@@ -4,6 +4,8 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   const opener = selectComponentsWrapper.querySelector('.pos-select-opener');
   const options = selectComponentsWrapper.querySelector('.pos-select-custom__options');
 
+  let optionHoveredIndex = -1;
+
   /* toggle open for custom select */
   const toggleOpen = () => {
     options.classList.toggle("hidden");
@@ -26,9 +28,54 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
     }
   }
 
+  const updateCustomSelectHovered = (newIndex) => {
+    const prevOption = options.children[optionHoveredIndex];
+    const option = options.children[newIndex];
+
+    if (prevOption) {
+      prevOption.classList.remove("bg-highlighted");
+    }
+    if (option) {
+      option.classList.add("bg-highlighted");
+    }
+
+    optionHoveredIndex = newIndex;
+  }
+
+  const supportKeyboardNavigation = (event) => {
+    // press down -> go next
+    if (event.keyCode === 40 && optionHoveredIndex < options.children.length - 1 ) {
+      event.preventDefault(); // prevent page scrolling
+      updateCustomSelectHovered(optionHoveredIndex + 1);
+    }
+
+    // press up -> go previous
+    if (event.keyCode === 38 && optionHoveredIndex > 0) {
+      event.preventDefault(); // prevent page scrolling
+      updateCustomSelectHovered(optionHoveredIndex - 1);
+    }
+
+    // press Enter or space -> select the option
+    if (event.keyCode === 13 || event.keyCode === 32) {
+      event.preventDefault();
+      const checkbox = options.children[optionHoveredIndex].querySelector('[type="checkbox"]');
+      if (checkbox) {
+        checkbox.click();
+      } else {
+        options.children[optionHoveredIndex].click();
+      }
+    }
+
+    // press ESC -> close selectCustom
+    if (event.keyCode === 27) {
+      closeOptions();
+    }
+  }
+
   document.addEventListener("click", watchClickOutside);
   opener.addEventListener('click', toggleOpen);
   placeholder.addEventListener('click', toggleOpen);
+  selectComponentsWrapper.addEventListener("keydown", supportKeyboardNavigation);
 
   /* multiselect */
   const nativeMultiSelect = selectComponentsWrapper.querySelector('.pos-select-multi-native');
