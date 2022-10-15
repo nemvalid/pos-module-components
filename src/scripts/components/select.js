@@ -2,16 +2,31 @@ const selectComponentsWrappers = document.querySelectorAll('[data-pos-component=
 selectComponentsWrappers.forEach(selectComponentsWrapper => {
   const placeholder = selectComponentsWrapper.querySelector('.placeholder');
   const opener = selectComponentsWrapper.querySelector('.pos-select-opener');
+  const options = selectComponentsWrapper.querySelector('.pos-select-custom__options');
 
   /* toggle open for custom select */
-  const toggleOpen = (event) => {
-    const options = selectComponentsWrapper.querySelector('.pos-select-custom__options');
+  const toggleOpen = () => {
     options.classList.toggle("hidden");
     const openerIcons = selectComponentsWrapper.querySelectorAll('.pos-select-opener > div');
     openerIcons[0].classList.toggle("hidden");
     openerIcons[1].classList.toggle("hidden");
   };
 
+  const closeOptions = () => {
+    options.classList.add("hidden");
+    const openerIcons = selectComponentsWrapper.querySelectorAll('.pos-select-opener > div');
+    openerIcons[0].classList.remove("hidden");
+    openerIcons[1].classList.add("hidden");
+  };
+
+  const watchClickOutside = (event) => {
+    const didClickedOutside = !selectComponentsWrapper.contains(event.target);
+    if (didClickedOutside) {
+      closeOptions();
+    }
+  }
+
+  document.addEventListener("click", watchClickOutside);
   opener.addEventListener('click', toggleOpen);
   placeholder.addEventListener('click', toggleOpen);
 
@@ -53,7 +68,6 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
       const selectedOptions = selectComponentsWrapper.querySelectorAll('.pos-select-multi-native > option');
 
       selectedOptions.forEach(option => {
-        console.log(option);
         const optionValue = option.value;
         const checkbox = selectComponentsWrapper.querySelector(`input[value="${optionValue}"]`);
         const tag = selectComponentsWrapper.querySelector(`[data-value="${optionValue}"]`);
