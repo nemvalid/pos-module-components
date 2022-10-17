@@ -29,9 +29,9 @@ metadata:
 
 {% if multiple == true %}
 <div data-pos-component="Select" class="relative inline-block" id="{{id}}">
-  <div class="pos-select-multi-custom items-center justify-between border border-input-border bg-panel py-2 px-2 h-11" tabindex="0" aria-hidden="true">
-    <div class="placeholder cursor-pointer">Select an option</div>
-    <div class="pos-select-multi-custom__tags flex">
+  <div class="pos-select pos-select--multi-custom items-center justify-between border border-input-border bg-panel py-2 px-2 h-11" tabindex="0" aria-hidden="true">
+    <div class="pos-select__placeholder cursor-pointer">Select an option</div>
+    <div class="pos-select__tags flex">
       {% for option in options %}
       <div class="hidden mr-2 cursor-pointer" data-value="{{option.value}}">
         {% assign chip_params = '{}' | parse_json | hash_merge: closable: true, variant: 'clickable', content: option.label %}
@@ -39,7 +39,7 @@ metadata:
       </div>
       {% endfor %}
     </div>
-    <div class="pos-select-opener ml-3 cursor-pointer">
+    <div class="pos-select__opener ml-3 cursor-pointer">
       {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashDown' %}
       <div>
         {% theme_render_rc 'components/atoms/icon', params: icon_params %}
@@ -63,7 +63,7 @@ metadata:
     {% endfor %}
   </div>
 
-  <select class="pos-select-multi-native" name="{{name}}[]" multiple aria-labelledby="{{name}}">
+  <select class="pos-select--multi-native" name="{{name}}[]" multiple aria-labelledby="{{name}}">
     {% for option in options %}
     <option value="{{option.value}}">{{option.label}}</option>
     {% endfor %}
@@ -75,15 +75,15 @@ metadata:
 <div data-pos-component="Select" class="relative" id="{{id}}">
   <div class="pos-select-custom" aria-hidden="true">
     <div class="flex items-center justify-between border border-input-border bg-panel py-2 px-2 h-11" tabindex="0">
-      <div class="placeholder cursor-pointer">Select an option</div>
-      <div class="pos-select-custom__tags flex">
+      <div class="pos-select__placeholder cursor-pointer">Select an option</div>
+      <div class="pos-select__tags flex">
         {% for option in options %}
         <div class="hidden mr-2 cursor-pointer" data-value="{{option.value}}">
           {{option.label}}
         </div>
         {% endfor %}
       </div>
-      <div class="pos-select-opener ml-3 cursor-pointer">
+      <div class="pos-select__opener ml-3 cursor-pointer">
         {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashDown' %}
         <div>
           {% theme_render_rc 'components/atoms/icon', params: icon_params %}
@@ -104,7 +104,7 @@ metadata:
     </div>
   </div>
 
-  <select class="pos-select-simple-native" name="{{name}}" aria-labelledby="{{name}}">
+  <select class="pos-select--simple-native" name="{{name}}" aria-labelledby="{{name}}">
     {% for option in options %}
     <option value="{{option.value}}">{{option.label}}</option>
     {% endfor %}

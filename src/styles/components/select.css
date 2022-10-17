@@ -1,11 +1,11 @@
 .pos-select-custom,
-.pos-select-multi-custom,
+.pos-select--multi-custom,
 .pos-select-custom__options {
   min-width: 168px;
 }
 
 .pos-select-custom,
-.pos-select-multi-custom {
+.pos-select--multi-custom {
   display: none;
 }
 
@@ -14,12 +14,12 @@
     display: inline-block;
   }
 
-  .pos-select-multi-custom {
+  .pos-select--multi-custom {
     display: flex;
   }
 
-  .pos-select-custom + .pos-select-simple-native,
-  .pos-select-custom__options + .pos-select-multi-native {
+  .pos-select-custom + .pos-select--simple-native,
+  .pos-select-custom__options + .pos-select--multi-native {
     display: none;
   }
 }
