@@ -19,6 +19,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
     const openerIcons = selectComponentsWrapper.querySelectorAll('.pos-select__opener > div');
     openerIcons[0].classList.remove("hidden");
     openerIcons[1].classList.add("hidden");
+    updateCustomSelectHovered(-1);
   };
 
   const watchClickOutside = (event) => {
@@ -58,11 +59,15 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
     // press Enter or space -> select the option
     if (event.keyCode === 13 || event.keyCode === 32) {
       event.preventDefault();
-      const checkbox = options.children[optionHoveredIndex].querySelector('[type="checkbox"]');
-      if (checkbox) {
-        checkbox.click();
+      if (optionHoveredIndex == -1) {
+        toggleOpen();
       } else {
-        options.children[optionHoveredIndex].click();
+        const checkbox = options.children[optionHoveredIndex].querySelector('[type="checkbox"]');
+        if (checkbox) {
+          checkbox.click();
+        } else {
+          options.children[optionHoveredIndex].click();
+        }
       }
     }
 
