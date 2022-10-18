@@ -2,7 +2,7 @@ const selectComponentsWrappers = document.querySelectorAll('[data-pos-component=
 selectComponentsWrappers.forEach(selectComponentsWrapper => {
   const placeholder = selectComponentsWrapper.querySelector('.pos-select__placeholder');
   const opener = selectComponentsWrapper.querySelector('.pos-select__opener');
-  const options = selectComponentsWrapper.querySelector('.pos-select-custom__options');
+  const options = selectComponentsWrapper.querySelector('.pos-select__options');
 
   let optionHoveredIndex = -1;
 
@@ -156,7 +156,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
         }
       })
 
-      const options = selectComponentsWrapper.querySelectorAll('.pos-select-custom__options > div');
+      const options = selectComponentsWrapper.querySelectorAll('.pos-select__options > div');
       options.forEach(option => {
         const optionValue = option.getAttribute("data-value");
         if (optionValue == nativeSelect.value) {
@@ -174,7 +174,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
     }
 
     /* single select - custom select*/
-    selectComponentsWrapper.querySelectorAll('.pos-select-custom__options > div').forEach(option => {
+    selectComponentsWrapper.querySelectorAll('.pos-select__options > div').forEach(option => {
       const value = option.getAttribute("data-value");
       option.addEventListener('click', () => {
         nativeSelect.value = value;
