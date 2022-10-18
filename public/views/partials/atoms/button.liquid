@@ -24,9 +24,11 @@ metadata:
       - false
       - true
     content: Click me
+    type: 'button'
 ---
 {% liquid
   assign tag = params.tag | default: 'button'
+  assign type = params.type | default: 'button'
   assign weight = params.weight | default: 'primary'
   assign variant = params.variant | default: 'normal'
   assign filled = params.filled | default: false
@@ -82,5 +84,6 @@ metadata:
     {{ attribute[0] }}="{{ attribute[1] }}"
   {% endfor %}
   {% if tag == 'button' and disabled %}disabled{% endif %}
+  {% if tag == 'button' %}type="{{type}}"{% endif %}
 >{{content}}</{{tag}}>
 
