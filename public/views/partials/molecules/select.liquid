@@ -7,20 +7,10 @@ metadata:
     multiple:
       - true
       - false
-    options:
-  styleguide:
-    params:
-      multiple: false
+    options: []
 ---
-{% capture options %}
-[
-  { "label": "Lorem", "value": "lorem"},
-  { "label": "Ipsum", "value": "ipsum"},
-  { "label": "Dolor", "value": "dolor"}
-]
-{% endcapture %}
 {% liquid
-  assign options = params.options | parse_json | default: options | parse_json
+  assign options = params.options | parse_json | default: '[]' | parse_json
   assign id = params.id | default: "mySelect"
   assign name = params.name | default: "mySelect"
   assign multiple = params.multiple | default: false
