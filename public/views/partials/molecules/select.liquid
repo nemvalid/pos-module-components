@@ -30,7 +30,7 @@ metadata:
 {% if multiple == true %}
 <div data-pos-component="Select" class="relative inline-block" id="{{id}}">
   <div class="pos-select pos-select--multi-custom">
-    <div class="flex items-center justify-between border border-input-border bg-panel py-2 px-2 h-11" tabindex="0" aria-hidden="true">
+    <div class="pos-select__head cursor-pointer flex items-center justify-between border border-input-border bg-panel py-2 px-2 h-11" tabindex="0" aria-hidden="true">
       <div class="pos-select__placeholder cursor-pointer">Select an option</div>
       <div class="pos-select__tags flex">
         {% for option in options %}
@@ -76,7 +76,7 @@ metadata:
 {% if multiple == false %}
 <div data-pos-component="Select" class="relative" id="{{id}}">
   <div class="pos-select pos-select--simple-custom" aria-hidden="true">
-    <div class="flex items-center justify-between border border-input-border bg-panel py-2 px-2 h-11" tabindex="0">
+    <div class="pos-select__head cursor-pointer flex items-center justify-between border border-input-border bg-panel py-2 px-2 h-11" tabindex="0">
       <div class="pos-select__placeholder cursor-pointer">Select an option</div>
       <div class="pos-select__tags flex">
         {% for option in options %}

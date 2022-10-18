@@ -3,18 +3,21 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   const placeholder = selectComponentsWrapper.querySelector('.pos-select__placeholder');
   const opener = selectComponentsWrapper.querySelector('.pos-select__opener');
   const options = selectComponentsWrapper.querySelector('.pos-select__options');
+  const head = selectComponentsWrapper.querySelector('.pos-select__head');
 
   let optionHoveredIndex = -1;
 
   /* toggle open for custom select */
-  const toggleOpen = () => {
+  const toggleOpen = (event) => {
+    event.stopPropagation();
     options.classList.toggle("hidden");
     const openerIcons = selectComponentsWrapper.querySelectorAll('.pos-select__opener > div');
     openerIcons[0].classList.toggle("hidden");
     openerIcons[1].classList.toggle("hidden");
   };
 
-  const closeOptions = () => {
+  const closeOptions = (event) => {
+    event.stopPropagation();
     options.classList.add("hidden");
     const openerIcons = selectComponentsWrapper.querySelectorAll('.pos-select__opener > div');
     openerIcons[0].classList.remove("hidden");
@@ -25,7 +28,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   const watchClickOutside = (event) => {
     const didClickedOutside = !selectComponentsWrapper.contains(event.target);
     if (didClickedOutside) {
-      closeOptions();
+      closeOptions(event);
     }
   }
 
@@ -60,7 +63,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
     if (event.keyCode === 13 || event.keyCode === 32) {
       event.preventDefault();
       if (optionHoveredIndex == -1) {
-        toggleOpen();
+        toggleOpen(event);
       } else {
         const checkbox = options.children[optionHoveredIndex].querySelector('[type="checkbox"]');
         if (checkbox) {
@@ -73,14 +76,16 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
 
     // press ESC -> close selectCustom
     if (event.keyCode === 27) {
-      closeOptions();
+      closeOptions(event);
     }
   }
 
+  head.addEventListener('click', toggleOpen);
   document.addEventListener("click", watchClickOutside);
   opener.addEventListener('click', toggleOpen);
   placeholder.addEventListener('click', toggleOpen);
   selectComponentsWrapper.addEventListener("keydown", supportKeyboardNavigation);
+
 
   /* multiselect */
   const nativeMultiSelect = selectComponentsWrapper.querySelector('.pos-select--multi-native');
@@ -105,7 +110,8 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
 
     const tags = selectComponentsWrapper.querySelectorAll('.pos-select__tags > div');
     tags.forEach(tag => {
-      tag.addEventListener('click', () => {
+      tag.addEventListener('click', (event) => {
+        event.stopPropagation();
         const tagValue = tag.getAttribute("data-value");
         const checkbox = selectComponentsWrapper.querySelector(`input[value="${tagValue}"]`);
         checkbox.click();
@@ -176,9 +182,9 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
     /* single select - custom select*/
     selectComponentsWrapper.querySelectorAll('.pos-select__options > div').forEach(option => {
       const value = option.getAttribute("data-value");
-      option.addEventListener('click', () => {
+      option.addEventListener('click', (event) => {
         nativeSelect.value = value;
-        toggleOpen();
+        toggleOpen(event);
         singleSelectTagSelect();
       });
     });
