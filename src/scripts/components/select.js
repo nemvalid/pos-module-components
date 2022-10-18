@@ -1,9 +1,9 @@
-const selectComponentsWrappers = document.querySelectorAll('[data-pos-component="Select"]');
-selectComponentsWrappers.forEach(selectComponentsWrapper => {
-  const placeholder = selectComponentsWrapper.querySelector('.pos-select__placeholder');
-  const opener = selectComponentsWrapper.querySelector('.pos-select__opener');
-  const options = selectComponentsWrapper.querySelector('.pos-select__options');
-  const head = selectComponentsWrapper.querySelector('.pos-select__head');
+const selectComponentWrappers = document.querySelectorAll('[data-pos-component="Select"]');
+selectComponentWrappers.forEach(selectComponentWrapper => {
+  const placeholder = selectComponentWrapper.querySelector('.pos-select__placeholder');
+  const opener = selectComponentWrapper.querySelector('.pos-select__opener');
+  const options = selectComponentWrapper.querySelector('.pos-select__options');
+  const head = selectComponentWrapper.querySelector('.pos-select__head');
 
   let optionHoveredIndex = -1;
 
@@ -11,7 +11,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   const toggleOpen = (event) => {
     event.stopPropagation();
     options.classList.toggle("hidden");
-    const openerIcons = selectComponentsWrapper.querySelectorAll('.pos-select__opener > div');
+    const openerIcons = selectComponentWrapper.querySelectorAll('.pos-select__opener > div');
     openerIcons[0].classList.toggle("hidden");
     openerIcons[1].classList.toggle("hidden");
   };
@@ -19,14 +19,14 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   const closeOptions = (event) => {
     event.stopPropagation();
     options.classList.add("hidden");
-    const openerIcons = selectComponentsWrapper.querySelectorAll('.pos-select__opener > div');
+    const openerIcons = selectComponentWrapper.querySelectorAll('.pos-select__opener > div');
     openerIcons[0].classList.remove("hidden");
     openerIcons[1].classList.add("hidden");
     updateCustomSelectHovered(-1);
   };
 
   const watchClickOutside = (event) => {
-    const didClickedOutside = !selectComponentsWrapper.contains(event.target);
+    const didClickedOutside = !selectComponentWrapper.contains(event.target);
     if (didClickedOutside) {
       closeOptions(event);
     }
@@ -84,22 +84,22 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   document.addEventListener("click", watchClickOutside);
   opener.addEventListener('click', toggleOpen);
   placeholder.addEventListener('click', toggleOpen);
-  selectComponentsWrapper.addEventListener("keydown", supportKeyboardNavigation);
+  selectComponentWrapper.addEventListener("keydown", supportKeyboardNavigation);
 
 
   /* multiselect */
-  const nativeMultiSelect = selectComponentsWrapper.querySelector('.pos-select--multi-native');
+  const nativeMultiSelect = selectComponentWrapper.querySelector('.pos-select--multi-native');
   if (nativeMultiSelect) {
-    selectComponentsWrapper.querySelectorAll('[type="checkbox"]').forEach(checkbox => {
+    selectComponentWrapper.querySelectorAll('[type="checkbox"]').forEach(checkbox => {
       /* multi select - custom select*/
       checkbox.addEventListener('change', () => {
-        const option = selectComponentsWrapper.querySelector(`option[value="${checkbox.value}"]`);
+        const option = selectComponentWrapper.querySelector(`option[value="${checkbox.value}"]`);
         option.selected = !option.selected;
 
-        const tag = selectComponentsWrapper.querySelector(`[data-value="${checkbox.value}"]`);
+        const tag = selectComponentWrapper.querySelector(`[data-value="${checkbox.value}"]`);
         tag.classList.toggle('hidden');
 
-        const checkedBoxes = selectComponentsWrapper.querySelectorAll('[type="checkbox"]:checked');
+        const checkedBoxes = selectComponentWrapper.querySelectorAll('[type="checkbox"]:checked');
         if (checkedBoxes.length) {
           placeholder.classList.add('hidden');
         } else {
@@ -108,14 +108,14 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
       });
     });
 
-    const tags = selectComponentsWrapper.querySelectorAll('.pos-select__tags > div');
+    const tags = selectComponentWrapper.querySelectorAll('.pos-select__tags > div');
     tags.forEach(tag => {
       tag.addEventListener('click', (event) => {
         event.stopPropagation();
         const tagValue = tag.getAttribute("data-value");
-        const checkbox = selectComponentsWrapper.querySelector(`input[value="${tagValue}"]`);
+        const checkbox = selectComponentWrapper.querySelector(`input[value="${tagValue}"]`);
         checkbox.click();
-        const option = selectComponentsWrapper.querySelector(`option[value="${tagValue}"]`);
+        const option = selectComponentWrapper.querySelector(`option[value="${tagValue}"]`);
         option.selected = false;
         tag.classList.add('hidden');
       });
@@ -123,12 +123,12 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
 
     /* multi select - native select*/
     nativeMultiSelect.addEventListener('change', () => {
-      const selectedOptions = selectComponentsWrapper.querySelectorAll('.pos-select--multi-native > option');
+      const selectedOptions = selectComponentWrapper.querySelectorAll('.pos-select--multi-native > option');
 
       selectedOptions.forEach(option => {
         const optionValue = option.value;
-        const checkbox = selectComponentsWrapper.querySelector(`input[value="${optionValue}"]`);
-        const tag = selectComponentsWrapper.querySelector(`[data-value="${optionValue}"]`);
+        const checkbox = selectComponentWrapper.querySelector(`input[value="${optionValue}"]`);
+        const tag = selectComponentWrapper.querySelector(`[data-value="${optionValue}"]`);
         if (option.selected) {
           checkbox.checked = true;
           tag.classList.remove('hidden');
@@ -136,7 +136,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
           checkbox.checked = false;
           tag.classList.add('hidden');
         }
-        const checkedBoxes = selectComponentsWrapper.querySelectorAll('[type="checkbox"]:checked');
+        const checkedBoxes = selectComponentWrapper.querySelectorAll('[type="checkbox"]:checked');
         if (checkedBoxes.length) {
           placeholder.classList.add('hidden');
         } else {
@@ -147,12 +147,12 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
   }
 
   /* single select */
-  const nativeSelect = selectComponentsWrapper.querySelector('.pos-select--simple-native');
+  const nativeSelect = selectComponentWrapper.querySelector('.pos-select--simple-native');
   if (nativeSelect) {
-    const tagWrapper = selectComponentsWrapper.querySelector('.pos-select__tags');
+    const tagWrapper = selectComponentWrapper.querySelector('.pos-select__tags');
     tagWrapper.addEventListener('click', toggleOpen);
     const singleSelectTagSelect = () => {
-      const tags = selectComponentsWrapper.querySelectorAll('.pos-select__tags > div');
+      const tags = selectComponentWrapper.querySelectorAll('.pos-select__tags > div');
       tags.forEach(tag => {
         const tagValue = tag.getAttribute("data-value");
         if (tagValue == nativeSelect.value) {
@@ -162,7 +162,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
         }
       })
 
-      const options = selectComponentsWrapper.querySelectorAll('.pos-select__options > div');
+      const options = selectComponentWrapper.querySelectorAll('.pos-select__options > div');
       options.forEach(option => {
         const optionValue = option.getAttribute("data-value");
         if (optionValue == nativeSelect.value) {
@@ -180,7 +180,7 @@ selectComponentsWrappers.forEach(selectComponentsWrapper => {
     }
 
     /* single select - custom select*/
-    selectComponentsWrapper.querySelectorAll('.pos-select__options > div').forEach(option => {
+    selectComponentWrapper.querySelectorAll('.pos-select__options > div').forEach(option => {
       const value = option.getAttribute("data-value");
       option.addEventListener('click', (event) => {
         nativeSelect.value = value;
