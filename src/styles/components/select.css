@@ -10,16 +10,13 @@
 }
 
 @media (hover: hover) {
-  .pos-select--simple-custom {
+  .pos-select--simple-custom,
+  .pos-select--multi-custom {
     display: inline-block;
   }
 
-  .pos-select--multi-custom {
-    display: flex;
-  }
-
   .pos-select--simple-custom + .pos-select--simple-native,
-  .pos-select__options + .pos-select--multi-native {
+  .pos-select--multi-custom + .pos-select--multi-native {
     display: none;
   }
 }
