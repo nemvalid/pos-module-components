@@ -1,0 +1,56 @@
+---
+metadata:
+  name: Alert
+  params:
+    tag: "div"
+    variant:
+      - default
+      - error
+      - success
+      - warning
+    size:
+      - small
+      - normal
+    icon:
+      - true
+      - false
+    content: Fill your profile
+---
+{% capture icons %}
+{
+  "success": { "name": "checkBadge", "color": "text-confirmation" },
+  "error": { "name": "warningCloud", "color": "text-important" },
+  "default": { "name": "info", "color": "text-graphic" },
+  "warning": { "name": "warning", "color": "text-warning" }
+}
+{% endcapture %}
+{% assign icons = icons | parse_json %}
+{% liquid
+  assign tag = params.tag | default: 'div'
+  assign icon = params.icon | default: true
+  assign variant = params.variant | default: 'default'
+  assign content = params.content
+
+  assign classes = 'px-3 py-1 leading-5 rounded-md flex items-center align-center border w-96 '
+
+  if variant == 'error'
+    assign classes = classes | append: ' border-important bg-important-disabled'
+  elsif variant == 'success'
+    assign classes = classes | append: ' border-confirmation bg-confirmation-disabled'
+  elsif variant == 'warning'
+    assign classes = classes | append: ' border-warning bg-warning-disabled'
+  else
+    assign classes = classes | append: ' border-divider bg-highlighted'
+  endif
+
+  assign icon_classes = 'w-6 h-6 mr-2 ' | append: icons[variant].color
+  assign icon_params = '{}' | parse_json | hash_merge: name: icons[variant].name, class: icon_classes
+%}
+<div class="inline-block">
+<{{tag}} class="{{classes}}">
+    {% if icon == true %}
+      {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+    {% endif %}
+    {{content}}
+</{{tag}}>
+</div>
