@@ -3,14 +3,15 @@ metadata:
   name: Alert
   params:
     tag: "div"
-    variant:
-      - default
+    severity:
+      - info
       - error
       - success
       - warning
-    size:
-      - small
+    variant:
       - normal
+      - small
+      - secondary
     icon:
       - true
       - false
@@ -20,7 +21,7 @@ metadata:
 {
   "success": { "name": "checkBadge", "color": "text-confirmation" },
   "error": { "name": "warningCloud", "color": "text-important" },
-  "default": { "name": "info", "color": "text-graphic" },
+  "info": { "name": "info", "color": "text-graphic" },
   "warning": { "name": "warning", "color": "text-warning" }
 }
 {% endcapture %}
@@ -28,23 +29,30 @@ metadata:
 {% liquid
   assign tag = params.tag | default: 'div'
   assign icon = params.icon | default: true
-  assign variant = params.variant | default: 'default'
+  assign severity = params.severity | default: 'info'
+  assign variant = params.variant | default: 'normal'
   assign content = params.content
 
   assign classes = 'px-3 py-1 leading-5 rounded-md flex items-center align-center border w-96 '
 
-  if variant == 'error'
-    assign classes = classes | append: ' border-important bg-important-disabled'
-  elsif variant == 'success'
-    assign classes = classes | append: ' border-confirmation bg-confirmation-disabled'
-  elsif variant == 'warning'
-    assign classes = classes | append: ' border-warning bg-warning-disabled'
+  if variant == 'normal'
+    if severity == 'error'
+      assign classes = classes | append: ' border-important bg-important-disabled'
+    elsif severity == 'success'
+      assign classes = classes | append: ' border-confirmation bg-confirmation-disabled'
+    elsif severity == 'warning'
+      assign classes = classes | append: ' border-warning bg-warning-disabled'
+    else
+      assign classes = classes | append: ' border-divider bg-highlighted'
+    endif
+  elsif variant == 'secondary'
+    assign classes = classes | append: ' bg-inverted'
   else
-    assign classes = classes | append: ' border-divider bg-highlighted'
+    assign classes = classes | append: ' text supplementary'
   endif
 
-  assign icon_classes = 'w-6 h-6 mr-2 ' | append: icons[variant].color
-  assign icon_params = '{}' | parse_json | hash_merge: name: icons[variant].name, class: icon_classes
+  assign icon_classes = 'w-6 h-6 mr-2 ' | append: icons[severity].color
+  assign icon_params = '{}' | parse_json | hash_merge: name: icons[severity].name, class: icon_classes
 %}
 <div class="inline-block">
 <{{tag}} class="{{classes}}">
