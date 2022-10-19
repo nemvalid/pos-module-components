@@ -33,25 +33,28 @@ metadata:
   assign variant = params.variant | default: 'normal'
   assign content = params.content
 
-  assign classes = 'px-3 py-1 leading-5 rounded-md flex items-center align-center border w-96 '
+  assign classes = 'px-3 py-1 leading-5 rounded-md flex items-center align-center w-96 '
 
   if variant == 'normal'
     if severity == 'error'
-      assign classes = classes | append: ' border-important bg-important-disabled'
+      assign classes = classes | append: ' border border-important bg-important-disabled'
     elsif severity == 'success'
-      assign classes = classes | append: ' border-confirmation bg-confirmation-disabled'
+      assign classes = classes | append: ' border border-confirmation bg-confirmation-disabled'
     elsif severity == 'warning'
-      assign classes = classes | append: ' border-warning bg-warning-disabled'
+      assign classes = classes | append: ' border border-warning bg-warning-disabled'
     else
-      assign classes = classes | append: ' border-divider bg-highlighted'
+      assign classes = classes | append: ' border border-divider bg-highlighted'
     endif
+    assign icon_classes = 'w-6 h-6 mr-2 ' | append: icons[severity].color
   elsif variant == 'secondary'
-    assign classes = classes | append: ' bg-inverted'
+    assign classes = classes | append: ' border bg-inverted'
+    assign icon_classes = 'w-6 h-6 mr-2 ' | append: icons[severity].color
   else
-    assign classes = classes | append: ' text supplementary'
+    assign classes = classes | append: ' text-xs text-supplementary'
+    assign icon_classes = 'w-4 h-4 mr-2 ' | append: icons[severity].color
   endif
 
-  assign icon_classes = 'w-6 h-6 mr-2 ' | append: icons[severity].color
+
   assign icon_params = '{}' | parse_json | hash_merge: name: icons[severity].name, class: icon_classes
 %}
 <div class="inline-block">
