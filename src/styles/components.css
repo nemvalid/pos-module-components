@@ -3,6 +3,8 @@
 @import "./components/base.css";
 @import "./components/elements.css";
 @import "./components/select.css";
+@import "./components/checkbox.css";
+@import "./components/rating.css";
 
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
