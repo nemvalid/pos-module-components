@@ -3,49 +3,7 @@
     @apply my-4 border-t-divider;
   }
 
-  input:enabled:checked[type=checkbox]:not(.pos-clean) ~ .pos-checkmark {
-    @apply bg-interactive-graphic
-  }
-
-  input:disabled:checked[type=checkbox]:not(.pos-clean) ~ .pos-checkmark {
-    @apply bg-interactive-disabled;
-  }
-
-  input:disabled[type=checkbox]:not(.pos-clean) ~ .pos-checkmark {
-    @apply border-interactive-disabled;
-  }
-
-  input:checked[type=checkbox]:not(.pos-clean) ~ .pos-checkmark:after {
-    @apply border-input;
-    content: "";
-    position: absolute;
-    display: block;
-    left: 5px;
-    top: 0px;
-    width: 6px;
-    height: 12px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-  }
-
-  label > .pos-rating-empty {
-    display: none;
-  }
-
-  .pos-rating:not(:hover) input:checked[type=radio] ~ label > .pos-rating-empty {
-    display: block;
-  }
-
-  .pos-rating:not(:hover) input:checked[type=radio] ~ label > .pos-rating-full {
-    display: none;
-  }
-
-  .pos-rating input:hover[type=radio] ~ label > .pos-rating-empty {
-    display: block;
-  }
-
-  .pos-rating input:hover[type=radio] ~ label > .pos-rating-full {
-    display: none;
+  a:not(.pos-clean) {
+    @apply underline text-interactive-text;
   }
 }
