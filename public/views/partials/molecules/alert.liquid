@@ -33,7 +33,7 @@ metadata:
   assign variant = params.variant | default: 'normal'
   assign content = params.content
 
-  assign classes = 'px-3 py-1 leading-5 rounded-md flex items-center align-center w-96 '
+  assign classes = 'px-2 py-1 leading-5 rounded-md shadow-card flex items-center align-center w-96 h-10 '
 
   if variant == 'normal'
     if severity == 'error'
@@ -43,7 +43,7 @@ metadata:
     elsif severity == 'warning'
       assign classes = classes | append: ' border border-warning bg-warning-disabled'
     else
-      assign classes = classes | append: ' border border-divider bg-highlighted'
+      assign classes = classes | append: ' bg-highlighted'
     endif
     assign icon_classes = 'w-6 h-6 mr-2 ' | append: icons[severity].color
   elsif variant == 'secondary'
