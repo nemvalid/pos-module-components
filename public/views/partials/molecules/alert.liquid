@@ -17,15 +17,14 @@ metadata:
       - false
     content: Fill your profile
 ---
-{% capture icons %}
+{% parse_json icons %}
 {
   "success": { "name": "checkBadge", "color": "text-confirmation" },
   "error": { "name": "warningCloud", "color": "text-important" },
   "info": { "name": "info", "color": "text-graphic" },
   "warning": { "name": "warning", "color": "text-warning" }
 }
-{% endcapture %}
-{% assign icons = icons | parse_json %}
+{% endparse_json %}
 {% liquid
   assign tag = params.tag | default: 'div'
   assign icon = params.icon | default: true
