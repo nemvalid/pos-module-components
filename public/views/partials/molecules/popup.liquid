@@ -1,0 +1,25 @@
+---
+metadata:
+  name: Popup
+  params:
+    tag: "div"
+    id: 'myPopup'
+---
+{% liquid
+  assign id = params.id
+%}
+{% capture popup_content %}
+<div class="hidden bg-inverted w-96" data-popup-id="{{id}}">
+  <p class="pb-4">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a urna nibh. Proin condimentum est non consequat aliquet. Fusce viverra tellus ex, ut varius felis imperdiet at. Proin porttitor vel ligula id semper. Maecenas eleifend augue vitae libero auctor fermentum. Donec ullamcorper malesuada volutpat. Fusce ut facilisis arcu. Sed eget nisl quis sapien elementum posuere quis et odio.
+  </p>
+  <p>
+    Donec in ex lectus. Aliquam in leo enim. Phasellus a facilisis metus. Vivamus eget metus interdum, sagittis nisi posuere, eleifend odio. Curabitur a tellus ligula. Nunc nec magna cursus dui eleifend condimentum. Phasellus velit elit, convallis eu nisi eu, tincidunt lacinia purus. Nam blandit vel leo ac facilisis. Nulla commodo felis nunc, eu egestas tellus consequat id. Nulla dapibus ultricies cursus.
+  </p>
+</div>
+{% endcapture %}
+
+{% assign backdrop_params = '{}' | parse_json | hash_merge: content: popup_content, hidden: true, backdrop_id: id %}
+{% theme_render_rc 'components/atoms/backdrop',
+    params: backdrop_params
+%}
