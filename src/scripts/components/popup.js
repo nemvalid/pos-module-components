@@ -9,3 +9,14 @@ popupOpeners.forEach(opener => {
   });
 });
 
+const popups = document.querySelectorAll('[data-popup-id]');
+popups.forEach(popup => {
+  popup.addEventListener("keydown", event => {
+    if (event.keyCode === 27) {
+      const popupId = popup.getAttribute('data-popup-id');
+      const backdrop = document.querySelector(`[data-backdrop-id="${popupId}"]`);
+      popup.classList.toggle("hidden");
+      backdrop.classList.toggle("hidden");
+    }
+  });
+});
