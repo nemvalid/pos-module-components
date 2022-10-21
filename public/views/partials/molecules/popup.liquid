@@ -5,10 +5,12 @@ metadata:
     tag: "div"
     id: 'myPopup'
     title: ''
+    content: ''
 ---
 {% liquid
   assign id = params.id
   assign title = params.title | default: 'Popup title'
+  assign content = params.content | default: 'Sample content'
   assign icon_params = '{}' | parse_json | hash_merge: name: 'x', class: 'w-4 h-4'
 
 %}
@@ -23,15 +25,7 @@ metadata:
   </div>
   <hr>
   <div>
-    <p class="pb-4">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fermentum faucibus elit quis sodales. Etiam malesuada.
-    </p>
-  </div>
-  <div>
-    {% assign button_params = '{}' | parse_json | hash_merge: weight: 'primary', content: 'Remove Admin Permissions', type: "submit" %}
-    {% theme_render_rc 'components/atoms/button', params: button_params %}
-    {% assign button_params = '{}' | parse_json | hash_merge: weight: 'secondary', content: 'Cancel' %}
-    {% theme_render_rc 'components/atoms/button', params: button_params %}
+    {% print content %}
   </div>
 </div>
 {% endcapture %}
