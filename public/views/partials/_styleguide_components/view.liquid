@@ -64,6 +64,10 @@
     <section class="p-4">
       <div data-styleguide-component="{{component.metadata.name}}" class="relative">
         {% if styleguide_stories %}
+          {% assign styleguide_stories_type = styleguide_stories | type_of %}
+          {% if styleguide_stories_type != 'Array' %}
+            {% assign styleguide_stories = '[]' | parse_json | add_to_array: styleguide_stories %}
+          {% endif %}
           {% for story in styleguide_stories %}
             {% include component.path, params: story %}
             <div class="py-4"><pre class="whitespace-pre-wrap break-all">{{ story | json }}</pre></div>

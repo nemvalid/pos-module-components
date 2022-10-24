@@ -10,14 +10,13 @@ metadata:
       weight: primary
       content: Search
   styleguide:
-    params:
-      classes: 'w-1/2'
-      input_params:
-        name: input
-        placeholder: Type here
-      button_params:
-        weight: primary
-        content: Search
+    classes: 'w-1/2'
+    input_params:
+      name: input
+      placeholder: Type here
+    button_params:
+      weight: primary
+      content: Search
 ---
 {% liquid
   assign input_params = params.input_params | hash_merge: classes: 'w-full pr-8'
