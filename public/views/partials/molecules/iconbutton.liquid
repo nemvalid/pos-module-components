@@ -12,6 +12,30 @@ metadata:
       variant: confirmation
     icon_params:
       name: folderUpload
+  styleguide:
+    - alignment: left
+      gap: 2
+      button_params:
+        weight: primary
+        content: Upload
+        variant: confirmation
+      icon_params:
+        name: folderUpload
+    - alignment: right
+      gap: 2
+      button_params:
+        weight: secondary
+        content: Upload secondary
+        variant: confirmation
+      icon_params:
+        name: folderUpload
+    - alignment: left
+      button_params:
+        content: Delete small
+        size: small
+        variant: important
+      icon_params:
+        name: trash
 ---
 {% liquid
   assign icon_params = params.icon_params

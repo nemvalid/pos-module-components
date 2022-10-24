@@ -1,4 +1,4 @@
-@layer components {
+@layer base {
   hr:not(.pos-clean) {
     @apply my-4 border-t-divider;
   }
