@@ -71,7 +71,7 @@ metadata:
 ```
 
 A story captures the rendered state of a UI component. Developers can write multiple stories per component that describe all the “interesting” states a component can support.  
-The terminology comes from [StoryBook](https://storybook.js.org/), one of the most popular component library development frameworks.
+The terminology comes from [Storybook](https://storybook.js.org/), one of the most popular component library development frameworks.
 
 ## Development
 
