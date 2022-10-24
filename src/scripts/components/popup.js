@@ -6,6 +6,15 @@ popupOpeners.forEach(opener => {
     const backdrop = document.querySelector(`[data-backdrop-id="${popupId}"]`);
     popup.classList.toggle("hidden");
     backdrop.classList.toggle("hidden");
+
+    if (!popup.classList.contains('hidden')) {
+      const firstInput = popup.querySelector('input');
+      if (firstInput) {
+        firstInput.focus();
+      }
+    } else {
+      console.log('close')
+    }
   });
 });
 
