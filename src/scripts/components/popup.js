@@ -7,13 +7,16 @@ popupOpeners.forEach(opener => {
     popup.classList.toggle("hidden");
     backdrop.classList.toggle("hidden");
 
+    // open
     if (!popup.classList.contains('hidden')) {
+      popup.setAttribute("aria-hidden", false);
       const firstInput = popup.querySelector('input');
       if (firstInput) {
         firstInput.focus();
       }
+    // close
     } else {
-      console.log('close')
+      popup.setAttribute("aria-hidden", true);
     }
   });
 });
