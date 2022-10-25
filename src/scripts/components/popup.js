@@ -17,6 +17,7 @@ popups.forEach(popup => {
       closePopup(popupId);
     }
   });
+  // click out
   document.addEventListener("click", (event) => {
     const didClickedOutside = !popup.contains(event.target);
     if (didClickedOutside) {

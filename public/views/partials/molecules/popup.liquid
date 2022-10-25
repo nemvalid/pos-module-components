@@ -15,7 +15,12 @@ metadata:
 
 %}
 {% capture popup_content %}
-<div class="hidden bg-inverted w-96 p-6" data-popup-id="{{id}}" tabindex="0" aria-hidden="true">
+<div class="hidden bg-inverted w-96 p-6"
+  data-popup-id="{{id}}"
+  tabindex="0"
+  aria-hidden="true"
+  role="popup"
+  aria-modal="true">
   <div class="flex justify-between">
     {% assign headline_params = '{}' | parse_json | hash_merge: tag: 'h2', variant: 'h2', content: title %}
     {% theme_render_rc 'components/atoms/heading', params: headline_params %}
