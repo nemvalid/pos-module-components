@@ -39,7 +39,9 @@ metadata:
   assign href = params.href
 
   assign classes = params.classes | append: ' inline-flex items-center justify-center gap-3 rounded whitespace-nowrap transition-colors disabled:opacity-30 disabled:pointer-events-none'
-
+  if tag == 'a'
+    assign classes = classes | prepend: 'pos-clean '
+  endif
 
   if weight == 'primary'
     case variant

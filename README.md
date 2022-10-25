@@ -50,7 +50,7 @@ The style guide renders every component that is available in your project, and a
 The style guide uses the component metadata to show the docs section for every component and to display the component variants automatically.
 The component meta is a standard frontmatter section in the component source which serves two purposes: It shows the available params you can pass to the component, and it acts as a "component config blueprint" for the style guide for the component variants.
 
-It's possible that for a component we don't want to show every combination of the possible param values in the style guide. In this case, you as a component developer can provide a _styleguide params_ object in the following format:
+It's possible that for a component we don't want to show every combination of the possible param values in the style guide, or we want to provide an example configuration manually. In this case, you as a component developer can provide _stories_ for your component in the following format:
 
 ```
 ---
@@ -63,11 +63,15 @@ metadata:
       - param2 value 2
     content: Example content
   styleguide:
-    params:
-      param1: param1 value to be used in the styleguide
+    - param1: param1 value to be used in the styleguide for the first story
+      param2: param2 value to be used in the styleguide
+    - param1: param1 value to be used in the styleguide for the second story
       param2: param2 value to be used in the styleguide
 ---
 ```
+
+A story captures the rendered state of a UI component. Developers can write multiple stories per component that describe all the “interesting” states a component can support.  
+The terminology comes from [Storybook](https://storybook.js.org/), one of the most popular component library development frameworks.
 
 ## Development
 

@@ -13,6 +13,13 @@ function parseColor(colorName) {
   };
 }
 
+const safelist = [
+  {
+    pattern: new RegExp(`.+-(${Object.keys(defaultColors).join('|')})$`),
+    variants: ['hover'],
+  }
+];
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   /* TODO: further optimizations needed */
@@ -80,6 +87,7 @@ module.exports = {
       }
     },
   },
+  safelist,
   plugins: [
     require('@tailwindcss/typography')
   ],

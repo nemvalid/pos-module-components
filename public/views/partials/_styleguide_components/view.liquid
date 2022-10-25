@@ -33,7 +33,7 @@
             <span class="text-sm break-words">{{ component.path }}.liquid</span>
             <hr />
             {% assign default_render_params = '{}' | parse_json %}
-            {% assign styleguide_render_params = component.metadata.styleguide.params %}
+            {% assign styleguide_stories = component.metadata.styleguide %}
             {% for param_group in component.metadata.params %}
               {% liquid
                 assign paramtype = param_group[1] | type_of
@@ -63,9 +63,15 @@
   <div class="flex-1">
     <section class="p-4">
       <div data-styleguide-component="{{component.metadata.name}}" class="relative">
-        {% if styleguide_render_params %}
-            {% include component.path, params: styleguide_render_params %}
-          <div class="py-4"><pre class="whitespace-pre-wrap break-all">{{ styleguide_render_params | json }}</pre></div>
+        {% if styleguide_stories %}
+          {% assign styleguide_stories_type = styleguide_stories | type_of %}
+          {% if styleguide_stories_type != 'Array' %}
+            {% assign styleguide_stories = '[]' | parse_json | add_to_array: styleguide_stories %}
+          {% endif %}
+          {% for story in styleguide_stories %}
+            {% include component.path, params: story %}
+            <div class="py-4"><pre class="whitespace-pre-wrap break-all">{{ story | json }}</pre></div>
+          {% endfor %}
         {% else %}
           {% for param_group in component.metadata.params %}
               {% assign render_params = '{}' | parse_json | hash_merge: default_render_params %}
@@ -92,7 +98,6 @@
 
                 {% endunless %}
               {% endfor %}
-                  <hr>
           {% endfor %}
         {% endif %}
       </div>
