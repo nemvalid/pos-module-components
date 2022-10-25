@@ -34,10 +34,13 @@ metadata:
   tabindex="0"
   aria-hidden="true"
   role="popup"
-  aria-modal="true">
+  aria-modal="true"
+  aria-labelledby="popup_title_{{id}}">
   <div class="flex justify-between">
     {% assign headline_params = '{}' | parse_json | hash_merge: tag: 'h2', variant: 'h2', content: title %}
-    {% theme_render_rc 'components/atoms/heading', params: headline_params %}
+    <div id="popup_title_{{id}}">
+      {% theme_render_rc 'components/atoms/heading', params: headline_params %}
+    </div>
     <div class="pt-4 pr-4 cursor-pointer" data-popup-open-id="{{id}}">
       {% if closeIcon == true and closable == true%}
       {% theme_render_rc 'components/atoms/icon', params: icon_params %}
