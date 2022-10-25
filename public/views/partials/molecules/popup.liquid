@@ -9,12 +9,16 @@ metadata:
     closed:
       - false
       - true
+    closeIcon:
+      - false
+      - true
 ---
 {% liquid
   assign id = params.id
   assign title = params.title | default: 'Popup title'
   assign content = params.content | default: 'Sample content'
   assign closed = params.closed | default: true
+  assign closeIcon = params.closeIcon | default: true
   assign icon_params = '{}' | parse_json | hash_merge: name: 'x', class: 'w-4 h-4'
 
 %}
@@ -30,7 +34,9 @@ metadata:
     {% assign headline_params = '{}' | parse_json | hash_merge: tag: 'h2', variant: 'h2', content: title %}
     {% theme_render_rc 'components/atoms/heading', params: headline_params %}
     <div class="pt-4 pr-4 cursor-pointer" data-popup-open-id="{{id}}">
+      {% if closeIcon == true %}
       {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+      {% endif %}
     </div>
   </div>
   <hr>
