@@ -6,16 +6,21 @@ metadata:
     id: 'myPopup'
     title: ''
     content: ''
+    closed:
+      - false
+      - true
 ---
 {% liquid
   assign id = params.id
   assign title = params.title | default: 'Popup title'
   assign content = params.content | default: 'Sample content'
+  assign closed = params.closed | default: true
   assign icon_params = '{}' | parse_json | hash_merge: name: 'x', class: 'w-4 h-4'
 
 %}
 {% capture popup_content %}
 <div class="hidden bg-inverted w-96 p-6"
+  data-closed="{{closed}}"
   data-popup-id="{{id}}"
   tabindex="0"
   aria-hidden="true"
