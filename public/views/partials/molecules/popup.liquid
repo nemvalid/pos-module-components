@@ -23,7 +23,7 @@ metadata:
   assign closed = params.closed | default: true
   assign closeIcon = params.closeIcon | default: true
   assign closable = params.closable | default: true
-  assign icon_params = '{}' | parse_json | hash_merge: name: 'x', class: 'w-5 h-5'
+  assign icon_params = null | hash_merge: name: 'x', class: 'w-5 h-5'
 
 %}
 {% capture popup_content %}
@@ -37,7 +37,7 @@ metadata:
   aria-modal="true"
   aria-labelledby="popup_title_{{popup_id}}">
   <div class="flex justify-between">
-    {% assign headline_params = '{}' | parse_json | hash_merge: tag: 'h2', variant: 'h2', content: title %}
+    {% assign headline_params = null | hash_merge: tag: 'h2', variant: 'h2', content: title %}
     <div id="popup_title_{{popup_id}}">
       {% theme_render_rc 'components/atoms/heading', params: headline_params %}
     </div>
