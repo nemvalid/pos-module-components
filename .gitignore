@@ -6,3 +6,5 @@ node_modules
 tmp/
 .DS_Store
 yarn-error.log
+assets/*.css.map
+assets/*.js.map
