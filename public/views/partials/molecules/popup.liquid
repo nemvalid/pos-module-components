@@ -54,7 +54,7 @@ metadata:
 </div>
 {% endcapture %}
 
-{% assign backdrop_params = '{}' | parse_json | hash_merge: content: popup_content, hidden: true, backdrop_id: popup_id %}
+{% assign backdrop_params = null | hash_merge: content: popup_content, hidden: true, backdrop_id: popup_id %}
 {% theme_render_rc 'components/atoms/backdrop',
     params: backdrop_params
 %}
