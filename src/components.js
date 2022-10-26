@@ -2,4 +2,5 @@
 import './styles/components.css';
 
 import './scripts/components/select';
+import './scripts/components/popup';
 
