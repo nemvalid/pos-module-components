@@ -1,0 +1,46 @@
+---
+metadata:
+  name: Breadcrumbs
+  params:
+    id: myBreadcrumbs
+    name: myBreadcrumbs
+    breadcrumbs:
+      - text: Golden Platform
+        link: /value1
+      - text: Styleguide
+        link: /value2
+      - text: Molecules
+        link: /value3
+      - text: Breadcrumbs
+        link: /value4
+  styleguide:
+      breadcrumbs:
+      - text: Golden Platform
+        link: /value1
+      - text: Styleguide
+        link: /value2
+      - text: Molecules
+        link: /value3
+      - text: Breadcrumbs
+        link: /value4
+      breadcrumbs:
+      - text: Golden Platform
+        link: /value1
+      - text: Styleguide
+        link: /value2
+      - text: Molecules
+        link: /value3
+      - text: Breadcrumbs
+        link: /value4
+---
+{% liquid
+  assign breadcrumbs = params.breadcrumbs | parse_json | default: '[]' | parse_json
+  assign id = params.id | default: "myBreadcrumbs"
+  assign name = params.name | default: "myBreadcrumbs"
+%}
+
+<ul>
+{% for breadcrumb in breadcrumbs %}
+  <li><a href="{{breadcrumb.link}}">{{breadcrumb.text}}</a></li>
+{% endfor %}
+</ul>
