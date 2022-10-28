@@ -35,7 +35,7 @@ metadata:
       - text: Molecules
         link: /value3
       - text: Breadcrumbs
-        link:
+        link: /value4
 ---
 {% liquid
   assign breadcrumbs = params.breadcrumbs | parse_json | default: '[]' | parse_json
@@ -49,8 +49,10 @@ metadata:
   {% for breadcrumb in breadcrumbs %}
     <li class="flex">
       {% if forloop.last == false or activeLastBreadcrumb == true %}
-        <a href="{{breadcrumb.link}}">{{breadcrumb.text}}</a>
-        {% if forloop.last == false %}
+        {% if forloop.last == true %}
+          <a href="{{breadcrumb.link}}" aria-current="page">{{breadcrumb.text}}</a>
+        {% else %}
+          <a href="{{breadcrumb.link}}">{{breadcrumb.text}}</a>
           <div class="flex flex-col justify-center items-center" aria-hidden="true">
             {% if separator %}
               <span class="mx-2 text-interactive-text">
@@ -62,8 +64,10 @@ metadata:
             {% endif %}
           </div>
         {% endif %}
-        {% else %}
-        {{breadcrumb.text}}
+      {% else %}
+        <span aria-current="page">
+          {{breadcrumb.text}}
+        </span>
       {% endif %}
     </li>
   {% endfor %}
