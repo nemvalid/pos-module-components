@@ -5,7 +5,6 @@
 @import "./components/select.css";
 @import "./components/checkbox.css";
 @import "./components/rating.css";
-@import "./components/breadcrumbs.css";
 
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
