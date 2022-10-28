@@ -9,33 +9,45 @@ metadata:
       - false
     breadcrumbs:
       - text: Golden Platform
-        link: /value1
+        link: /goldenplatform
       - text: Styleguide
-        link: /value2
+        link: /styleguide
       - text: Molecules
-        link: /value3
+        link: /molecules
       - text: Breadcrumbs
-        link: /value4
+        link: /breadcrumbs
   styleguide:
-      activeLastBreadcrumb: false
-      breadcrumbs:
-      - text: Golden Platform
-        link: /value1
-      - text: Styleguide
-        link: /value2
-      - text: Molecules
-        link: /value3
-      - text: Breadcrumbs
-        link:
-      breadcrumbs:
-      - text: Golden Platform
-        link: /value1
-      - text: Styleguide
-        link: /value2
-      - text: Molecules
-        link: /value3
-      - text: Breadcrumbs
-        link: /value4
+      - activeLastBreadcrumb: false
+        breadcrumbs:
+        - text: Golden Platform
+          link: /goldenplatform
+        - text: Styleguide
+          link: /styleguide
+        - text: Molecules
+          link: /molecules
+        - text: Breadcrumbs
+          link: /breadcrumbs
+      - activeLastBreadcrumb: true
+        breadcrumbs:
+        - text: Golden Platform
+          link: /goldenplatform
+        - text: Styleguide
+          link: /styleguide
+        - text: Molecules
+          link: /molecules
+        - text: Breadcrumbs
+          link: /breadcrumbs
+      - activeLastBreadcrumb: false
+        separator: \
+        breadcrumbs:
+        - text: Golden Platform
+          link: /goldenplatform
+        - text: Styleguide
+          link: /styleguide
+        - text: Molecules
+          link: /molecules
+        - text: Breadcrumbs
+          link: /breadcrumbs
 ---
 {% liquid
   assign breadcrumbs = params.breadcrumbs | parse_json | default: '[]' | parse_json
