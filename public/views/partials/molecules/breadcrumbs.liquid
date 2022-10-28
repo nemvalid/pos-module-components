@@ -53,8 +53,8 @@ metadata:
       {% if forloop.last == false or activeLastBreadcrumb == true %}
         <a href="{{breadcrumb.link}}">{{breadcrumb.text}}</a>
         {% if forloop.last == false %}
-          {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashRight', class: 'w-3 h-4 mx-2 ' %}
-          <div class="flex content-center">
+          {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashRight', class: 'w-3 h-4 mx-2 text-interactive-text ' %}
+          <div class="flex flex-col justify-center items-center">
             {% theme_render_rc 'components/atoms/icon', params: icon_params %}
           </div>
         {% endif %}
