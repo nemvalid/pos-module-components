@@ -1,0 +1,25 @@
+---
+metadata:
+  name: Icon with badge
+  params:
+    tag: "div"
+    maxLength: 4
+    content: 123456
+    icon: "bell"
+---
+{% liquid
+  assign tag = params.tag | default: 'div'
+  assign maxLength = params.maxLength | default: 3
+  assign content = params.content | truncate: maxLength, '+'
+  assign icon = params.icon | default: 'bell'
+
+  assign icon_params = null | hash_merge: name: icon, class: 'w-6 h-6 ml-2 '
+  assign badge_params = null | hash_merge: content: '12312312'
+%}
+
+<div class="relative inline-block">
+  {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+  <div class="absolute -top-4 -right-4">
+    {% theme_render_rc 'components/atoms/badge', params: badge_params %}
+  </div>
+</div>
