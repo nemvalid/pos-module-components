@@ -6,6 +6,18 @@ metadata:
     maxLength: 4
     content: 123456
     icon: "bell"
+  styleguide:
+    - tag: "div"
+      maxLength: 4
+      content: 12
+    - tag: "div"
+      maxLength: 4
+      content: 123456
+      icon: "mail"
+    - tag: "div"
+      maxLength: 5
+      content: 123456
+      icon: "globe"
 ---
 {% liquid
   assign tag = params.tag | default: 'div'
@@ -14,12 +26,12 @@ metadata:
   assign icon = params.icon | default: 'bell'
 
   assign icon_params = null | hash_merge: name: icon, class: 'w-6 h-6 ml-2 '
-  assign badge_params = null | hash_merge: content: '12312312'
+  assign badge_params = null | hash_merge: content: content, maxLength: maxLength
 %}
 
 <div class="relative inline-block">
   {% theme_render_rc 'components/atoms/icon', params: icon_params %}
-  <div class="absolute -top-4 -right-4">
+  <div class="absolute -top-2 left-6">
     {% theme_render_rc 'components/atoms/badge', params: badge_params %}
   </div>
 </div>
