@@ -21,8 +21,8 @@ metadata:
 ---
 {% liquid
   assign tag = params.tag | default: 'div'
-  assign maxLength = params.maxLength | default: 3
-  assign content = params.content | truncate: maxLength, '+'
+  assign maxLength = params.maxLength | default: 4
+  assign content = params.content
   assign icon = params.icon | default: 'bell'
 
   assign icon_params = null | hash_merge: name: icon, class: 'w-6 h-6 ml-2 '
