@@ -2,7 +2,6 @@
 metadata:
   name: Breadcrumbs
   params:
-    id: myBreadcrumbs
     separator:
     activeLastBreadcrumb:
       - true
@@ -51,13 +50,12 @@ metadata:
 ---
 {% liquid
   assign breadcrumbs = params.breadcrumbs | parse_json | default: '[]' | parse_json
-  assign id = params.id | default: "myBreadcrumbs"
   assign separator = params.separator
   assign activeLastBreadcrumb = params.activeLastBreadcrumb | default: false
 %}
 
-<nav aria-label="Breadcrumb" id="{{id}}">
-  <ol class="pos-breadcrumbs flex list-none">
+<nav aria-label="Breadcrumb">
+  <ol class="flex list-none">
   {% for breadcrumb in breadcrumbs %}
     <li class="flex">
       {% if forloop.last == false or activeLastBreadcrumb == true %}
