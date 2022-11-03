@@ -3,15 +3,23 @@ metadata:
   name: Badge
   params:
     tag: "div"
-    maxLength: 3
-    content: 1234
+    maxLength: 4
+    content: 123456
+  styleguide:
+    - tag: "div"
+      maxLength: 4
+      content: 123456
+    - tag: "div"
+      maxLength: 5
+      content: 123456
+
 ---
 {% liquid
   assign tag = params.tag | default: 'div'
   assign maxLength = params.maxLength | default: 3
-  assign content = params.content
+  assign content = params.content | truncate: maxLength, '+'
 
-  assign classes = 'px-1 py-1 leading-5 rounded-full flex items-center align-center bg-important text-inverted'
+  assign classes = 'px-1 py-1 leading-3 text-xs rounded-full flex items-center align-center bg-important text-inverted'
 %}
 
 
