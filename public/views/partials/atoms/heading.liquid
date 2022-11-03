@@ -42,6 +42,8 @@ metadata:
   {% for attribute in attributes %}
   {{ attribute[0] }}="{{ attribute[1] }}"
   {% endfor %}
->{{content}}</{{tag}}>
+>
+  {% print content %}
+</{{tag}}>
 
 
