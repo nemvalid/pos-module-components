@@ -1,0 +1,22 @@
+---
+metadata:
+  name: Badge
+  params:
+    tag: "div"
+    maxLength: 3
+    content: 1234
+---
+{% liquid
+  assign tag = params.tag | default: 'div'
+  assign maxLength = params.maxLength | default: 3
+  assign content = params.content
+
+  assign classes = 'px-1 py-1 leading-5 rounded-full flex items-center align-center bg-important text-inverted'
+%}
+
+
+<div class="inline-block">
+  <{{tag}} class="{{classes}}">
+    {{content}}
+</{{tag}}>
+</div>
