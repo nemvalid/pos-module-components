@@ -3,24 +3,30 @@ metadata:
   name: Badge
   params:
     tag: "div"
-    maxLength: 4
-    content: 123456
+    maxValue: 1000
+    value: 1000
   styleguide:
     - tag: "div"
-      maxLength: 4
-      content: 8
+      maxValue: 20
+      value: 8
     - tag: "div"
-      maxLength: 4
-      content: 123456
+      maxValue: 999
+      value: 1500
     - tag: "div"
-      maxLength: 5
-      content: 123456
+      maxValue: 1999
+      value: 1500
+    - tag: "div"
+      value: 1500
 
 ---
 {% liquid
   assign tag = params.tag | default: 'div'
-  assign maxLength = params.maxLength | default: 3
-  assign content = params.content | truncate: maxLength, '+'
+  assign maxValue = params.maxValue | default: 0
+  assign value = params.value
+
+  if maxValue > 0 and maxValue < value
+    assign value = params.value | at_most: maxValue | append: "+"
+  endif
 
   assign classes = 'px-1 py-1 leading-3 text-xs rounded-full min-w-[20] flex flex-col items-center bg-important text-inverted'
 %}
@@ -28,6 +34,6 @@ metadata:
 
 <div class="inline-block">
   <{{tag}} class="{{classes}}">
-    {{content}}
+    {{value}}
 </{{tag}}>
 </div>
