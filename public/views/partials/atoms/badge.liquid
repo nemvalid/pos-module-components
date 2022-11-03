@@ -8,7 +8,7 @@ metadata:
   styleguide:
     - tag: "div"
       maxLength: 4
-      content: 12
+      content: 8
     - tag: "div"
       maxLength: 4
       content: 123456
@@ -22,7 +22,7 @@ metadata:
   assign maxLength = params.maxLength | default: 3
   assign content = params.content | truncate: maxLength, '+'
 
-  assign classes = 'px-1 py-1 leading-3 text-xs rounded-full flex items-center align-center bg-important text-inverted'
+  assign classes = 'px-1 py-1 leading-3 text-xs rounded-full min-w-[20] flex flex-col items-center bg-important text-inverted'
 %}
 
 
