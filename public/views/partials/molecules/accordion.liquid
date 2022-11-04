@@ -1,0 +1,40 @@
+---
+metadata:
+  name: Accordion
+  params:
+    id: myAccordion
+    name: myAccordion
+    multiple:
+      - true
+      - false
+    options:
+      - title: Option 1
+        content: value1
+      - title: Option 2
+        content: value2
+  styleguide:
+    - multiple: false
+      options:
+      - title: Option 1
+        content: value1
+      - title: Option 2
+        content: value2
+    - multiple: true
+      options:
+      - title: Option 1
+        content: value1
+      - title: Option 2
+        content: value2
+---
+{% liquid
+  assign options = params.options | parse_json | default: '[]' | parse_json
+%}
+
+<div data-pos-component="Accordion"]>
+{% for option in options %}
+  <div class="pos-accordion__title">{{option.title}}</div>
+  <div class="pos-accordion__panel hidden">
+    <p>{{option.content}}</p>
+  </div>
+{% endfor %}
+</div>
