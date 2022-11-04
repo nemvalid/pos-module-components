@@ -32,12 +32,12 @@ metadata:
 
 <div data-pos-component="Accordion" class="inline-block w-80">
 {% for option in options %}
-  <div class="pos-accordion__title rounded shadow-card bg-panel h-11 cursor-pointer flex">
+  <div class="pos-accordion__title rounded shadow-card bg-panel h-11 cursor-pointer flex px-2">
     {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashUp' %}
-    <div class="rotate-180">
+    <div class="rotate-180 flex items-center px-2 text-interactive-text">
       {% theme_render_rc 'components/atoms/icon', params: icon_params %}
     </div>
-    <div>
+    <div class="flex items-center">
     {{option.title}}
     </div>
   </div>
