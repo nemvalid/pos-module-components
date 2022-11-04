@@ -16,23 +16,31 @@ metadata:
     - multiple: false
       options:
       - title: Option 1
-        content: value1
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
       - title: Option 2
-        content: value2
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
     - multiple: true
       options:
       - title: Option 1
-        content: value1
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
       - title: Option 2
-        content: value2
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
 ---
 {% liquid
   assign options = params.options | parse_json | default: '[]' | parse_json
 %}
 
-<div data-pos-component="Accordion"]>
+<div data-pos-component="Accordion" class="inline-block w-80">
 {% for option in options %}
-  <div class="pos-accordion__title">{{option.title}}</div>
+  <div class="pos-accordion__title rounded shadow-card bg-panel h-11 cursor-pointer flex">
+    {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashUp' %}
+    <div class="rotate-180">
+      {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+    </div>
+    <div>
+    {{option.title}}
+    </div>
+  </div>
   <div class="pos-accordion__panel hidden">
     <p>{{option.content}}</p>
   </div>
