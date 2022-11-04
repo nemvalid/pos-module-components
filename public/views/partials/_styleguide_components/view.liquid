@@ -70,7 +70,7 @@
           {% endif %}
           {% for story in styleguide_stories %}
             {% include component.path, params: story %}
-            <div class="py-4"><pre class="whitespace-pre-wrap break-all">{{ story | json }}</pre></div>
+            <code data-component-config="" class="bg-white block p-4 my-4 shadow-sm rounded-sm whitespace-pre-wrap break-all text-sm">{{ story | json }}</code>
           {% endfor %}
         {% else %}
           {% for param_group in component.metadata.params %}
@@ -94,7 +94,7 @@
                   <div class="mt-4">
                     {% include component.path, params: render_params %}
                   </div>
-                  <div class="py-4"><pre class="whitespace-pre-wrap break-all">{{ render_params | json }}</pre></div>
+                  <code data-component-config="" class="bg-white block p-4 my-4 shadow-sm rounded-sm whitespace-pre-wrap break-all text-sm">{{ render_params | json }}</code>
 
                 {% endunless %}
               {% endfor %}

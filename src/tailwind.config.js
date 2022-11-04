@@ -15,8 +15,7 @@ function parseColor(colorName) {
 
 const safelist = [
   {
-    pattern: new RegExp(`.+-(${Object.keys(defaultColors).join('|')})$`),
-    variants: ['hover'],
+    pattern: new RegExp(`.+-(${Object.keys(defaultColors).join('|')})$`)
   }
 ];
 
@@ -87,7 +86,7 @@ module.exports = {
       }
     },
   },
-  safelist,
+  // safelist,
   plugins: [
     require('@tailwindcss/typography')
   ],
