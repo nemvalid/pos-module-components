@@ -4,7 +4,7 @@ metadata:
   params:
     id: myAccordion
     name: myAccordion
-    multiple:
+    multiOpen:
       - true
       - false
     options:
@@ -13,25 +13,30 @@ metadata:
       - title: Option 2
         content: value2
   styleguide:
-    - multiple: false
+    - multiOpen: false
       options:
       - title: Option 1
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
       - title: Option 2
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
-    - multiple: true
+      - title: Option 3
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
+    - multiOpen: true
       options:
       - title: Option 1
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
       - title: Option 2
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
+      - title: Option 3
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
 ---
 {% liquid
   assign id = params.id | default: "myAccordion"
+  assign multiOpen = params.multiOpen | default: false
   assign options = params.options | parse_json | default: '[]' | parse_json
 %}
 
-<div data-pos-component="Accordion" class="inline-block w-80">
+<div data-pos-component="Accordion" class="inline-block w-80" data-pos-accordion-multiopen="{{multiOpen}}">
 {% for option in options %}
   <button class="pos-accordion__title rounded shadow-card bg-panel h-11 cursor-pointer flex items-center px-2 w-80" aria-expanded="false" id="{{id}}{{forloop.index}}" aria-controls="{{id}}{{forloop.index}}Panel">
     {% assign icon_params = null | hash_merge: name: 'dashUp' %}

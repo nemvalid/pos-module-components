@@ -1,6 +1,7 @@
 const accordionWrappers = document.querySelectorAll('[data-pos-component="Accordion"]');
 accordionWrappers.forEach(accordionWrapper => {
   const titles = accordionWrapper.querySelectorAll('.pos-accordion__title');
+  const multiOpen = accordionWrapper.getAttribute("data-pos-accordion-multiopen") === "true" ? true : false;
 
   titles.forEach(title => {
     title.addEventListener('click', () => {
@@ -15,6 +16,18 @@ accordionWrappers.forEach(accordionWrapper => {
       } else {
         panel.style.maxHeight = panel.scrollHeight + "px";
         title.setAttribute('aria-expanded', true);
+        // close others, if needed
+        if (!multiOpen) {
+          titles.forEach(oTitle => {
+            if (oTitle !== title) {
+              const oPanel = oTitle.nextElementSibling;
+              const oIcon = oTitle.firstElementChild;
+              oIcon.classList.add("rotate-180");
+              oPanel.style.maxHeight = null;
+              oTitle.setAttribute('aria-expanded', false);
+            }
+          });
+        }
       }
     });
   })
