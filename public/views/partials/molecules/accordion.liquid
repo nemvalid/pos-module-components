@@ -27,13 +27,14 @@ metadata:
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
 ---
 {% liquid
+  assign id = params.id | default: "myAccordion"
   assign options = params.options | parse_json | default: '[]' | parse_json
 %}
 
 <div data-pos-component="Accordion" class="inline-block w-80">
 {% for option in options %}
-  <button class="pos-accordion__title rounded shadow-card bg-panel h-11 cursor-pointer flex items-center px-2 w-80">
-    {% assign icon_params = '{}' | parse_json | hash_merge: name: 'dashUp' %}
+  <button class="pos-accordion__title rounded shadow-card bg-panel h-11 cursor-pointer flex items-center px-2 w-80" aria-expanded="false" id="{{id}}{{forloop.index}}" aria-controls="{{id}}{{forloop.index}}Panel">
+    {% assign icon_params = null | hash_merge: name: 'dashUp' %}
     <div class="rotate-180 flex items-center px-2 text-interactive-text">
       {% theme_render_rc 'components/atoms/icon', params: icon_params %}
     </div>
@@ -41,7 +42,7 @@ metadata:
     {{option.title}}
     </div>
   </button>
-  <div class="pos-accordion__panel">
+  <div class="pos-accordion__panel" role="region" id="{{id}}{{forloop.index}}Panel" aria-labelledby="{{id}}{{forloop.index}}">
     <p>{{option.content}}</p>
   </div>
 {% endfor %}
