@@ -6,8 +6,12 @@ accordionWrappers.forEach(accordionWrapper => {
     title.addEventListener('click', () => {
       const panel = title.nextElementSibling;
       const icon = title.firstElementChild;
-      panel.classList.toggle("hidden");
       icon.classList.toggle("rotate-180");
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
     });
   })
 
