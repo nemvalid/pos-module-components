@@ -3,30 +3,30 @@ metadata:
   name: Icon with badge
   params:
     tag: "div"
-    maxLength: 4
-    content: 123456
+    maxValue: 1000
+    value: 1000
     icon: "bell"
   styleguide:
     - tag: "div"
-      maxLength: 4
-      content: 8
+      maxValue: 20
+      value: 8
     - tag: "div"
-      maxLength: 4
-      content: 123456
+      maxValue: 999
+      value: 1500
       icon: "mail"
     - tag: "div"
-      maxLength: 5
-      content: 123456
+      maxValue: 1999
+      value: 1500
       icon: "globe"
 ---
 {% liquid
   assign tag = params.tag | default: 'div'
-  assign maxLength = params.maxLength | default: 4
-  assign content = params.content
+  assign maxValue = params.maxValue | default: 0
+  assign value = params.value
   assign icon = params.icon | default: 'bell'
 
   assign icon_params = null | hash_merge: name: icon, class: 'w-6 h-6 ml-2 '
-  assign badge_params = null | hash_merge: content: content, maxLength: maxLength
+  assign badge_params = null | hash_merge: value: value, maxValue: maxValue
 %}
 
 <div class="relative inline-block">
