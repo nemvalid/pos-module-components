@@ -1,0 +1,39 @@
+---
+metadata:
+  name: Avatar
+  params:
+    imageSrc: ""
+    name: "John Doe"
+    size: "md"
+  styleguide:
+    - imageSrc: ""
+      name: "John Doe"
+      size: "lg"
+    - imageSrc: ""
+      name: "Harrison Ford"
+      size: "md"
+    - imageSrc: ""
+      name: "Mark Hamill"
+      size: "sm"
+---
+{% liquid
+  assign size = params.size | default: 'md'
+  assign value = params.value
+
+
+  assign classes = 'rounded-full bg-button-primary flex items-center justify-center text-inverted '
+  if size == 'md'
+    assign classes = classes | append: "w-10 h-10 "
+  endif
+  if size == 'lg'
+    assign classes = classes | append: "w-14 h-14 "
+  endif
+  if size == 'sm'
+    assign classes = classes | append: "w-6 h-6 text-sm "
+  endif
+
+%}
+
+<div class="{{classes}}">
+    X Y
+</div>
