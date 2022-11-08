@@ -15,19 +15,19 @@ metadata:
   styleguide:
     - multiOpen: false
       options:
-      - title: Option 1
+      - title: Does it work?
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
-      - title: Option 2
+      - title: Does it work?
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
-      - title: Option 3
+      - title: Does it work?
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
     - multiOpen: true
       options:
-      - title: Option 1
+      - title: Does it work?
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
-      - title: Option 2
+      - title: Does it work?
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
-      - title: Option 3
+      - title: Does it work?
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
 ---
 {% liquid
@@ -38,17 +38,17 @@ metadata:
 
 <div data-pos-component="Accordion" class="inline-block w-80" data-pos-accordion-multiopen="{{multiOpen}}">
 {% for option in options %}
-  <button class="pos-accordion__title rounded shadow-card bg-panel h-11 cursor-pointer flex items-center px-2 w-80" aria-expanded="false" id="{{id}}{{forloop.index}}" aria-controls="{{id}}{{forloop.index}}Panel">
+  <button class="pos-accordion__title z-10 relative rounded shadow-card bg-panel h-11 cursor-pointer flex items-center px-2 w-80" aria-expanded="false" id="{{id}}{{forloop.index}}" aria-controls="{{id}}{{forloop.index}}Panel">
     {% assign icon_params = null | hash_merge: name: 'dashUp' %}
     <div class="rotate-180 flex items-center px-2 text-interactive-text">
       {% theme_render_rc 'components/atoms/icon', params: icon_params %}
     </div>
-    <div class="flex items-center">
+    <div class="flex items-center font-bold">
     {{option.title}}
     </div>
   </button>
-  <div class="pos-accordion__panel" role="region" id="{{id}}{{forloop.index}}Panel" aria-labelledby="{{id}}{{forloop.index}}">
-    <p>{{option.content}}</p>
+  <div class="pos-accordion__panel z-0 relative " role="region" id="{{id}}{{forloop.index}}Panel" aria-labelledby="{{id}}{{forloop.index}}">
+    <p class="px-4 pt-3 pb-4 -mt-1 rounded-b shadow-card bg-panel">{{option.content}}</p>
   </div>
 {% endfor %}
 </div>
