@@ -27,14 +27,14 @@ metadata:
 ---
 {% parse_json sizes %}
 {
-  "lg": "w-48 h-48",
-  "md": "w-24 h-24",
-  "sm": "w-5 h-5 text-sm"
+  "lg": "w-48 h-48 text-7xl",
+  "md": "w-24 h-24 text-4xl",
+  "sm": "w-5 h-5 text-xs"
 }
 {% endparse_json %}
 {% liquid
   assign size = params.size | default: 'md'
-  assign nane = params.name
+  assign name = params.name
   assign imageSrc = params.imageSrc
 
   assign stringClasses = 'rounded-full bg-button-primary flex items-center justify-center text-inverted '
@@ -42,12 +42,14 @@ metadata:
 
   assign stringClasses = stringClasses | append: sizes[size]
   assign imageClasses = imageClasses | append: sizes[size]
+
+  assign names = name | split: " "
 %}
 
 
 {% if imageSrc == blank %}
 <div class="{{stringClasses}}">
-    X Y
+    {{names[0] | slice: 0}}{{names[1] | slice: 0}}
 </div>
 {% else %}
 <div class="{{imageClasses}}">
