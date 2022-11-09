@@ -15,10 +15,14 @@ metadata:
     - imageSrc: ""
       name: "Mark Hamill"
       size: "sm"
+    - imageSrc: "asd"
+      name: "John Doe"
+      size: "lg"
 ---
 {% liquid
   assign size = params.size | default: 'md'
-  assign value = params.value
+  assign nane = params.name
+  assign imageSrc = params.imageSrc
 
 
   assign classes = 'rounded-full bg-button-primary flex items-center justify-center text-inverted '
@@ -34,6 +38,10 @@ metadata:
 
 %}
 
+{% if imageSrc == blank %}
 <div class="{{classes}}">
     X Y
 </div>
+{% else %}
+<img src="{{ 'modules/components/avatar1.jpg' | asset_url }}" class="{{classes}}">
+{% endif %}
