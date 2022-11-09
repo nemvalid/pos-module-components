@@ -57,6 +57,9 @@ metadata:
   else
     assign colorIndex = names[0].size | modulo: names[1].size
   endif
+  if colorIndex > 3
+    assign colorIndex = 3
+  endif
 
   assign stringClasses = stringClasses | append: colors[colorIndex]
 %}
