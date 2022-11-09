@@ -15,33 +15,42 @@ metadata:
     - imageSrc: ""
       name: "Mark Hamill"
       size: "sm"
-    - imageSrc: "asd"
+    - imageSrc: "modules/components/avatar1.jpg"
       name: "John Doe"
       size: "lg"
+    - imageSrc: "modules/components/avatar1.jpg"
+      name: "John Doe"
+      size: "md"
+    - imageSrc: "modules/components/avatar1.jpg"
+      name: "John Doe"
+      size: "sm"
 ---
+{% parse_json sizes %}
+{
+  "lg": "w-48 h-48",
+  "md": "w-24 h-24",
+  "sm": "w-5 h-5 text-sm"
+}
+{% endparse_json %}
 {% liquid
   assign size = params.size | default: 'md'
   assign nane = params.name
   assign imageSrc = params.imageSrc
 
+  assign stringClasses = 'rounded-full bg-button-primary flex items-center justify-center text-inverted '
+  assign imageClasses = 'rounded-full overflow-hidden '
 
-  assign classes = 'rounded-full bg-button-primary flex items-center justify-center text-inverted '
-  if size == 'md'
-    assign classes = classes | append: "w-10 h-10 "
-  endif
-  if size == 'lg'
-    assign classes = classes | append: "w-14 h-14 "
-  endif
-  if size == 'sm'
-    assign classes = classes | append: "w-6 h-6 text-sm "
-  endif
-
+  assign stringClasses = stringClasses | append: sizes[size]
+  assign imageClasses = imageClasses | append: sizes[size]
 %}
 
+
 {% if imageSrc == blank %}
-<div class="{{classes}}">
+<div class="{{stringClasses}}">
     X Y
 </div>
 {% else %}
-<img src="{{ 'modules/components/avatar1.jpg' | asset_url }}" class="{{classes}}">
+<div class="{{imageClasses}}">
+  <img src="{{imageSrc | asset_url}}" class="object-cover h-full">
+</div>
 {% endif %}
