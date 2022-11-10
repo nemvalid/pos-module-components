@@ -1,36 +1,16 @@
-.pos-toggle {
-  width: 60px;
-  height: 34px;
-}
-
-.pos-toggle__slider {
-  @apply bg-graphic;
-  transition: .4s;
-  border-radius: 34px;
-}
-
 .pos-toggle__slider:before {
+  @apply w-4 h-4 bg-inverted rounded-full duration-500;
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
 }
 
 input:checked + .pos-toggle__slider {
   @apply bg-interactive-graphic;
 }
 
-input:focus + .pos-toggle__slider {
-  @apply shadow-sm;
-  @apply shadow-black;
-}
-
 input:checked + .pos-toggle__slider:before {
-  transform: translateX(26px);
+  @apply translate-x-6;
 }
 
