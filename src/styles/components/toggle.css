@@ -1,18 +1,10 @@
 .pos-toggle {
-  position: relative;
-  display: inline-block;
   width: 60px;
   height: 34px;
 }
 
 .pos-toggle__slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
+  @apply bg-graphic;
   transition: .4s;
   border-radius: 34px;
 }
@@ -30,11 +22,12 @@
 }
 
 input:checked + .pos-toggle__slider {
-  background-color: #2196F3;
+  @apply bg-interactive-graphic;
 }
 
 input:focus + .pos-toggle__slider {
-  box-shadow: 0 0 1px #2196F3;
+  @apply shadow-sm;
+  @apply shadow-black;
 }
 
 input:checked + .pos-toggle__slider:before {
