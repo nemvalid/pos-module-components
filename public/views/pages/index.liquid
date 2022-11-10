@@ -6,7 +6,7 @@ slug: styleguide
   function current_user = 'modules/user/lib/queries/user/current'
   include 'modules/permission/lib/helpers/can_do_or_unauthorized', requester: current_user, do: 'styleguide.view'
 
-  function component_groups = 'modules/components/lib/queries/components/get_all'
+  function component_groups = 'modules/components/lib/queries/components/search'
 %}
 {% content_for 'pagetitle' %}Component Library{% endcontent_for %}
 
