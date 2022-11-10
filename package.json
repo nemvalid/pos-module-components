@@ -1,0 +1,26 @@
+{
+  "name": "components",
+  "version": "0.0.0",
+  "description": "Module description",
+  "scripts": {
+    "version": "(cd ../../ && pos-cli modules version components -p) && git add template-values.json && auto-changelog -p && git add CHANGELOG.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Platform-OS/pos-module-components.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Platform-OS/pos-module-components/issues"
+  },
+  "homepage": "https://github.com/Platform-OS/pos-module-components#readme",
+  "devDependencies": {
+    "auto-changelog": "^2.4.0"
+  },
+  "auto-changelog": {
+    "template": "changelog-template.hbs",
+    "unreleased": true,
+    "commitLimit": false
+  }
+}
