@@ -1,0 +1,26 @@
+---
+metadata:
+  name: Toggle
+  params:
+    name: 'myToggle'
+    value: ''
+    checked:
+      - false
+      - true
+    id: 'myToggle'
+    disabled:
+      - false
+      - true
+---
+{% liquid
+  assign checked = params.checked | default: false
+  assign id = params.id
+  assign name = params.name
+  assign value = params.value
+
+%}
+<label class="pos-toggle">
+  <input type="checkbox">
+  <span class="pos-toggle__slider"></span>
+</label>
+
