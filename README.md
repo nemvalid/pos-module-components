@@ -114,3 +114,10 @@ https://www.w3.org/WAI/ARIA/apg/
 
 ### Code styling and Linters 
 Make sure to enable `.editorconfig` support in your IDE: https://editorconfig.org/#download  
+
+## Versioning
+
+```
+git fetch origin --tags
+npm version major | minor | patch
+```
