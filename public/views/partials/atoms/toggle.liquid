@@ -12,6 +12,7 @@ metadata:
     disabled:
       - false
       - true
+    ariaLabel: 'myToggle'
   styleguide:
     - name: 'myToggleChecked'
       value: 'toggle1'
@@ -29,6 +30,7 @@ metadata:
   assign id = params.id
   assign name = params.name
   assign label = params.label
+  assign ariaLabel = params.ariaLabel | default: label
   assign value = params.value
 
 %}
@@ -45,6 +47,7 @@ metadata:
       name="{{name}}"
       {% if value %}value="{{value}}"{% endif %}
       {% if checked %}checked{% endif %}
+      {% if ariaLabel %}aria-label="{{ariaLabel}}"{% endif %}
       />
       <span class="pos-toggle__slider absolute cursor-pointer inset-0 bg-graphic rounded-full duration-500"></span>
     </div>
