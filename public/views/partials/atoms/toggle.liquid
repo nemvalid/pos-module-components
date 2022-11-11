@@ -34,8 +34,10 @@ metadata:
 %}
 <label>
   <div class="flex">
-    <div>{{label}}</div>
-    <div class="ml-2 relative inline-block w-12 h-6">
+    {% if label != blank %}
+    <div class="mr-2">{{label}}</div>
+    {% endif %}
+    <div class="relative inline-block w-12 h-6">
       <input
       type="checkbox"
       class="w-0 h-0 opacity-0"
