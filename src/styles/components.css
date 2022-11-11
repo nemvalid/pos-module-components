@@ -6,6 +6,7 @@
 @import "./components/checkbox.css";
 @import "./components/rating.css";
 @import "./components/accordion.css";
+@import "./components/toggle.css";
 
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
