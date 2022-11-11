@@ -17,7 +17,7 @@ metadata:
   assign name = params.name
   assign imageSrc = params.imageSrc
 
-  assign classes = 'px-3 py-1 leading-5 rounded flex items-center align-center border h-8 bg-base '
+  assign classes = 'px-3 py-1 leading-5 rounded flex items-center align-center h-8 bg-base '
 
   assign avatar_params = null | hash_merge: size: 'sm', name: name, imageSrc: imageSrc
   assign names = name | split: " "
