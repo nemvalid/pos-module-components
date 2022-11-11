@@ -24,6 +24,10 @@ metadata:
       value: 'toggle3'
       checked: true
       label: 'Toggle'
+    - name: 'myToggleWithAriaLabel'
+      value: 'toggle4'
+      checked: true
+      ariaLabel: 'Toggle label'
 ---
 {% liquid
   assign checked = params.checked | default: false
