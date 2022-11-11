@@ -4,6 +4,7 @@ metadata:
   params:
     name: 'myToggle'
     value: ''
+    label: ''
     checked:
       - false
       - true
@@ -11,16 +12,40 @@ metadata:
     disabled:
       - false
       - true
+  styleguide:
+    - name: 'myToggleChecked'
+      value: 'toggle1'
+      checked: true
+    - name: 'myToggleUnchecked'
+      value: 'toggle2'
+      checked: false
+    - name: 'myToggleWithLabel'
+      value: 'toggle3'
+      checked: true
+      label: 'Toggle'
 ---
 {% liquid
   assign checked = params.checked | default: false
   assign id = params.id
   assign name = params.name
+  assign label = params.label
   assign value = params.value
 
 %}
-<label class="pos-toggle relative inline-block w-12 h-6">
-  <input type="checkbox" class="w-0 h-0 opacity-0">
-  <span class="pos-toggle__slider absolute cursor-pointer inset-0 bg-graphic rounded-full duration-500"></span>
+<label>
+  <div class="flex">
+    <div>{{label}}</div>
+    <div class="ml-2 relative inline-block w-12 h-6">
+      <input
+      type="checkbox"
+      class="w-0 h-0 opacity-0"
+      id="{{id}}"
+      name="{{name}}"
+      {% if value %}value="{{value}}"{% endif %}
+      {% if checked %}checked{% endif %}
+      />
+      <span class="pos-toggle__slider absolute cursor-pointer inset-0 bg-graphic rounded-full duration-500"></span>
+    </div>
+  </div>
 </label>
 
