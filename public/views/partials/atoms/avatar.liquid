@@ -6,13 +6,13 @@ metadata:
     name: "John Doe"
     size: "md"
   styleguide:
-    - imageSrc: "modules/components/avatar1.jpg"
+    - imageSrc: "https://i.pravatar.cc/150?img=59"
       name: "John Doe"
       size: "lg"
-    - imageSrc: "modules/components/avatar2.jpg"
+    - imageSrc: "https://i.pravatar.cc/150?img=47"
       name: "Jane Doe"
       size: "md"
-    - imageSrc: "modules/components/avatar1.jpg"
+    - imageSrc: "https://i.pravatar.cc/150?img=53"
       name: "John Doe"
       size: "sm"
     - imageSrc: ""
@@ -70,6 +70,6 @@ metadata:
 </div>
 {% else %}
 <div class="{{imageClasses}}">
-  <img src="{{imageSrc | asset_url}}" class="object-cover h-full">
+  <img src="{{imageSrc}}" class="object-cover h-full">
 </div>
 {% endif %}
