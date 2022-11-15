@@ -1,0 +1,28 @@
+---
+metadata:
+  name: Review bar
+  params:
+    maxValue: 120
+    value: 80
+  styleguide:
+    - maxValue: 120
+      value: 120
+    - maxValue: 120
+      value: 70
+    - maxValue: 120
+      value: 20
+---
+{% liquid
+  assign maxValue = params.maxValue | default: 0
+  assign value = params.value
+
+
+
+  assign classes = 'px-1 py-1 leading-3 text-xs rounded-full min-w-[20] flex flex-col items-center bg-important text-inverted'
+%}
+
+<div class="w-48 h-1.5 border border-input-border">
+  <div class="bg-warning h-full" style="width: 50%;">
+
+  </div>
+</div>
