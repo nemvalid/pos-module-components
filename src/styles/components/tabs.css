@@ -1,7 +1,7 @@
 .pos-tabs__tablist > button {
-
+  @apply text-normal p-3.5 mb-3.5;
 }
 
 .pos-tabs__tab--active {
-  border-bottom: 2px solid red;
+  @apply border-b-2 border-interactive-graphic
 }
