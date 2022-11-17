@@ -1,7 +1,16 @@
-.pos-tabs__tablist > button {
-  @apply text-normal p-3.5 mb-3.5;
+.pos-tabs__tab {
+  @apply text-normal p-3.5 mb-3.5 mr-5;
+  min-width: 110px;
 }
 
 .pos-tabs__tab--active {
-  @apply border-b-2 border-interactive-graphic
+  @apply border-b-2 border-interactive-graphic text-interactive-graphic;
+}
+
+.pos-tabs--background .pos-tabs__tab {
+  @apply bg-highlighted;
+}
+
+.pos-tabs--background .pos-tabs__tab--active {
+  @apply bg-panel;
 }
