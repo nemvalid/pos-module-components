@@ -1,0 +1,7 @@
+.pos-tabs__tablist > button {
+
+}
+
+.pos-tabs__tab--active {
+  border-bottom: 2px solid red;
+}

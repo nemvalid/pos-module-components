@@ -1,0 +1,49 @@
+---
+metadata:
+  name: Tabs
+  params:
+    id: myTabs
+    name: myTabs
+    multiOpen:
+      - true
+      - false
+    options:
+      - title: Option 1
+        content: value1
+      - title: Option 2
+        content: value2
+  styleguide:
+    - multiOpen: false
+      options:
+      - title: Does it work?
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
+      - title: Does it work?
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
+      - title: Does it work?
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
+    - multiOpen: true
+      options:
+      - title: Does it work?
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
+      - title: Does it work?
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
+      - title: Does it work?
+        content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
+---
+{% liquid
+  assign id = params.id | default: "myAccordion"
+  assign multiOpen = params.multiOpen | default: false
+  assign options = params.options | parse_json | default: '[]' | parse_json
+%}
+
+<div role="tablist" class="pos-tabs__tablist">
+  {% for option in options %}
+  <button class="pos-tabs__tab">{{option.title}}</button>
+  {% endfor %}
+</div>
+
+<div role="tabpanel">
+  {% for option in options %}
+  <div class="">{{option.content}}</div>
+  {% endfor %}
+</div>
