@@ -7,14 +7,14 @@ metadata:
     background:
       - false
       - true
-    options:
+    tabs:
       - title: Option 1
         content: value1
       - title: Option 2
         content: value2
   styleguide:
     - background: false
-      options:
+      tabs:
       - title: London
         content: London is the capital of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.
       - title: Paris
@@ -22,7 +22,7 @@ metadata:
       - title: Tokyo
         content: Tokyo is the capital of Japan. It is the center of the Greater Tokyo Area, and the most populous metropolitan area in the world.
     - background: true
-      options:
+      tabs:
       - title: London
         content: London is the capital of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.
       - title: Paris
@@ -33,7 +33,7 @@ metadata:
 {% liquid
   assign id = params.id | default: "myTabs"
   assign background = params.background | default: false
-  assign options = params.options | parse_json | default: '[]' | parse_json
+  assign tabs = params.tabs | parse_json | default: '[]' | parse_json
 
   assign classes = 'pos-tabs '
   if background == true
@@ -43,18 +43,18 @@ metadata:
 
 <div data-pos-component="Tabs" class="{{classes}}">
   <div role="tablist" class="pos-tabs__tablist">
-    {% for option in options %}
+    {% for tab in tabs %}
     <button class="pos-tabs__tab"
       role="tab"
       aria-controls="{{id}}{{forloop.index}}Panel"
       id="{{id}}{{forloop.index}}Tab"
-      tabindex="-1">{{option.title}}</button>
+      tabindex="-1">{{tab.title}}</button>
     {% endfor %}
   </div>
 
   <div>
-    {% for option in options %}
-    <div class="pos-tabs__panel" role="tabpanel" id="{{id}}{{forloop.index}}Panel" aria-labelledby="{{id}}{{forloop.index}}Tab">{{option.content}}</div>
+    {% for tab in tabs %}
+    <div class="pos-tabs__panel" role="tabpanel" id="{{id}}{{forloop.index}}Panel" aria-labelledby="{{id}}{{forloop.index}}Tab">{{tab.content}}</div>
     {% endfor %}
   </div>
 </div>
