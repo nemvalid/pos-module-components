@@ -22,10 +22,13 @@ metadata:
   assign maxCount = params.maxCount
   assign active = params.active
 
-  assign classes = "py-1.5 px-2.5 "
+  assign classes = "py-1.5 px-2.5 hover:bg-highlighted "
 %}
-<div class="pagination">
-  <a href="#">&laquo;</a>
+<div class="pagination flex">
+  <a href="#" class="{{classes}}">
+    {% assign icon_params = null | hash_merge: name: 'dashLeft' %}
+    {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+  </a>
   {% for i in (1..count) %}
     {% if active == i %}
       <a href="#" class="{{classes}} rounded border border-interactive-graphic">{{i}}</a>
@@ -33,5 +36,8 @@ metadata:
       <a href="#" class="{{classes}}">{{i}}</a>
     {% endif %}
   {% endfor %}
-  <a href="#">&raquo;</a>
+  <a href="#" class="{{classes}}">
+    {% assign icon_params = null | hash_merge: name: 'dashRight' %}
+    {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+  </a>
 </div>
