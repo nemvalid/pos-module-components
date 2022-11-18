@@ -1,0 +1,37 @@
+---
+metadata:
+  name: Pagination
+  params:
+    tag: "div"
+    count: 10
+    maxCount: 5
+    active: 3
+  styleguide:
+    - tag: "div"
+      count: 10
+      maxCount: 5
+      active: 3
+    - tag: "div"
+      count: 5
+      maxCount: 5
+      active: 3
+---
+{% liquid
+  assign tag = params.tag | default: 'div'
+  assign count = params.count
+  assign maxCount = params.maxCount
+  assign active = params.active
+
+  assign classes = "py-1.5 px-2.5 "
+%}
+<div class="pagination">
+  <a href="#">&laquo;</a>
+  {% for i in (1..count) %}
+    {% if active == i %}
+      <a href="#" class="{{classes}} rounded border border-interactive-graphic">{{i}}</a>
+    {% else %}
+      <a href="#" class="{{classes}}">{{i}}</a>
+    {% endif %}
+  {% endfor %}
+  <a href="#">&raquo;</a>
+</div>
