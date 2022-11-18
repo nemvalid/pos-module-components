@@ -54,7 +54,7 @@ metadata:
 
   <div>
     {% for tab in tabs %}
-    <div class="pos-tabs__panel" role="tabpanel" id="{{id}}{{forloop.index}}Panel" aria-labelledby="{{id}}{{forloop.index}}Tab">{{tab.content}}</div>
+    <div class="pos-tabs__panel" role="tabpanel" id="{{id}}{{forloop.index}}Panel" aria-labelledby="{{id}}{{forloop.index}}Tab">{{tab.content | html_safe}}</div>
     {% endfor %}
   </div>
 </div>
