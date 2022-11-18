@@ -31,7 +31,7 @@ metadata:
         content: Tokyo is the capital of Japan. It is the center of the Greater Tokyo Area, and the most populous metropolitan area in the world.
 ---
 {% liquid
-  assign id = params.id | default: "myAccordion"
+  assign id = params.id | default: "myTabs"
   assign background = params.background | default: false
   assign options = params.options | parse_json | default: '[]' | parse_json
 
@@ -44,13 +44,13 @@ metadata:
 <div data-pos-component="Tabs" class="{{classes}}">
   <div role="tablist" class="pos-tabs__tablist">
     {% for option in options %}
-    <button class="pos-tabs__tab">{{option.title}}</button>
+    <button class="pos-tabs__tab" role="tab" aria-controls="{{id}}{{forloop.index}}Panel" id="{{id}}{{forloop.index}}Tab">{{option.title}}</button>
     {% endfor %}
   </div>
 
-  <div role="tabpanel">
+  <div>
     {% for option in options %}
-    <div class="pos-tabs__panel">{{option.content}}</div>
+    <div class="pos-tabs__panel" role="tabpanel" id="{{id}}{{forloop.index}}Panel" aria-labelledby="{{id}}{{forloop.index}}Tab">{{option.content}}</div>
     {% endfor %}
   </div>
 </div>

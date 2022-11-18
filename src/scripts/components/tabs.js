@@ -46,9 +46,11 @@ tablistWrappers.forEach(tablistWrapper => {
         if (currentTab === tab) {
           tab.classList.add("pos-tabs__tab--active");
           panels[index].classList.remove("hidden");
+          tab.setAttribute('aria-selected', 'true');
         } else {
           tab.classList.remove("pos-tabs__tab--active");
           panels[index].classList.add("hidden");
+          tab.setAttribute('aria-selected', 'false');
         }
       });
 
@@ -57,6 +59,7 @@ tablistWrappers.forEach(tablistWrapper => {
     if (!firstTab) {
       firstTab = currentTab;
       panels[currentTabIndex].classList.remove("hidden");
+      tab.setAttribute('aria-selected', 'true');
     }
     lastTab = currentTab;
 
