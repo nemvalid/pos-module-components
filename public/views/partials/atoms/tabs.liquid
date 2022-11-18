@@ -44,7 +44,11 @@ metadata:
 <div data-pos-component="Tabs" class="{{classes}}">
   <div role="tablist" class="pos-tabs__tablist">
     {% for option in options %}
-    <button class="pos-tabs__tab" role="tab" aria-controls="{{id}}{{forloop.index}}Panel" id="{{id}}{{forloop.index}}Tab">{{option.title}}</button>
+    <button class="pos-tabs__tab"
+      role="tab"
+      aria-controls="{{id}}{{forloop.index}}Panel"
+      id="{{id}}{{forloop.index}}Tab"
+      tabindex="-1">{{option.title}}</button>
     {% endfor %}
   </div>
 
