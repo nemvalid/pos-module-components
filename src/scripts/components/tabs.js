@@ -1,6 +1,6 @@
 const tablistWrappers = document.querySelectorAll('[data-pos-component="Tabs"]');
 tablistWrappers.forEach(tablistWrapper => {
-  const tabs = [...tablistWrapper.querySelectorAll('button')];
+  const tabs = [...tablistWrapper.querySelectorAll('.pos-tabs__tab')];
   const panels = tablistWrapper.querySelectorAll('.pos-tabs__panel');
   let firstTab = null;
   let lastTab = null;
