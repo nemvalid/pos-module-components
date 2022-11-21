@@ -47,10 +47,12 @@ tablistWrappers.forEach(tablistWrapper => {
           tab.classList.add("pos-tabs__tab--active");
           panels[index].classList.remove("hidden");
           tab.setAttribute('aria-selected', 'true');
+          tab.setAttribute('tabindex', '0');
         } else {
           tab.classList.remove("pos-tabs__tab--active");
           panels[index].classList.add("hidden");
           tab.setAttribute('aria-selected', 'false');
+          tab.setAttribute('tabindex', '-1');
         }
       });
 
@@ -59,7 +61,8 @@ tablistWrappers.forEach(tablistWrapper => {
     if (!firstTab) {
       firstTab = currentTab;
       panels[currentTabIndex].classList.remove("hidden");
-      tab.setAttribute('aria-selected', 'true');
+      currentTab.setAttribute('aria-selected', 'true');
+      currentTab.setAttribute('tabindex', '0');
     }
     lastTab = currentTab;
 

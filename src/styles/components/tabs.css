@@ -4,7 +4,7 @@
 }
 
 .pos-tabs__tab--active {
-  @apply border-b-2 border-interactive-graphic text-interactive-graphic;
+  @apply border-b-2 border-interactive-graphic text-interactive-text font-bold;
 }
 
 .pos-tabs--background .pos-tabs__tab {
