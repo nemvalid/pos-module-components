@@ -3,7 +3,7 @@
     @apply my-4 border-t-divider;
   }
 
-  a:not(.pos-clean) {
+  a:not(.pos-clean):not(.pos-pagination__link) {
     @apply underline text-interactive-text;
   }
 }

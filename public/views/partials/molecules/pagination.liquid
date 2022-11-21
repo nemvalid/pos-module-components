@@ -22,22 +22,30 @@ metadata:
   assign maxCount = params.maxCount
   assign active = params.active
 
-  assign classes = "py-1.5 px-2.5 hover:bg-highlighted "
+  assign classes = "pos-pagination__link text-interactive-text py-1.5 px-2.5 hover:bg-highlighted "
 %}
-<div class="pagination flex">
-  <a href="#" class="{{classes}}">
-    {% assign icon_params = null | hash_merge: name: 'dashLeft' %}
-    {% theme_render_rc 'components/atoms/icon', params: icon_params %}
-  </a>
-  {% for i in (1..count) %}
-    {% if active == i %}
-      <a href="#" class="{{classes}} rounded border border-interactive-graphic">{{i}}</a>
-    {% else %}
-      <a href="#" class="{{classes}}">{{i}}</a>
-    {% endif %}
-  {% endfor %}
-  <a href="#" class="{{classes}}">
-    {% assign icon_params = null | hash_merge: name: 'dashRight' %}
-    {% theme_render_rc 'components/atoms/icon', params: icon_params %}
-  </a>
-</div>
+<nav role="navigation" aria-label="Pagination Navigation">
+  <ul class="pagination flex">
+    <li class="{{classes}}">
+      <a href="#">
+        {% assign icon_params = null | hash_merge: name: 'dashLeft' %}
+        {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+      </a>
+    </li>
+    {% for i in (1..count) %}
+      <li>
+        {% if active == i %}
+          <a href="#" class="{{classes}} rounded border border-interactive-graphic" aria-label="Current Page, Page {{i}}" aria-current="true">{{i}}</a>
+        {% else %}
+          <a href="#" class="{{classes}}" aria-label="Goto Page {{i}}">{{i}}</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+    <li class="{{classes}}">
+      <a href="#">
+        {% assign icon_params = null | hash_merge: name: 'dashRight' %}
+        {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+      </a>
+    </li>
+  </ul>
+</nav>
