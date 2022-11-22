@@ -6,11 +6,13 @@ metadata:
     count: 10
     maxCount: 5
     active: 3
+    url: ''
   styleguide:
     - tag: "div"
       count: 10
       maxCount: 5
       active: 3
+      url: 'something?page='
     - tag: "div"
       count: 5
       maxCount: 5
@@ -21,8 +23,9 @@ metadata:
   assign count = params.count
   assign maxCount = params.maxCount
   assign active = params.active
+  assign url = params.url | default: '?page='
 
-  assign classes = "pos-pagination__link text-interactive-text py-1.5 px-2.5 hover:bg-highlighted "
+  assign classes = "pos-pagination__link leading-5 text-interactive-text py-1.5 px-2.5 hover:bg-highlighted "
 %}
 <nav role="navigation" aria-label="Pagination Navigation">
   <ul class="pagination flex">
@@ -35,9 +38,9 @@ metadata:
     {% for i in (1..count) %}
       <li>
         {% if active == i %}
-          <a href="#" class="{{classes}} rounded border border-interactive-graphic" aria-label="Current Page, Page {{i}}" aria-current="true">{{i}}</a>
+          <a href="{{url}}{{i}}" class="{{classes}} rounded border border-interactive-graphic" aria-label="Current Page, Page {{i}}" aria-current="true">{{i}}</a>
         {% else %}
-          <a href="#" class="{{classes}}" aria-label="Goto Page {{i}}">{{i}}</a>
+          <a href="{{url}}{{i}}" class="{{classes}}" aria-label="Goto Page {{i}}">{{i}}</a>
         {% endif %}
       </li>
     {% endfor %}
