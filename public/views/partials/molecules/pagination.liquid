@@ -29,7 +29,7 @@ metadata:
 %}
 <nav role="navigation" aria-label="Pagination Navigation">
   <ul class="pagination flex">
-    <li class="leading-5 py-1.5 px-2.5 text-interactive-graphic">
+    <li class="leading-5 py-1.5 px-2.5 text-interactive-graphic hover:border-button-secondary-hover hover:text-button-secondary-foreground-hover">
       <a class="pos-pagination__link" href="#">
         {% assign icon_params = null | hash_merge: name: 'dashLeft' %}
         {% theme_render_rc 'components/atoms/icon', params: icon_params %}
@@ -44,7 +44,7 @@ metadata:
         {% endif %}
       </li>
     {% endfor %}
-    <li class="leading-5 py-1.5 px-2.5 text-interactive-graphic">
+    <li class="leading-5 py-1.5 px-2.5 text-interactive-graphic hover:border-button-secondary-hover hover:text-button-secondary-foreground-hover">
       <a class="pos-pagination__link" href="#">
         {% assign icon_params = null | hash_merge: name: 'dashRight' %}
         {% theme_render_rc 'components/atoms/icon', params: icon_params %}
