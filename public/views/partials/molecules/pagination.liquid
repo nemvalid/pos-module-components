@@ -2,7 +2,6 @@
 metadata:
   name: Pagination
   params:
-    tag: "div"
     count: 10
     maxCount: 5
     active: 3
@@ -20,8 +19,8 @@ metadata:
       active: 9
 ---
 {% liquid
-  assign count = params.count
-  assign maxCount = params.maxCount
+  assign count = params.count | default: 10
+  assign maxCount = params.maxCount | default: 5
   assign active = params.active
   assign url = params.url | default: '?page='
 
