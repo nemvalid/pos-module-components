@@ -44,13 +44,14 @@ metadata:
   assign leftArrow = startPage | minus: 1
   assign rightArrow = endPage | plus: 1
 
-  assign classes = "pos-pagination__link leading-5 py-1.5 px-2.5 hover:border-button-secondary-hover hover:text-button-secondary-foreground-hover "
+  assign classes = "pos-pagination__link leading-5 flex items-center justify-center text-interactive-text hover:border-button-secondary-hover hover:text-button-secondary-foreground-hover "
+  assign arrowClasses = "pos-pagination__link flex items-center justify-center text-interactive-graphic hover:text-button-secondary-foreground-hover "
 %}
 <nav role="navigation" aria-label="Pagination Navigation">
-  <ul class="pagination flex">
+  <ul class="flex">
     {% if startPage > 1 %}
-      <li class="leading-5 py-1.5 px-2.5 text-interactive-graphic hover:border-button-secondary-hover hover:text-button-secondary-foreground-hover">
-        <a class="pos-pagination__link" href="{{url}}{{leftArrow}}" aria-label="Goto Page {{leftArrow}}">
+      <li>
+        <a class="{{arrowClasses}}" href="{{url}}{{leftArrow}}" aria-label="Goto Page {{leftArrow}}">
           {% assign icon_params = null | hash_merge: name: 'dashLeft' %}
           {% theme_render_rc 'components/atoms/icon', params: icon_params %}
         </a>
@@ -60,16 +61,16 @@ metadata:
       {% if i >= startPage and i <= endPage %}
         <li>
           {% if active == i %}
-            <a href="{{url}}{{i}}" class="{{classes}} text-interactive-text rounded border border-interactive-graphic" aria-label="Current Page, Page {{i}}" aria-current="true">{{i}}</a>
+            <a href="{{url}}{{i}}" class="{{classes}} rounded border border-interactive-graphic" aria-label="Current Page, Page {{i}}" aria-current="true">{{i}}</a>
           {% else %}
-            <a href="{{url}}{{i}}" class="{{classes}} text-interactive-text" aria-label="Goto Page {{i}}">{{i}}</a>
+            <a href="{{url}}{{i}}" class="{{classes}}" aria-label="Goto Page {{i}}">{{i}}</a>
           {% endif %}
         </li>
       {% endif %}
     {% endfor %}
     {% if count > endPage %}
-      <li class="leading-5 py-1.5 px-2.5 text-interactive-graphic hover:border-button-secondary-hover hover:text-button-secondary-foreground-hover">
-        <a class="pos-pagination__link" href="{{url}}{{rightArrow}}" aria-label="Goto Page {{rightArrow}}">
+      <li>
+        <a class="{{arrowClasses}}" href="{{url}}{{rightArrow}}" aria-label="Goto Page {{rightArrow}}">
           {% assign icon_params = null | hash_merge: name: 'dashRight' %}
           {% theme_render_rc 'components/atoms/icon', params: icon_params %}
         </a>
