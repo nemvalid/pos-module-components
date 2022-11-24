@@ -17,10 +17,12 @@ metadata:
     - count: 10
       maxCount: 5
       active: 9
+    - count: 10
+      active: 9
 ---
 {% liquid
   assign count = params.count | default: 10
-  assign maxCount = params.maxCount | default: 5
+  assign maxCount = params.maxCount | default: count
   assign active = params.active
   assign url = params.url | default: '?page='
 
@@ -28,6 +30,11 @@ metadata:
     assign limit = maxCount | divided_by: 2 | round
     assign startPage = active | minus: limit
     assign endPage = active | plus: limit
+  endif
+
+  if count == maxCount
+    assign startPage = 1
+    assign endPage = count
   endif
 
   if startPage < 1
