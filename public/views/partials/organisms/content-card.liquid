@@ -22,7 +22,6 @@ metadata:
       author: Jane Doe
       imgSrc: 'https://picsum.photos/300/180?random=2'
     - variant: default
-      title: Blog post title
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
       imgSrc: 'https://picsum.photos/300/180?random=3'
 
@@ -45,7 +44,9 @@ metadata:
 <div class="border rounded overflow-hidden  w-80 {{bgClass}}">
   <div><img src="{{imgSrc}}" class="w-full"></div>
   <div class="p-6">
+    {% if title != blank%}
     <h2 class="text-xl font-bold pb-2">{{title}}</h2>
+    {% endif %}
     <div>{{text}}</div>
     <div class="flex">
       <div>
