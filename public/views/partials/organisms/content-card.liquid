@@ -14,10 +14,12 @@ metadata:
     - variant: default
       title: Blog post title
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
+      author: Jane Doe
       imgSrc: 'https://picsum.photos/300/180?random=1'
     - variant: highlighted
       title: Blog post title
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
+      author: Jane Doe
       imgSrc: 'https://picsum.photos/300/180?random=2'
     - variant: default
       title: Blog post title
@@ -33,18 +35,21 @@ metadata:
   assign imgSrc = params.imgSrc
 
   assign button_params = null | hash_merge: weight: 'primary', content: 'Read more'
-
+  if variant == 'highlighted'
+    assign bgClass = 'bg-highlighted'
+  else
+    assign bgClass = 'bg-panel'
+  endif
 %}
 
-<div class="border rounded overflow-hidden bg-panel w-80">
+<div class="border rounded overflow-hidden  w-80 {{bgClass}}">
   <div><img src="{{imgSrc}}" class="w-full"></div>
   <div class="p-6">
     <h2 class="text-xl font-bold pb-2">{{title}}</h2>
     <div>{{text}}</div>
     <div class="flex">
       <div>
-        Sept 22 2021
-        <a href="#">Jane Doe</a>
+        <a href="#">{{author}}</a>
       </div>
     </div>
   </div>
