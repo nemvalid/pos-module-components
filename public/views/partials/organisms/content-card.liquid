@@ -8,6 +8,7 @@ metadata:
     title: ''
     text: ''
     author: ''
+    authorLink: ''
     content: This is an example card
     imgSrc: ''
   styleguide:
@@ -15,11 +16,13 @@ metadata:
       title: Blog post title
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
       author: Jane Doe
+      authorLink: '/janedoe'
       imgSrc: 'https://picsum.photos/300/180?random=1'
     - variant: highlighted
       title: Blog post title
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
       author: Jane Doe
+      authorLink: '/janedoe'
       imgSrc: 'https://picsum.photos/300/180?random=2'
     - variant: default
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
@@ -30,6 +33,7 @@ metadata:
   assign variant = params.variant | default: 'default'
   assign title = params.title
   assign text = params.text
+  assign authorLink = params.authorLink
   assign author = params.author
   assign imgSrc = params.imgSrc
 
@@ -44,14 +48,14 @@ metadata:
 <div class="border rounded overflow-hidden  w-80 {{bgClass}}">
   <div><img src="{{imgSrc}}" class="w-full"></div>
   <div class="p-6">
-    {% if title != blank%}
+    {% if title != blank %}
     <h2 class="text-xl font-bold pb-2">{{title}}</h2>
     {% endif %}
-    <div>{{text}}</div>
-    <div class="flex">
-      <div>
-        <a href="#">{{author}}</a>
+    <div class="pb-4">{{text}}</div>
+    {% if author != blank %}
+      <div class="text-xs">
+        by <a href="{{authorLink}}" class="pos-clean text-interactive-text">{{author}}</a>
       </div>
-    </div>
+    {% endif %}
   </div>
 </div>
