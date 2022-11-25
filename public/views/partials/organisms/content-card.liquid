@@ -9,8 +9,11 @@ metadata:
     text: ''
     author: ''
     authorLink: ''
-    content: This is an example card
+    content: ''
     imgSrc: ''
+    animation:
+      - true
+      - false
   styleguide:
     - variant: default
       title: Blog post title
@@ -18,6 +21,8 @@ metadata:
       author: Jane Doe
       authorLink: '/janedoe'
       imgSrc: 'https://picsum.photos/300/180?random=1'
+      animation: true
+      content: This is an example card
     - variant: highlighted
       title: Blog post title
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
@@ -31,8 +36,10 @@ metadata:
 ---
 {% liquid
   assign variant = params.variant | default: 'default'
+  assign animation = params.animation | default: false
   assign title = params.title
   assign text = params.text
+  assign content = params.content | default: false
   assign authorLink = params.authorLink
   assign author = params.author
   assign imgSrc = params.imgSrc
@@ -43,9 +50,15 @@ metadata:
   else
     assign bgClass = 'bg-panel'
   endif
+
+  if animation == true
+    assign animationClass = 'hover:scale-105 duration-500'
+  else
+    assign animationClass = ''
+  endif
 %}
 
-<div class="border rounded overflow-hidden  w-80 {{bgClass}}">
+<div class="shadow-card rounded overflow-hidden  w-80 {{bgClass}} {{animationClass}}">
   <div><img src="{{imgSrc}}" class="w-full"></div>
   <div class="p-6">
     {% if title != blank %}
@@ -53,9 +66,10 @@ metadata:
     {% endif %}
     <div class="pb-4">{{text}}</div>
     {% if author != blank %}
-      <div class="text-xs">
+      <div class="text-xs pb-4">
         by <a href="{{authorLink}}" class="pos-clean text-interactive-text">{{author}}</a>
       </div>
     {% endif %}
+    {{content | html_safe}}
   </div>
 </div>
