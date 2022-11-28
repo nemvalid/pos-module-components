@@ -22,7 +22,6 @@ metadata:
       authorLink: '/janedoe'
       imgSrc: 'https://picsum.photos/300/180?random=1'
       animation: true
-      content: This is an example card
     - variant: highlighted
       title: Blog post title
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
@@ -44,7 +43,6 @@ metadata:
   assign author = params.author
   assign imgSrc = params.imgSrc
 
-  assign button_params = null | hash_merge: weight: 'primary', content: 'Read more'
   if variant == 'highlighted'
     assign bgClass = 'bg-highlighted'
   else
