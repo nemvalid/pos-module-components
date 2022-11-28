@@ -79,7 +79,8 @@ module.exports = {
         'warning-disabled': parseColor('warning-disabled')
       },
       boxShadow: {
-        'card': `0px 0px 5px rgba(${defaultColors['shadow']}, .1)`
+        'card': `0px 0px 5px rgba(${defaultColors['shadow']}, .1)`,
+        'large': `0px 10px 30px rgba(${defaultColors['shadow']}, .3)`
       },
       ringWidth: {
         '1': '1px',
