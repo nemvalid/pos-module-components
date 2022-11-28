@@ -7,9 +7,7 @@ metadata:
       - highlighted
     title: ''
     text: ''
-    author: ''
-    authorLink: ''
-    content: ''
+    footerContent: ''
     imgSrc: ''
     animation:
       - true
@@ -18,10 +16,9 @@ metadata:
     - variant: default
       title: Blog post title
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
-      author: Jane Doe
-      authorLink: '/janedoe'
       imgSrc: 'https://picsum.photos/300/180?random=1'
       animation: true
+      footerContent: <div class="text-xs pb-4">by <a href="#" class="pos-clean text-interactive-text">Jane Doe</a></div>
     - variant: highlighted
       title: Blog post title
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
@@ -38,36 +35,30 @@ metadata:
   assign animation = params.animation | default: false
   assign title = params.title
   assign text = params.text
-  assign content = params.content | default: false
-  assign authorLink = params.authorLink
-  assign author = params.author
+  assign footerContent = params.footerContent | default: false
   assign imgSrc = params.imgSrc
 
-  if variant == 'highlighted'
-    assign bgClass = 'bg-highlighted'
-  else
-    assign bgClass = 'bg-panel'
-  endif
+  assign classes = 'w-80 overflow-hidden p-0 '
 
   if animation == true
-    assign animationClass = 'hover:scale-105 duration-500 hover:shadow-large '
-  else
-    assign animationClass = ''
+    assign classes = classes | append: 'hover:scale-105 duration-500 hover:shadow-large '
   endif
 %}
 
-<div class="shadow-card rounded overflow-hidden  w-80 {{bgClass}} {{animationClass}}">
+{% capture card_content %}
   <div><img src="{{imgSrc}}" class="w-full"></div>
   <div class="p-6">
     {% if title != blank %}
     <h2 class="text-xl font-bold pb-2">{{title}}</h2>
     {% endif %}
     <div class="pb-4">{{text}}</div>
-    {% if author != blank %}
-      <div class="text-xs pb-4">
-        by <a href="{{authorLink}}" class="pos-clean text-interactive-text">{{author}}</a>
-      </div>
-    {% endif %}
-    {{content | html_safe}}
+    {{footerContent | html_safe}}
   </div>
-</div>
+{% endcapture %}
+
+
+{% liquid
+  assign card_params = null | hash_merge: content: card_content, classes: classes, variant: variant
+%}
+{% theme_render_rc 'components/atoms/card', params: card_params %}
+

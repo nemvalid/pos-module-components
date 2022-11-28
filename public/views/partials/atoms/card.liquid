@@ -3,6 +3,7 @@ metadata:
   name: Card
   params:
     tag: "div"
+    classes: ''
     variant:
       - default
       - highlighted
@@ -12,8 +13,9 @@ metadata:
   assign tag = params.tag | default: 'div'
   assign variant = params.variant | default: 'default'
   assign content = params.content
+  assign classes = params.classes
 
-  assign classes = 'p-6 rounded shadow-card'
+  assign classes = 'p-6 rounded shadow-card ' | append: classes
 
   if variant == 'highlighted'
     assign classes = classes | append: ' bg-highlighted'
