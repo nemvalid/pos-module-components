@@ -3,6 +3,7 @@ metadata:
   name: Avatar
   params:
     imageSrc: ""
+    classes: ''
     name: "John Doe"
     size:
       - xs
@@ -19,6 +20,7 @@ metadata:
     - imageSrc: "https://i.pravatar.cc/150?img=59"
       name: "John Doe"
       size: "xxl"
+      classes: "rounded-lg"
     - imageSrc: "https://i.pravatar.cc/150?img=47"
       name: "Jane Doe"
       size: "xl"
@@ -56,14 +58,15 @@ metadata:
 {% endparse_json %}
 {% liquid
   assign size = params.size | default: 'md'
+  assign classes = params.classes
   assign name = params.name
   assign imageSrc = params.imageSrc
 
   assign stringClasses = 'rounded-full flex items-center justify-center text-inverted '
   assign imageClasses = 'rounded-full overflow-hidden '
 
-  assign stringClasses = stringClasses | append: sizes[size]
-  assign imageClasses = imageClasses | append: sizes[size]
+  assign stringClasses = classes | append: stringClasses | append: sizes[size]
+  assign imageClasses = classes | append: imageClasses | append: sizes[size] | append: classes
 
   assign names = name | split: " "
   if names[0].size < names[1].size
