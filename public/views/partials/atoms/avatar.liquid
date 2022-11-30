@@ -4,33 +4,43 @@ metadata:
   params:
     imageSrc: ""
     name: "John Doe"
-    size: "md"
+    size:
+      - xs
+      - s
+      - m
+      - l
+      - xl
+      - xxl
+      - xxxl
   styleguide:
+    - imageSrc: "https://i.pravatar.cc/150?img=18"
+      name: "John Doe"
+      size: "xxxl"
     - imageSrc: "https://i.pravatar.cc/150?img=59"
       name: "John Doe"
-      size: "lg"
+      size: "xxl"
     - imageSrc: "https://i.pravatar.cc/150?img=47"
       name: "Jane Doe"
-      size: "md"
+      size: "xl"
     - imageSrc: "https://i.pravatar.cc/150?img=53"
       name: "John Doe"
-      size: "sm"
+      size: "l"
     - imageSrc: ""
       name: "John Doe"
-      size: "lg"
+      size: "m"
     - imageSrc: ""
       name: "Harrison Ford"
-      size: "md"
+      size: "s"
     - imageSrc: ""
       name: "Mark Hamill"
-      size: "sm"
+      size: "xs"
 ---
 {% parse_json sizes %}
 {
   "xxxl": "w-48 h-48 text-7xl ",
-  "xxl": "w-40 h-40 text-7xl ",
+  "xxl": "w-40 h-40 text-6xl ",
   "xl": "w-24 h-24 text-4xl ",
-  "l": "w-12 h-12 text-xs ",
+  "l": "w-12 h-12 text-xl ",
   "m": "w-8 h-8 text-xs ",
   "s": "w-6 h-6 text-xs ",
   "xs": "w-5 h-5 text-xs "
