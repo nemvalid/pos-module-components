@@ -24,7 +24,7 @@ metadata:
       icon: true
       alignment: right
     - severity: success
-      content: Open until 20 July 2021
+      content: <b>Open</b> until 20 July 2021
       icon: true
     - severity: warning
       content: Under Evaluation
@@ -37,7 +37,7 @@ metadata:
       icon: false
       alignment: left
     - severity: success
-      content: Open until 20 July 2021
+      content: <b>Open</b> until 20 July 2021
       icon: false
     - severity: warning
       content: Under Evaluation
@@ -57,15 +57,17 @@ metadata:
   assign severity = params.severity | default: 'info'
   assign content = params.content
 
-  assign classes = 'px-2 py-1 leading-5 rounded-md shadow-card flex items-center align-center h-10 '
-  assign classes = classes | append: ' border bg-inverted'
+  assign classes = 'px-2 py-1 h-6 rounded flex items-center align-center border border-divider bg-panel '
 
   if alignment == "left"
     assign classes = classes | append:  " flex-row-reverse"
+    assign content_classes = "mr-1"
+  else
+    assign content_classes = "ml-1"
   endif
 
-  assign icon_classes = 'w-6 h-6 mx-2 ' | append: icons[severity].color
-  assign icon_params = '{}' | parse_json | hash_merge: name: icons[severity].name, class: icon_classes
+  assign icon_classes = 'w-3 h-3 ' | append: icons[severity].color
+  assign icon_params = null | hash_merge: name: icons[severity].name, class: icon_classes
 %}
 <div class="inline-block">
 <div class="{{classes}}">
@@ -74,8 +76,8 @@ metadata:
         {% theme_render_rc 'components/atoms/icon', params: icon_params %}
       </div>
     {% else %}
-      <div class="rounded-full block w-3 h-3 mx-2 {{icons[severity].bgcolor}}"></div>
+      <div class="rounded-full block w-3 h-3 {{icons[severity].bgcolor}}"></div>
     {% endif %}
-    <div>{{content | html_safe}}</div>
+    <div class="text-xs {{content_classes}}">{{content | html_safe}}</div>
 </div>
 </div>
