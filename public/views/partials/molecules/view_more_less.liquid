@@ -3,18 +3,14 @@ metadata:
   name: View More/Less
   params:
     content: ""
-    limit: 100
-    variant:
-      - list
-      - block
-      - inline
+    limit: 200
+    more_text: ''
+    less_text: ''
   styleguide:
     - content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae orci varius, fermentum nisi at, semper orci. Quisque eu mi id enim congue gravida. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras tristique accumsan nisi eget semper. Etiam scelerisque rutrum quam, eu tristique elit pharetra eget. Nulla placerat quam sit amet arcu rutrum mattis. Vestibulum dictum mollis hendrerit. Vivamus in leo a arcu finibus scelerisque. Etiam pretium fermentum sapien eu sodales. Sed elit neque, pretium ac eros nec, gravida venenatis nisi. Curabitur ullamcorper eu magna ac egestas."
-      limit: 100
-      variant: inline
-    - content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae orci varius, fermentum nisi at, semper orci. Quisque eu mi id enim congue gravida. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras tristique accumsan nisi eget semper. Etiam scelerisque rutrum quam, eu tristique elit pharetra eget. Nulla placerat quam sit amet arcu rutrum mattis. Vestibulum dictum mollis hendrerit. Vivamus in leo a arcu finibus scelerisque. Etiam pretium fermentum sapien eu sodales. Sed elit neque, pretium ac eros nec, gravida venenatis nisi. Curabitur ullamcorper eu magna ac egestas."
-      limit: 100
-      variant: block
+      limit: 200
+      more_text: 'Show More &#62;'
+      less_text: '&#60; Show Less'
     - content:
         - <div class="inline-block"><div class="px-3 py-1 leading-5 rounded-md flex items-center align-center border  text-interactive-text border-divider bg-highlighted">#personal development</div></div>
         - <div class="inline-block"><div class="px-3 py-1 leading-5 rounded-md flex items-center align-center border  text-interactive-text border-divider bg-highlighted">#retail</div></div>
@@ -23,48 +19,39 @@ metadata:
         - <div class="inline-block"><div class="px-3 py-1 leading-5 rounded-md flex items-center align-center border  text-interactive-text border-divider bg-highlighted">#corporate</div></div>
         - <div class="inline-block"><div class="px-3 py-1 leading-5 rounded-md flex items-center align-center border  text-interactive-text border-divider bg-highlighted">#investment</div></div>
       limit: 2
-      variant: list
 ---
 {% liquid
-  assign limit = params.limit | default: 100
+  assign limit = params.limit | default: 200
   assign content = params.content
-  assign variant = params.variant
+  assign more_text = params.more_text | default: 'Show More'
+  assign less_text = params.less_text | default: 'Show Less'
 
-  if variant == 'inline'
-    assign block = ''
-  else
-    assign block = 'block'
-  endif
-
-  if variant == 'list'
-    assign content = content | parse_json
-  endif
 %}
-{% if variant == 'list' %}
+{% if  content[0] %}
   <div data-pos-component="more-less">
     <div class="more-less__short">
       {% for i in (0..limit) %}
         {{content[i]}}
       {% endfor %}
-      <a class="more-less__button--more block" href="#">Show More</a>
+      <a class="more-less__button--more block" href="#">{{more_text}}</a>
     </div>
     <div class="more-less__full hidden">
       {% for i in (0..content.size) %}
         {{content[i]}}
       {% endfor %}
-      <a class="more-less__button--less block" href="#">Show Less</a>
+      <a class="more-less__button--less block" href="#">{{less_text}}</a>
     </div>
   </div>
 {% else %}
   <div data-pos-component="more-less">
-    {% if content.size > 100 %}
+    {% if content.size > limit %}
       <div class="more-less__short">
-        {{ content | truncate: 500, "... " }}<a class="more-less__button--more {{block}}" href="#">Show More &#62;</a>
+        {{ content | truncate: limit, "... " }}<a class="more-less__button--more {{block}}" href="#">{{more_text}}</a>
       </div>
       <div class="more-less__full hidden">
         {{ content }}
         <br>
-        <a class="more-less__button--less" href="#">&#60; Show Less</a>
+        <a class="more-less__button--less" href="#">{{less_text}}</a>
       </div>
     {% else %}
         {{ content }}
