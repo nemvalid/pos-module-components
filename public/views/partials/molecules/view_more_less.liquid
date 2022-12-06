@@ -1,0 +1,29 @@
+---
+metadata:
+  name: View More/Less
+  params:
+    content: ""
+    limit: 100
+  styleguide:
+    - content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae orci varius, fermentum nisi at, semper orci. Quisque eu mi id enim congue gravida. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras tristique accumsan nisi eget semper. Etiam scelerisque rutrum quam, eu tristique elit pharetra eget. Nulla placerat quam sit amet arcu rutrum mattis. Vestibulum dictum mollis hendrerit. Vivamus in leo a arcu finibus scelerisque. Etiam pretium fermentum sapien eu sodales. Sed elit neque, pretium ac eros nec, gravida venenatis nisi. Curabitur ullamcorper eu magna ac egestas."
+      limit: 100
+---
+{% liquid
+  assign limit = params.limit | default: 100
+  assign content = params.content
+
+%}
+<div data-pos-component="more-less">
+  {% if content.size > 100 %}
+    <div class="more-less__short">
+      {{ content | truncate: 500, "... " }}<a class="more-less__button--more" href="#">Show More &#62;</a>
+    </div>
+    <div class="more-less__full hidden">
+      {{ content }}
+      <br>
+      <a class="more-less__button--less" href="#">&#60; Show Less</a>
+    </div>
+  {% else %}
+      {{ content }}
+  {% endif %}
+</div>
