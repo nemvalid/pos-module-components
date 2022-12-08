@@ -49,25 +49,25 @@ metadata:
 ---
 {% liquid
   assign size = params.size | default: 'md'
-  assign input_params = params.input_params | hash_merge: classes: 'w-full pr-8 border-0 '
-
-  assign icon_params = null | hash_merge: name: 'search'
-
-  assign button_params = params.button_params | hash_merge: icon_params: icon_params, gap: 0
-
-
   assign classes = 'border border-input-border bg-input ' | append: params.classes
+
+  assign input_classes = 'w-full pr-8 border-0 '
 
   if size == 'lg'
     assign classes = classes | append: ' p-2 h-14 '
   elsif size == 'sm'
-    assign classes = classes | append: ' h-7 '
+    assign classes = classes | append: ' pl-2 h-7 '
+    assign input_classes = input_classes | append: ' h-6 '
   else
-    assign classes = classes | append: ' h-11 '
+    assign classes = classes | append: ' pl-2 h-11 '
   endif
 
+  assign input_params = params.input_params | hash_merge: classes: input_classes
+  assign icon_params = null | hash_merge: name: 'search'
+  assign button_params = params.button_params | hash_merge: icon_params: icon_params, gap: 0
+
 %}
-<div class="inline-flex {{classes}}">
+<div class="inline-flex items-center {{classes}}">
   {% if button_params.icon == blank %}
     {% theme_render_rc 'components/atoms/icon', params: icon_params %}
   {% endif %}
