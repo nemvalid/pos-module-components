@@ -1,0 +1,51 @@
+---
+metadata:
+  name: Search field
+  params:
+    classes: ''
+    input_params:
+      name: input
+      placeholder: Type here
+    button_params:
+      weight: primary
+      content: Search
+      icon: ''
+  styleguide:
+    - classes: 'w-1/2'
+      input_params:
+        name: input
+        placeholder: Type here
+      button_params:
+        weight: primary
+        content: Search
+    - classes: 'w-1/2'
+      input_params:
+        name: input
+        placeholder: Type here
+      button_params:
+        weight: primary
+        content: Search2
+        icon: 'star'
+---
+{% liquid
+  assign input_params = params.input_params | hash_merge: classes: 'w-full pr-8 border-0 '
+
+  assign icon_params = null | hash_merge: name: 'search'
+
+  assign button_params = params.button_params | hash_merge: icon_params: icon_params, gap: 0
+
+
+  assign classes = 'border border-input-border ' | append: params.classes
+
+%}
+<div class="inline-flex {{classes}}">
+  {% if button_params.icon == blank %}
+    {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+  {% endif %}
+  {% theme_render_rc 'components/atoms/input', params: input_params %}
+  {% if button_params.icon == blank %}
+    {% theme_render_rc 'components/atoms/button', params: button_params %}
+  {% else %}
+    {% theme_render_rc 'components/molecules/iconbutton', params: button_params %}
+  {% endif %}
+</div>
