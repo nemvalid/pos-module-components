@@ -3,6 +3,10 @@ metadata:
   name: Search field
   params:
     classes: ''
+    size:
+      - sm
+      - md
+      - lg
     input_params:
       name: input
       placeholder: Type here
@@ -19,6 +23,22 @@ metadata:
         weight: primary
         content: Search
     - classes: 'w-1/2'
+      size: 'lg'
+      input_params:
+        name: input
+        placeholder: Type here
+      button_params:
+        weight: primary
+        content: Search
+    - classes: 'w-1/2'
+      size: 'sm'
+      input_params:
+        name: input
+        placeholder: Type here
+      button_params:
+        weight: primary
+        content: Search
+    - classes: 'w-1/2'
       input_params:
         name: input
         placeholder: Type here
@@ -28,6 +48,7 @@ metadata:
         icon: 'star'
 ---
 {% liquid
+  assign size = params.size | default: 'md'
   assign input_params = params.input_params | hash_merge: classes: 'w-full pr-8 border-0 '
 
   assign icon_params = null | hash_merge: name: 'search'
@@ -35,7 +56,15 @@ metadata:
   assign button_params = params.button_params | hash_merge: icon_params: icon_params, gap: 0
 
 
-  assign classes = 'border border-input-border ' | append: params.classes
+  assign classes = 'border border-input-border bg-input ' | append: params.classes
+
+  if size == 'lg'
+    assign classes = classes | append: ' p-2 h-14 '
+  elsif size == 'sm'
+    assign classes = classes | append: ' h-7 '
+  else
+    assign classes = classes | append: ' h-11 '
+  endif
 
 %}
 <div class="inline-flex {{classes}}">
