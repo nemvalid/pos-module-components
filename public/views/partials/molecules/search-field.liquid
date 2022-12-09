@@ -18,7 +18,7 @@ metadata:
       content: Search
       icon: ''
   styleguide:
-    - classes: 'w-1/2'
+    - classes: 'w-80'
       button: true
       input_params:
         name: input
@@ -26,7 +26,7 @@ metadata:
       button_params:
         weight: primary
         content: Search
-    - classes: 'w-1/2'
+    - classes: 'w-80'
       button: true
       size: 'lg'
       input_params:
@@ -35,7 +35,7 @@ metadata:
       button_params:
         weight: primary
         content: Search
-    - classes: 'w-1/2'
+    - classes: 'w-80'
       button: true
       size: 'sm'
       input_params:
@@ -44,7 +44,7 @@ metadata:
       button_params:
         weight: primary
         content: Search
-    - classes: 'w-1/2'
+    - classes: 'w-80'
       button: true
       input_params:
         name: input
@@ -53,7 +53,7 @@ metadata:
         weight: primary
         content: Search2
         icon: 'star'
-    - classes: 'w-1/2'
+    - classes: 'w-80'
       button: false
       input_params:
         name: input
@@ -74,15 +74,18 @@ metadata:
 
   if size == 'lg'
     assign classes = classes | append: ' p-2 h-14 '
-    assign button_classes = button_classes | append: ' w-20 h-11 '
+    assign string_button_classes = button_classes | append: ' w-20 h-11 '
+    assign icon_button_classes = button_classes | append: ' w-11 h-11 '
   elsif size == 'sm'
     assign classes = classes | append: ' pl-2 h-7 '
     assign input_classes = input_classes | append: ' h-6 '
-    assign button_classes = button_classes | append: ' w-16 h-7 '
+    assign string_button_classes = button_classes | append: ' w-16 h-7 '
+    assign icon_button_classes = button_classes | append: ' w-7 h-7 '
     assign button_size = 'small'
   else
     assign classes = classes | append: ' pl-2 h-11 '
-    assign button_classes = button_classes | append: ' w-20 h-11 '
+    assign string_button_classes = button_classes | append: ' w-20 h-11 '
+    assign icon_button_classes = button_classes | append: ' w-11 h-11 '
   endif
 
   if button == false
@@ -91,7 +94,10 @@ metadata:
 
   assign input_params = params.input_params | hash_merge: classes: input_classes
   assign icon_params = null | hash_merge: name: 'search'
-  assign button_params = params.button_params | hash_merge: icon_params: icon_params, gap: 0, size: button_size, classes: button_classes
+  assign icon_button_params = null | hash_merge: classes: icon_button_classes
+
+  assign button_params = params.button_params | hash_merge: size: button_size, classes: string_button_classes
+  assign icon_button = null | hash_merge: icon_params: icon_params, gap: 0, button_params: icon_button_params
 
 %}
 <div class="inline-flex items-center {{classes}}">
@@ -103,7 +109,7 @@ metadata:
     {% if button_params.icon == blank %}
       {% theme_render_rc 'components/atoms/button', params: button_params %}
     {% else %}
-      {% theme_render_rc 'components/molecules/iconbutton', params: button_params %}
+      {% theme_render_rc 'components/molecules/iconbutton', params: icon_button %}
     {% endif %}
   {% endif %}
 </div>
