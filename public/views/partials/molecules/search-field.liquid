@@ -69,16 +69,20 @@ metadata:
   assign classes = 'border border-input-border bg-input ' | append: params.classes
 
   assign input_classes = 'w-full pr-8 border-0 '
+  assign button_classes = 'rounded-none '
   assign button_size = 'normal'
 
   if size == 'lg'
     assign classes = classes | append: ' p-2 h-14 '
+    assign button_classes = button_classes | append: ' w-20 h-11 '
   elsif size == 'sm'
     assign classes = classes | append: ' pl-2 h-7 '
     assign input_classes = input_classes | append: ' h-6 '
+    assign button_classes = button_classes | append: ' w-16 h-7 '
     assign button_size = 'small'
   else
     assign classes = classes | append: ' pl-2 h-11 '
+    assign button_classes = button_classes | append: ' w-20 h-11 '
   endif
 
   if button == false
@@ -87,7 +91,7 @@ metadata:
 
   assign input_params = params.input_params | hash_merge: classes: input_classes
   assign icon_params = null | hash_merge: name: 'search'
-  assign button_params = params.button_params | hash_merge: icon_params: icon_params, gap: 0, size: button_size
+  assign button_params = params.button_params | hash_merge: icon_params: icon_params, gap: 0, size: button_size, classes: button_classes
 
 %}
 <div class="inline-flex items-center {{classes}}">
