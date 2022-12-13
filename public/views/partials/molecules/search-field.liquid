@@ -100,7 +100,7 @@ metadata:
   assign icon_button = null | hash_merge: icon_params: icon_params, gap: 0, button_params: icon_button_params
 
 %}
-<div class="inline-flex items-center {{classes}}">
+<div class="pos-search-field inline-flex items-center {{classes}}">
   {% if button_params.icon == blank or button == false %}
     {% theme_render_rc 'components/atoms/icon', params: icon_params %}
   {% endif %}
