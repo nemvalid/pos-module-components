@@ -46,7 +46,7 @@ metadata:
   <div data-pos-component="more-less">
     {% if content.size > limit %}
       <div class="more-less__short">
-        {{ content | truncate: limit, "... " }}<a class="more-less__button--more {{block}}" href="#">{{more_text}}</a>
+        {{ content | truncate: limit, "... " }}<a class="more-less__button--more" href="#">{{more_text}}</a>
       </div>
       <div class="more-less__full hidden">
         {{ content }}
