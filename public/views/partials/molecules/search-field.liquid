@@ -20,6 +20,7 @@ metadata:
   styleguide:
     - classes: 'w-80'
       button: true
+      size: 'lg'
       input_params:
         name: input
         placeholder: Type here
@@ -28,7 +29,6 @@ metadata:
         content: Search
     - classes: 'w-80'
       button: true
-      size: 'lg'
       input_params:
         name: input
         placeholder: Type here
@@ -73,13 +73,13 @@ metadata:
   assign button_size = 'normal'
 
   if size == 'lg'
-    assign classes = classes | append: ' p-2 h-14 '
+    assign classes = classes | append: ' p-2 h-16 '
     assign string_button_classes = button_classes | append: ' w-20 h-11 '
     assign icon_button_classes = button_classes | append: ' w-11 h-11 '
   elsif size == 'sm'
     assign classes = classes | append: ' pl-2 h-7 '
     assign input_classes = input_classes | append: ' h-6 '
-    assign string_button_classes = button_classes | append: ' w-16 h-7 '
+    assign string_button_classes = button_classes | append: ' w-20 h-7 '
     assign icon_button_classes = button_classes | append: ' w-7 h-7 '
     assign button_size = 'small'
   else
