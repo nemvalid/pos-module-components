@@ -1,0 +1,69 @@
+---
+metadata:
+  name: Date picker
+  params:
+    variant:
+      - normal
+      - confirmation
+      - error
+    type:
+      - text
+      - email
+      - password
+      - search
+      - tel
+      - date
+      - number
+      - hidden
+    name: my-input
+    placeholder: Type here
+    value: ''
+    required:
+      - false
+      - true
+    disabled:
+      - false
+      - true
+    classes: ''
+    attributes: {}
+---
+{% liquid
+  assign variant = params.variant | default: 'normal'
+  assign type = params.type | default: 'text'
+  assign name = params.name
+  assign value = params.value
+  assign required = params.required | default: false
+  assign disabled = params.disabled | default: false
+  assign placeholder = params.placeholder
+  assign id = params.attributes.id | default: name
+  assign attributes = params.attributes
+
+  assign classes = 'py-[0.69em] px-[0.44em] inline-block border focus:border-interactive-hover bg-input disabled:opacity-40 outline-none text-input-foreground leading-tight transition-colors ' | append: params.classes
+
+  case variant
+    when 'confirmation'
+      assign classes = classes | append: ' border-confirmation'
+    when 'error'
+      assign classes = classes | append: ' border-important'
+    else
+      assign classes = classes | append: ' border-input-border'
+  endcase
+%}
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dmuy/duDatepicker@v2.0.4/dist/duDatepicker.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/dmuy/duDatepicker@v2.0.4/dist/duDatepicker.js"></script>
+
+<input
+  type="{{type}}"
+  name="{{name}}"
+  class="{{classes}}"
+  id="{{id}}"
+  data-pos-component="date-picker"
+  {% if required %}required{% endif %}
+  {% if value != blank %}value="{{value}}"{% endif %}
+  {% if placeholder != blank %}placeholder="{{placeholder}}"{% endif %}
+  {% if disabled %}disabled{% endif %}
+  {% if variant == 'error' %}aria-invalid="true"{% endif %}
+  {% for attribute in attributes %}
+    {{ attribute[0] }}="{{ attribute[1] }}"
+  {% endfor %}
+>
