@@ -12,6 +12,8 @@ metadata:
     animation:
       - true
       - false
+    classes: ''
+    titleClasses: ''
   styleguide:
     - variant: default
       title: Blog post title
@@ -19,15 +21,18 @@ metadata:
       imgSrc: 'https://picsum.photos/300/180?random=1'
       animation: true
       footerContent: <div class="text-xs pb-4">by <a href="#" class="pos-clean text-interactive-text">Jane Doe</a></div>
+      classes: 'w-80'
     - variant: highlighted
       title: Blog post title
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
       author: Jane Doe
       authorLink: '/janedoe'
       imgSrc: 'https://picsum.photos/300/180?random=2'
+      classes: 'w-80'
     - variant: default
       text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
       imgSrc: 'https://picsum.photos/300/180?random=3'
+      classes: 'w-80'
 
 ---
 {% liquid
@@ -37,19 +42,23 @@ metadata:
   assign text = params.text
   assign footerContent = params.footerContent | default: false
   assign imgSrc = params.imgSrc
+  assign classes = params.classes
+  assign titleClasses = params.titleClasses
 
-  assign classes = 'w-80 overflow-hidden p-0 '
+  assign classes = classes | append: ' overflow-hidden p-0 '
 
   if animation == true
     assign classes = classes | append: 'hover:scale-105 duration-500 hover:shadow-large '
   endif
+
+  assign heading_params = null | hash_merge: content: title, classes: titleClasses, level: 4
 %}
 
 {% capture card_content %}
   <div><img src="{{imgSrc}}" class="w-full"></div>
   <div class="p-6">
     {% if title != blank %}
-    <h2 class="text-xl font-bold pb-2">{{title}}</h2>
+    {% theme_render_rc 'components/atoms/heading', params: heading_params %}
     {% endif %}
     <div class="pb-4">{{text}}</div>
     {{footerContent | html_safe}}
