@@ -50,13 +50,15 @@ metadata:
   if animation == true
     assign classes = classes | append: 'hover:scale-105 duration-500 hover:shadow-large '
   endif
+
+  assign heading_params = null | hash_merge: content: title, classes: titleClasses, level: 4
 %}
 
 {% capture card_content %}
   <div><img src="{{imgSrc}}" class="w-full"></div>
   <div class="p-6">
     {% if title != blank %}
-    <h2 class="text-xl font-bold pb-2 {{titleClasses}}">{{title}}</h2>
+    {% theme_render_rc 'components/atoms/heading', params: heading_params %}
     {% endif %}
     <div class="pb-4">{{text}}</div>
     {{footerContent | html_safe}}
