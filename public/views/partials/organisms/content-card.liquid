@@ -2,6 +2,7 @@
 metadata:
   name: Content card
   params:
+    classes: ''
     variant:
       - default
       - highlighted
@@ -38,10 +39,10 @@ metadata:
   assign footerContent = params.footerContent | default: false
   assign imgSrc = params.imgSrc
 
-  assign classes = 'w-80 overflow-hidden p-0 '
+  assign classes = 'overflow-hidden p-0 ' | append: params.classes
 
   if animation == true
-    assign classes = classes | append: 'hover:scale-105 duration-500 hover:shadow-large '
+    assign classes = classes | append: ' hover:scale-105 duration-500 hover:shadow-large '
   endif
 %}
 

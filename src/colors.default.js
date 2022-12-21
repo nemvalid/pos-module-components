@@ -42,4 +42,4 @@ module.exports = {
   "warning": "243, 177, 78",
   "warning-hover": "255, 190, 91",
   "warning-disabled": "255, 233, 200"
-}
+};
