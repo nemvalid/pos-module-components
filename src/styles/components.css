@@ -8,7 +8,6 @@
 @import "./components/accordion.css";
 @import "./components/toggle.css";
 @import "./components/tabs.css";
-@import "./components/search-field.css";
 
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
