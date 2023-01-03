@@ -13,17 +13,16 @@ function parseColor(colorName) {
   };
 }
 
-const safelist = [
-  {
-    pattern: new RegExp(`.+-(${Object.keys(defaultColors).join('|')})$`)
-  }
-];
+// const safelist = [
+//   {
+//     pattern: new RegExp(`.+-(${Object.keys(defaultColors).join('|')})$`)
+//   }
+// ];
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  /* TODO: further optimizations needed */
   content: [
-    "../public/views/partials/**/*.liquid}",
+    "../public/views/partials/**/*.liquid",
     "../../**/public/views/pages/**/*.liquid",
     "../../**/public/views/partials/**/*.liquid",
     "./scripts/*.js"

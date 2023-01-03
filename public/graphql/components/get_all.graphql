@@ -26,4 +26,13 @@ query {
       metadata
     }
   }
+  pages: admin_liquid_partials(
+    filter: { path: { contains: "components/pages/" } }
+  ) {
+    results {
+      id
+      path
+      metadata
+    }
+  }
 }

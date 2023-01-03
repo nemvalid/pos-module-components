@@ -72,7 +72,7 @@
             {% include component.path, params: story %}
             <code data-component-config="" class="bg-white block p-4 my-4 shadow-sm rounded-sm whitespace-pre-wrap break-all text-sm">{{ story | json }}</code>
           {% endfor %}
-        {% else %}
+        {% elsif component.metadata.params %}
           {% for param_group in component.metadata.params %}
               {% assign render_params = '{}' | parse_json | hash_merge: default_render_params %}
               {% for param_value in param_group[1] %}
@@ -83,8 +83,17 @@
                 else
                   assign is_default_boolean = false
                 endif
+
+                assign should_skip = is_default_boolean
+                if param_group[0] == 'content'
+                  assign should_skip = true
+                endif
+
+                if component.metadata.params.size == 1
+                  assign should_skip = false
+                endif
                 %}
-                {% unless param_group[0] == 'content' or is_default_boolean %}
+                {% unless should_skip %}
                   {% liquid
                     assign key = param_group[0]
                     hash_assign render_params[key] = param_value
@@ -99,6 +108,8 @@
                 {% endunless %}
               {% endfor %}
           {% endfor %}
+        {% else %}
+          {% include component.path %}
         {% endif %}
       </div>
     </section>
