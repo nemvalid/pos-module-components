@@ -40,6 +40,7 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
       prevOption.classList.remove("bg-highlighted");
     }
     if (option) {
+      option.scrollIntoView({behavior: "smooth", block: "center"});
       option.classList.add("bg-highlighted");
     }
 

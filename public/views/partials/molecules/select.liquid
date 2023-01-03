@@ -59,7 +59,7 @@ metadata:
       </div>
     </div>
 
-    <div class="pos-select__options hidden absolute bg-panel shadow-card px-1 py-2 z-50" aria-hidden="true">
+    <div class="pos-select__options hidden absolute max-h-48 overflow-y-auto bg-panel shadow-card px-1 py-2 z-50" aria-hidden="true">
       {% for option in options %}
       {% assign opt_id = id | append: '_' | append: option.value %}
       {% assign input_name = name | append: '[]'  %}
@@ -104,7 +104,7 @@ metadata:
       </div>
     </div>
 
-    <div class="pos-select__options hidden absolute bg-panel shadow-card px-1 py-2 z-50">
+    <div class="pos-select__options hidden absolute max-h-48 overflow-y-auto bg-panel shadow-card px-1 py-2 z-50">
       {% for option in options %}
       <div class="flex items-center py-2 px-4 cursor-pointer hover:text-inverted hover:bg-interactive-hover" data-value="{{option.value}}">
         {{option.label}}
