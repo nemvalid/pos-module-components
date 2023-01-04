@@ -77,6 +77,9 @@ module.exports = {
         'warning-hover': parseColor('warning-hover'),
         'warning-disabled': parseColor('warning-disabled')
       },
+      borderColor: {
+        DEFAULT: parseColor('divider')
+      },
       boxShadow: {
         'card': `0px 0px 5px rgba(${defaultColors['shadow']}, .1)`,
         'large': `0px 10px 30px rgba(${defaultColors['shadow']}, .3)`
