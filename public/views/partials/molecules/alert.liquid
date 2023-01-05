@@ -26,11 +26,11 @@ metadata:
 }
 {% endparse_json %}
 {% liquid
-  assign tag = params.tag | default: 'div'
-  assign icon = params.icon | default: true
-  assign severity = params.severity | default: 'info'
-  assign variant = params.variant | default: 'normal'
-  assign content = params.content
+  assign tag = tag | default: params.tag | default: 'div'
+  assign icon = icon | default: params.icon | default: true
+  assign severity = severity | default: params.severity | default: 'info'
+  assign variant = variant | default: params.variant | default: 'normal'
+  assign content = content | default: params.content
 
   assign classes = 'px-2 py-1 leading-5 rounded-md shadow-card flex items-center align-center w-96 h-10 '
 

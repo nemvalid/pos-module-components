@@ -10,10 +10,10 @@ metadata:
     content: This is an example card
 ---
 {% liquid
-  assign tag = params.tag | default: 'div'
-  assign variant = params.variant | default: 'default'
-  assign content = params.content
-  assign classes = params.classes
+  assign tag = tag | default: params.tag | default: 'div'
+  assign variant = variant | default: params.variant | default: 'default'
+  assign content = content | default: params.content
+  assign classes = classes | default: params.classes
 
   assign classes = 'p-6 rounded shadow-card ' | append: classes
 

@@ -30,12 +30,12 @@ metadata:
       ariaLabel: 'Toggle label'
 ---
 {% liquid
-  assign checked = params.checked | default: false
-  assign id = params.id
-  assign name = params.name
-  assign label = params.label
-  assign ariaLabel = params.ariaLabel | default: label
-  assign value = params.value
+  assign checked = checked | default: params.checked | default: false
+  assign id = id | default: params.id
+  assign name = name | default: params.name
+  assign label = label | default: params.label
+  assign ariaLabel = ariaLabel | default: params.ariaLabel | default: label
+  assign value = value | default: params.value
 
 %}
 <label>

@@ -9,9 +9,9 @@ metadata:
 
 ---
 {% liquid
-  assign attributes = params.attributes
-  assign content = params.content
-  assign classes = params.classes | append: ' text-xs text-supplementary'
+  assign attributes = attributes | default: params.attributes
+  assign content = content | default: params.content
+  assign classes = classes | default: params.classes | append: ' text-xs text-supplementary'
 %}
 <small
   class="{{classes}}"

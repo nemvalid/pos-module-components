@@ -14,13 +14,13 @@ metadata:
     content: I'm a heading
 ---
 {% liquid
-  assign level = params.level | default: 2
+  assign level = level | default: params.level | default: 2
   assign defaultTag = 'h' | append: level
-  assign tag = params.tag | default: defaultTag
-  assign attributes = params.attributes
-  assign content = params.content
+  assign tag = tag | default: params.tag | default: defaultTag
+  assign attributes = attributes | default: params.attributes
+  assign content = content | default: params.content
 
-  assign classes = params.classes | append: ' font-bold'
+  assign classes = classes | default: params.classes | append: ' font-bold'
 
 
   if level == 1

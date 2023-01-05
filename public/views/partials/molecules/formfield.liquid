@@ -41,18 +41,22 @@ metadata:
 
 ---
 {% liquid
-  assign tag = params.tag | default: 'fieldset'
-  assign label_params = params.label_params
-  assign input_attributes = '{}' | parse_json
-    hash_assign input_attributes['aria-describedby'] = '' | append: params.input_params.name | append: '-desc'
-  assign input_params = params.input_params | hash_merge: attributes: input_attributes
-    if params.validation.passed == false
-      hash_assign input_params['variant'] = 'error'
-    endif
-  assign description_params = params.description_params
-  assign validation = params.validation
+  assign tag = tag | default: params.tag | default: 'fieldset'
+  assign label_params = label_params | default: params.label_params
+  assign classes = classes | default: params.classes
+  assign validation = validation | default: params.validation
+  assign input_params = input_params | default: params.input_params
 
-  assign classes = '' | append: params.classes
+  assign input_attributes = '{}' | parse_json
+  hash_assign input_attributes['aria-describedby'] = '' | append: input_params.name | append: '-desc'
+
+  assign input_params = input_params | hash_merge: attributes: input_attributes
+  if validation.passed == false
+    hash_assign input_params['variant'] = 'error'
+  endif
+
+  assign description_params = description_params | default: params.description_params
+
 %}
 <{{tag}} class="flex flex-col items-start gap-1 {{classes}}">
 

@@ -27,10 +27,10 @@ metadata:
         value: value2
 ---
 {% liquid
-  assign options = params.options | parse_json | default: '[]' | parse_json
-  assign id = params.id | default: "mySelect"
-  assign name = params.name | default: "mySelect"
-  assign multiple = params.multiple | default: false
+  assign options = options | default: params.options | parse_json | default: '[]' | parse_json
+  assign id = id | default: params.id | default: "mySelect"
+  assign name = name | default: params.name | default: "mySelect"
+  assign multiple = multiple | default: params.multiple | default: false
 %}
 
 

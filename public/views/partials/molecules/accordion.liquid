@@ -31,9 +31,9 @@ metadata:
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla eros, lacinia sed justo at, posuere laoreet nisl. Proin commodo posuere tincidunt.
 ---
 {% liquid
-  assign id = params.id | default: "myAccordion"
-  assign multiOpen = params.multiOpen | default: false
-  assign options = params.options | parse_json | default: '[]' | parse_json
+  assign id = id | default: params.id | default: "myAccordion"
+  assign multiOpen = multiOpen | default: params.multiOpen | default: false
+  assign options = options | default: params.options | parse_json | default: '[]' | parse_json
 %}
 
 <div data-pos-component="Accordion" class="inline-block w-80" data-pos-accordion-multiopen="{{multiOpen}}">

@@ -29,21 +29,21 @@ metadata:
     type: 'button'
 ---
 {% liquid
-  assign tag = params.tag | default: 'button'
-  assign type = params.type | default: 'button'
-  assign weight = params.weight | default: 'primary'
-  assign variant = params.variant | default: 'normal'
-  assign filled = params.filled | default: false
-  assign size = params.size | default: 'normal'
-  assign disabled = params.disabled | default: false
-  assign attributes = params.attributes
-  assign content = params.content
-  assign href = params.href
+  assign tag = tag | default: params.tag | default: 'button'
+  assign type = type | default: params.type | default: 'button'
+  assign weight = weight | default: params.weight | default: 'primary'
+  assign variant = variant | default: params.variant | default: 'normal'
+  assign filled = filled | default: params.filled | default: false
+  assign size = size | default: params.size | default: 'normal'
+  assign disabled = disabled | default: params.disabled | default: false
+  assign attributes = attributes | default: params.attributes
+  assign content = content | default: params.content
+  assign href = href | default: params.href
   if href
-    assign tag = params.tag | default: 'a'
+    assign tag = tag | default: params.tag | default: 'a'
   endif
 
-  assign classes = params.classes | append: ' inline-flex items-center justify-center gap-3 rounded whitespace-nowrap transition-colors disabled:opacity-30 disabled:pointer-events-none'
+  assign classes = classes | default: params.classes | append: ' inline-flex items-center justify-center gap-3 rounded whitespace-nowrap transition-colors disabled:opacity-30 disabled:pointer-events-none'
   if tag == 'a'
     assign classes = classes | prepend: 'pos-clean '
   endif

@@ -11,9 +11,9 @@ metadata:
     - content: ''
 ---
 {% liquid
-  assign content = params.content
-  assign hidden = params.hidden | default: false
-  assign backdrop_id = params.backdrop_id
+  assign content = content | default: params.content
+  assign hidden = hidden | default: params.hidden | default: false
+  assign backdrop_id = backdrop_id | default: params.backdrop_id
 
   assign classes = params.classes | append: ' w-screen h-screen fixed inset-0 flex items-center justify-center bg-colorful bg-opacity-30'
   if hidden == true

@@ -40,9 +40,9 @@ metadata:
         name: trash
 ---
 {% liquid
-  assign icon_params = params.icon_params
-  assign gap = params.gap | default: 2
-  assign alignment = params.alignment | default: "right"
+  assign icon_params = icon_params | default: params.icon_params
+  assign gap = gap | default: params.gap | default: 2
+  assign alignment = alignment | default: params.alignment | default: "right"
 
   assign classes = "flex items-center gap-" | append: gap
   if alignment == "left"

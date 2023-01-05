@@ -54,11 +54,11 @@ metadata:
 }
 {% endparse_json %}
 {% liquid
-  assign icon = params.icon | default: false
-  assign alignment = params.alignment | default: 'right'
-  assign severity = params.severity | default: 'info'
-  assign content = params.content
-  assign classes = params.classes | default: 'px-2 py-1 h-6 rounded border border-divider bg-panel'
+  assign icon = icon | default: params.icon | default: false
+  assign alignment = alignment | default: params.alignment | default: 'right'
+  assign severity = severity | default: params.severity | default: 'info'
+  assign content = content | default: params.content
+  assign classes = classes | default: params.classes | default: 'px-2 py-1 h-6 rounded border border-divider bg-panel'
 
   if alignment == "left"
     assign reverse = " flex-row-reverse"
