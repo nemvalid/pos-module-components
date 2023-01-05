@@ -16,10 +16,10 @@ metadata:
     content: chip
 ---
 {% liquid
-  assign tag = params.tag | default: 'div'
-  assign closable = params.closable | default: false
-  assign variant = params.variant | default: 'default'
-  assign content = params.content
+  assign tag = tag | default: params.tag | default: 'div'
+  assign closable = closable | default: params.closable | default: false
+  assign variant = variant | default: params.variant | default: 'default'
+  assign content = content | default: params.content
 
   assign classes = 'px-3 py-1 leading-5 rounded-md flex items-center align-center border '
 

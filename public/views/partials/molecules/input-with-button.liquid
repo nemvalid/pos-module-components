@@ -19,10 +19,10 @@ metadata:
       content: Search
 ---
 {% liquid
-  assign input_params = params.input_params | hash_merge: classes: 'w-full pr-8'
-  assign button_params = params.button_params | hash_merge: classes: '-ml-7'
+  assign input_params = input_params | default: params.input_params | hash_merge: classes: 'w-full pr-8'
+  assign button_params = button_params | default: params.button_params | hash_merge: classes: '-ml-7'
 
-  assign classes = '' | append: params.classes
+  assign classes = classes | default: params.classes
 
 %}
 <div class="inline-flex {{classes}}">

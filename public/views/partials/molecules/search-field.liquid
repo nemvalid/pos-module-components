@@ -84,9 +84,11 @@ metadata:
         icon: 'star'
 ---
 {% liquid
-  assign size = params.size | default: 'md'
-  assign button = params.button | default: false
-  assign classes = 'border border-input-border bg-input ' | append: params.classes
+  assign size = size | default: params.size | default: 'md'
+  assign button = button | default: params.button | default: false
+  assign classes = classes | default: params.classes
+
+  assign classes = 'border border-input-border bg-input ' | append: classes
 
   assign input_classes = 'w-full pr-8 border-0 '
   assign button_classes = 'rounded '
@@ -118,11 +120,11 @@ metadata:
     assign classes = classes | append: ' flex-row-reverse pr-2 '
   endif
 
-  assign input_params = params.input_params | hash_merge: classes: input_classes
+  assign input_params = input_params | default: params.input_params | hash_merge: classes: input_classes
   assign icon_params = null | hash_merge: name: 'search'
   assign icon_button_params = null | hash_merge: classes: icon_button_classes
 
-  assign button_params = params.button_params | hash_merge: size: button_size, classes: string_button_classes
+  assign button_params = button_params | default: params.button_params | hash_merge: size: button_size, classes: string_button_classes
   assign icon_button = null | hash_merge: icon_params: icon_params, gap: 0, button_params: icon_button_params
 
 %}

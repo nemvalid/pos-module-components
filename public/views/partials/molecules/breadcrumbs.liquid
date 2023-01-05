@@ -49,9 +49,9 @@ metadata:
           link: /breadcrumbs
 ---
 {% liquid
-  assign breadcrumbs = params.breadcrumbs | parse_json | default: '[]' | parse_json
-  assign separator = params.separator
-  assign activeLastBreadcrumb = params.activeLastBreadcrumb | default: false
+  assign breadcrumbs = breadcrumbs | parse_json | default: params.breadcrumbs | parse_json | default: '[]' | parse_json
+  assign separator = separator | default: params.separator
+  assign activeLastBreadcrumb = activeLastBreadcrumb | default: params.activeLastBreadcrumb | default: false
 %}
 
 <nav aria-label="Breadcrumb">
