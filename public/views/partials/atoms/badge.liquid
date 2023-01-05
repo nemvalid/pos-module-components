@@ -15,8 +15,8 @@ metadata:
 
 ---
 {% liquid
-  assign maxValue = params.maxValue | default: 0
-  assign value = params.value
+  assign maxValue = maxValue | default: params.maxValue | default: 0
+  assign value = value | default: params.value
 
   if maxValue > 0 and maxValue < value
     assign value = maxValue | append: "+"

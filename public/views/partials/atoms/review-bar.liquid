@@ -20,14 +20,14 @@ metadata:
       valueClasses: 'bg-colorful rounded h-full'
 ---
 {% liquid
-  assign maxValue = params.maxValue | default: 100
-  assign value = params.value
-  assign ariaLabel = params.ariaLabel
+  assign maxValue = maxValue | default: params.maxValue | default: 100
+  assign value = value | default: params.value
+  assign ariaLabel = ariaLabel | default: params.ariaLabel
 
   assign percent = value | times: 100 | divided_by: maxValue
 
-  assign barClasses = params.barClasses | default :'w-52 h-1.5 border border-input-border bg-panel'
-  assign valueClasses = params.valueClasses | default :'bg-warning h-full'
+  assign barClasses = barClasses | default: params.barClasses | default :'w-52 h-1.5 border border-input-border bg-panel'
+  assign valueClasses = valueClasses | default: params.valueClasses | default :'bg-warning h-full'
 %}
 
 <div

@@ -57,10 +57,10 @@ metadata:
 ]
 {% endparse_json %}
 {% liquid
-  assign size = params.size | default: 'md'
-  assign classes = params.classes
-  assign name = params.name
-  assign imageSrc = params.imageSrc
+  assign size = size | default: params.size | default: 'md'
+  assign classes = classes | default: params.classes
+  assign name = name | default: params.name
+  assign imageSrc = imageSrc | default: params.imageSrc
 
   assign stringClasses = 'rounded-full flex items-center justify-center text-inverted '
   assign imageClasses = 'rounded-full overflow-hidden '
