@@ -36,14 +36,14 @@ metadata:
 
 ---
 {% liquid
-  assign variant = params.variant | default: 'default'
-  assign animation = params.animation | default: false
-  assign title = params.title
-  assign text = params.text
-  assign footerContent = params.footerContent | default: false
-  assign imgSrc = params.imgSrc
-  assign classes = params.classes
-  assign titleClasses = params.titleClasses
+  assign variant = variant | default: params.variant | default: 'default'
+  assign animation = animation | default: params.animation | default: false
+  assign title = title | default: params.title
+  assign text = text | default: params.text
+  assign footerContent = footerContent | default: params.footerContent | default: false
+  assign imgSrc = imgSrc | default: params.imgSrc
+  assign classes = classes | default: params.classes
+  assign titleClasses = titleClasses | default: params.titleClasses
 
   assign classes = classes | append: ' overflow-hidden p-0 '
 
