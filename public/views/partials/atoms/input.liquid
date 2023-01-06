@@ -8,6 +8,7 @@ metadata:
       - error
     type:
       - text
+      - textarea
       - email
       - password
       - search
@@ -31,14 +32,14 @@ metadata:
   assign variant = variant | default: params.variant | default: 'normal'
   assign type = type | default: params.type | default: 'text'
   assign name = name | default: params.name
-  assign value = value | default: params.value
+  assign value = value | default: params.value | default: ''
   assign required = required | default: params.required | default: false
   assign disabled = disabled | default: params.disabled | default: false
   assign placeholder = placeholder | default: params.placeholder
   assign id = id | default: params.attributes.id | default: name
   assign attributes = attributes | default: params.attributes
 
-  assign classes = 'py-[0.69em] px-[0.44em] inline-block border focus:border-interactive-hover bg-input disabled:opacity-40 outline-none text-input-foreground leading-tight transition-colors ' | append: params.classes
+  assign classes = 'w-full py-[0.69em] px-[0.44em] inline-block border focus:border-interactive-hover bg-input disabled:opacity-40 outline-none text-input-foreground leading-tight transition-colors ' | append: params.classes
 
   case variant
     when 'confirmation'
@@ -49,8 +50,12 @@ metadata:
       assign classes = classes | append: ' border-input-border'
   endcase
 %}
+{% if type == 'textarea' %}
+<textarea
+{% else %}
 <input
   type="{{type}}"
+{% endif %}
   name="{{name}}"
   class="{{classes}}"
   id="{{id}}"
@@ -63,3 +68,8 @@ metadata:
     {{ attribute[0] }}="{{ attribute[1] }}"
   {% endfor %}
 >
+{%- if type == 'textarea' -%}
+{{value | strip}}
+</textarea>
+{% endif %}
+

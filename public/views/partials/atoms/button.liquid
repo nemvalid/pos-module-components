@@ -39,8 +39,8 @@ metadata:
   assign attributes = attributes | default: params.attributes
   assign content = content | default: params.content
   assign href = href | default: params.href
-  if href
-    assign tag = tag | default: params.tag | default: 'a'
+  if href != blank
+    assign tag = 'a'
   endif
 
   assign classes = classes | default: params.classes | append: ' inline-flex items-center justify-center gap-3 rounded whitespace-nowrap transition-colors disabled:opacity-30 disabled:pointer-events-none'
