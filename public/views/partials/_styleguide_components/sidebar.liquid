@@ -88,9 +88,13 @@
         </span>
         <div class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
           {% for component in component_group[1].results %}
+            {% liquid
+              assign generated_name = component.path | split: '/' | last | prepend: '⚠️ '
+              assign name = component.metadata.name | default: generated_name
+            %}
             <a href="/styleguide/{{ component.id }}" role="menuitem"
               class="pos-clean block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md hover:text-gray-700 hover:bg-blue-100">
-              {{component.metadata.name | humanize }}
+              {{name | humanize }}
             </a>
           {% endfor %}
         </div>
