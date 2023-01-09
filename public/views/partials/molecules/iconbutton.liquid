@@ -5,59 +5,67 @@ metadata:
     alignment:
       - left
       - right
+    filled:
+      - false
+      - true
+    size:
+      - normal
+      - small
+    disabled:
+      - false
+      - true
     gap: 2
-    button_params:
-      weight: secondary
-      content: Upload
-      variant: confirmation
-      attributes: attributes
-      classes: ''
-    icon_params:
-      name: folderUpload
+    weight: secondary
+    content: Upload
+    variant: confirmation
+    attributes: attributes
+    classes: ''
+    href: ''
+    icon: folderUpload
   styleguide:
     - alignment: left
       gap: 2
-      button_params:
-        weight: primary
-        content: Upload
-        variant: confirmation
-      icon_params:
-        name: folderUpload
+      weight: primary
+      content: Upload
+      variant: confirmation
+      icon: folderUpload
     - alignment: right
       gap: 2
-      button_params:
-        weight: secondary
-        content: Upload secondary
-        variant: confirmation
-      icon_params:
-        name: folderUpload
+      weight: secondary
+      content: Upload secondary
+      variant: confirmation
+      icon: folderUpload
     - alignment: left
-      button_params:
-        content: Delete small
-        size: small
-        variant: important
-      icon_params:
-        name: trash
+      content: Delete small
+      size: small
+      variant: important
+      icon: trash
 ---
 {% liquid
-  assign icon_params = icon_params | default: params.icon_params
-  assign gap = gap | default: params.gap | default: 2
   assign alignment = alignment | default: params.alignment | default: "right"
+  assign filled = filled | default: params.filled | default: false
+  assign size = size | default: params.size | default: 'normal'
+  assign disabled = disabled | default: params.disabled | default: false
+  assign gap = gap | default: params.gap | default: 2
+  assign weight = weight | default: params.weight | default: "secondary"
+  assign content = content | default: params.content
+  assign variant = variant | default: params.variant
+  assign attributes = attributes | default: params.attributes
+  assign classes = classes | default: params.classes
+  assign icon = icon | default: params.icon
+  assign href = href | default: params.href
 
-  assign classes = "flex items-center gap-" | append: gap
+  assign wrapper_classes = "flex items-center gap-" | append: gap
   if alignment == "left"
-    assign classes = classes | append:  " flex-row-reverse"
+    assign wrapper_classes = wrapper_classes | append:  " flex-row-reverse"
   endif
 %}
 
 {% capture icon_content %}
-<div class="{{classes}}">
-  <span>{{params.button_params.content}}</span>
-  {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+<div class="{{wrapper_classes}}">
+  <span>{{content | html_safe}}</span>
+  {% theme_render_rc 'components/atoms/icon', name: icon %}
 </div>
 {% endcapture %}
 
-{% liquid
-  assign button_params = params.button_params | hash_merge: content: icon_content
-%}
-{% theme_render_rc 'components/atoms/button', params: button_params %}
+{% theme_render_rc 'components/atoms/button', content: icon_content, classes: classes, weight: weight, variant: variant, attributes: attributes, filled: filled, size: size, disabled: disabled, href: href %}
