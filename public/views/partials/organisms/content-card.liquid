@@ -63,20 +63,28 @@ metadata:
 {% capture card_content %}
   <div class="h-full flex flex-col">
     <div>
+      {% if url != blank %}
       <a href="{{url}}">
+      {% endif %}
         <picture>
           {% if avifSrcSet != blank %}
           <source type="image/avif" srcset="{{avifSrcSet}}">
           {% endif %}
           <img src="{{imgSrc}}" srcset="{{imgSrcSet}}" class="w-full">
         </picture>
+      {% if url != blank %}
       </a>
+    {% endif %}
     </div>
     <div class="p-6">
       {% if title != blank %}
-      <a href="{{url}}">
-        {% theme_render_rc 'components/atoms/heading', params: heading_params %}
-      </a>
+        {% if url != blank %}
+        <a href="{{url}}">
+        {% endif %}
+          {% theme_render_rc 'components/atoms/heading', params: heading_params %}
+        {% if url != blank %}
+        </a>
+        {% endif %}
       {% endif %}
       <div class="pb-4">{{content | html_safe}}</div>
     </div>
