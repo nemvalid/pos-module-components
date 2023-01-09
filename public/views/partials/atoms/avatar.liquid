@@ -65,17 +65,20 @@ metadata:
   assign stringClasses = 'rounded-full flex items-center justify-center text-inverted '
   assign imageClasses = 'rounded-full overflow-hidden '
 
-  assign stringClasses = classes | append: stringClasses | append: sizes[size]
+  assign stringClasses = classes | append: ' ' | append: stringClasses | append: sizes[size]
   assign imageClasses = classes | append: imageClasses | append: sizes[size] | append: classes
 
+  assign colorIndex = 0
   assign names = name | split: " "
-  if names[0].size < names[1].size
-    assign colorIndex = names[1].size | modulo: names[0].size
-  else
-    assign colorIndex = names[0].size | modulo: names[1].size
-  endif
-  if colorIndex > 3
-    assign colorIndex = 3
+  if names[0].size > 0 and names[1].size > 0
+    if names[0].size < names[1].size
+      assign colorIndex = names[1].size | modulo: names[0].size
+    else
+      assign colorIndex = names[0].size | modulo: names[1].size
+    endif
+    if colorIndex > 3
+      assign colorIndex = 3
+    endif
   endif
 
   assign stringClasses = stringClasses | append: colors[colorIndex]

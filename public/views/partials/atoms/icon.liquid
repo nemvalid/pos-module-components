@@ -11,6 +11,10 @@ metadata:
     - name: 'all'
       class: 'w-10 h-10 p-2 m-2 inline-block'
 ---
+{% liquid
+  assign name = name | default: params.name
+  assign class = class | default: params.class
+%}
 {% comment %}
 
   List of icons in SVG format
@@ -24,13 +28,13 @@ metadata:
 {% capture attrs %}
   viewBox="0 0 24 24"
   fill="none"
-  class="fill-current {{ params.class | default: 'w-4 h-4' }}"
+  class="fill-current {{ class | default: 'w-4 h-4' }}"
   focusable="false"
   role="img"
   xmlns="http://www.w3.org/2000/svg"
 {% endcapture %}
 
-{% case params.name %}
+{% case name %}
 
   {% when 'plus', 'all' %}
   <svg data-icon="plus" {{ attrs | html_safe }}><defs><style>.a{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px}</style></defs><path class="a" d="M.75 12h22.5M12 .75v22.5"/></svg>
