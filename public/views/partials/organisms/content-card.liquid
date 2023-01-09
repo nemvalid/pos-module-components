@@ -6,7 +6,7 @@ metadata:
       - default
       - highlighted
     title: ''
-    text: ''
+    content: ''
     footerContent: ''
     imgSrc: ''
     imgSrcSet: ''
@@ -20,20 +20,20 @@ metadata:
   styleguide:
     - variant: default
       title: Blog post title
-      text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
+      content: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
       imgSrc: 'https://picsum.photos/300/180?random=1'
       animation: true
       footerContent: <div class="text-xs pb-4">by <a href="#" class="pos-clean text-interactive-text">Jane Doe</a></div>
       classes: 'w-80'
     - variant: highlighted
       title: Blog post title
-      text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
+      content: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
       author: Jane Doe
       authorLink: '/janedoe'
       imgSrc: 'https://picsum.photos/300/180?random=2'
       classes: 'w-80'
     - variant: default
-      text: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
+      content: This is a post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis arcu, tempor eget ante munis...
       imgSrc: 'https://picsum.photos/300/180?random=3'
       classes: 'w-80'
 
@@ -42,7 +42,7 @@ metadata:
   assign variant = variant | default: params.variant | default: 'default'
   assign animation = animation | default: params.animation | default: false
   assign title = title | default: params.title
-  assign text = text | default: params.text
+  assign content = content | default: params.content
   assign footerContent = footerContent | default: params.footerContent | default: false
   assign imgSrc = imgSrc | default: params.imgSrc
   assign imgSrcSet = imgSrcSet | default: params.imgSrcSet
@@ -78,7 +78,7 @@ metadata:
         {% theme_render_rc 'components/atoms/heading', params: heading_params %}
       </a>
       {% endif %}
-      <div class="pb-4">{{text}}</div>
+      <div class="pb-4">{{content | html_safe}}</div>
     </div>
     <div class="p-6 mt-auto">
       {{footerContent | html_safe}}
