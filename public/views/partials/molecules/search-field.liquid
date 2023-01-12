@@ -52,8 +52,7 @@ metadata:
         placeholder: Type here
       button_params:
         weight: primary
-        content: Search2
-        icon: 'star'
+        icon: 'search'
     - classes: 'w-80'
       button: true
       input_params:
@@ -61,8 +60,7 @@ metadata:
         placeholder: Type here
       button_params:
         weight: primary
-        content: Search2
-        icon: 'star'
+        icon: 'search'
     - classes: 'w-80'
       button: true
       size: 'sm'
@@ -71,8 +69,7 @@ metadata:
         placeholder: Type here
       button_params:
         weight: primary
-        content: Search2
-        icon: 'star'
+        icon: 'search'
     - classes: 'w-80'
       button: false
       input_params:
@@ -80,8 +77,7 @@ metadata:
         placeholder: Type here
       button_params:
         weight: primary
-        content: Search2
-        icon: 'star'
+        icon: 'search'
 ---
 {% liquid
   assign size = size | default: params.size | default: 'md'
@@ -125,7 +121,7 @@ metadata:
   assign icon_button_params = null | hash_merge: classes: icon_button_classes
 
   assign button_params = button_params | default: params.button_params | hash_merge: size: button_size, classes: string_button_classes
-  assign icon_button = null | hash_merge: icon_params: icon_params, gap: 0, button_params: icon_button_params
+  assign icon_button = button_params | hash_merge: gap: 0, name: 'search', classes: icon_button_classes
 
 %}
 <div class="inline-flex items-center focus-within:border-interactive-graphic {{classes}}">

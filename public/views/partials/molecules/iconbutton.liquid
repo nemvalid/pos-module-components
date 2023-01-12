@@ -22,6 +22,7 @@ metadata:
     classes: ''
     href: ''
     icon: folderUpload
+    type: 'button'
   styleguide:
     - alignment: left
       gap: 2
@@ -54,6 +55,7 @@ metadata:
   assign classes = classes | default: params.classes
   assign icon = icon | default: params.icon
   assign href = href | default: params.href
+  assign type = type | default: params.type
 
   assign wrapper_classes = "flex items-center gap-" | append: gap
   if alignment == "left"
@@ -68,4 +70,4 @@ metadata:
 </div>
 {% endcapture %}
 
-{% theme_render_rc 'components/atoms/button', content: icon_content, classes: classes, weight: weight, variant: variant, attributes: attributes, filled: filled, size: size, disabled: disabled, href: href %}
+{% theme_render_rc 'components/atoms/button', content: icon_content, classes: classes, weight: weight, variant: variant, attributes: attributes, filled: filled, size: size, disabled: disabled, href: href, type: type %}
