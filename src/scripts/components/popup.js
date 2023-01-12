@@ -20,11 +20,11 @@ const togglePopup = (popupId, forceClose = false) => {
   } else {
     popup.setAttribute("aria-hidden", true);
   }
-}
+};
 
 const closePopup = popupId => {
   togglePopup(popupId, true);
-}
+};
 
 // opener buttons
 const popupOpeners = document.querySelectorAll('[data-popup-open-id]');

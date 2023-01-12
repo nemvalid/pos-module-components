@@ -14,6 +14,7 @@ metadata:
   assign variant = variant | default: params.variant | default: 'default'
   assign content = content | default: params.content
   assign classes = classes | default: params.classes
+  assign attributes = attributes | default: params.attributes
 
   assign classes = 'p-6 rounded shadow-card ' | append: classes
 
@@ -23,6 +24,11 @@ metadata:
     assign classes = classes | append: ' bg-panel'
   endif
 %}
-<{{tag}} class="{{classes}}">
+<{{tag}}
+  {% for attribute in attributes %}
+    {{ attribute[0] | html_safe }}="{{ attribute[1] | html_safe }}"
+  {% endfor %}
+  class="{{classes}}"
+>
   {% print content %}
 </{{tag}}>

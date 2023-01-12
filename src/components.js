@@ -6,4 +6,5 @@ import './scripts/components/popup';
 import './scripts/components/accordion';
 import './scripts/components/tabs';
 import './scripts/components/more-less';
+import './scripts/components/dropdown';
 

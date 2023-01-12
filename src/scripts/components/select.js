@@ -30,7 +30,7 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
     if (didClickedOutside) {
       closeOptions(event);
     }
-  }
+  };
 
   const updateCustomSelectHovered = (newIndex) => {
     const prevOption = options.children[optionHoveredIndex];
@@ -45,7 +45,7 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
     }
 
     optionHoveredIndex = newIndex;
-  }
+  };
 
   const supportKeyboardNavigation = (event) => {
     // press down -> go next
@@ -79,7 +79,7 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
     if (event.keyCode === 27) {
       closeOptions(event);
     }
-  }
+  };
 
   head.addEventListener('click', toggleOpen);
   document.addEventListener("click", watchClickOutside);
@@ -161,7 +161,7 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
         } else {
           tag.classList.add('hidden');
         }
-      })
+      });
 
       const options = selectComponentWrapper.querySelectorAll('.pos-select__options > div');
       options.forEach(option => {
@@ -171,14 +171,14 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
         } else {
           option.classList.remove('bg-highlighted');
         }
-      })
+      });
 
       if (nativeSelect.value) {
         placeholder.classList.add('hidden');
       } else {
         placeholder.classList.remove('hidden');
       }
-    }
+    };
 
     /* single select - custom select*/
     selectComponentWrapper.querySelectorAll('.pos-select__options > div').forEach(option => {

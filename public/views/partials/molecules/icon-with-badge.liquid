@@ -16,17 +16,14 @@ metadata:
       icon: "globe"
 ---
 {% liquid
-  assign maxValue = maxValue | default: params.maxValue | default: 0
+  assign maxValue = maxValue | default: params.maxValue
   assign value = value | default: params.value
   assign icon = icon | default: params.icon | default: 'bell'
-
-  assign icon_params = null | hash_merge: name: icon, class: 'w-6 h-6 ml-2 '
-  assign badge_params = null | hash_merge: value: value, maxValue: maxValue
 %}
 
 <div class="relative inline-block">
-  {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+  {% theme_render_rc 'components/atoms/icon', name: icon, class: 'w-6 h-6 ml-2' %}
   <div class="absolute -top-2 left-6">
-    {% theme_render_rc 'components/atoms/badge', params: badge_params %}
+    {% theme_render_rc 'components/atoms/badge', value: value, maxValue: maxValue %}
   </div>
 </div>
