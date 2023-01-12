@@ -42,12 +42,7 @@ dropdownComponentWrappers.forEach(dropdownComponentWrapper => {
     const contentSize = content.getBoundingClientRect();
     const arrowSize = arrow.getBoundingClientRect();
 
-    if(document.querySelector('html[dir="rtl"]')){
-      arrow.style.left = toggleSize.left - contentSize.left + toggleSize.width / 2 - arrowSize.width / 2 + 'px';
-    } else {
-      arrow.style.left = toggleSize.left - contentSize.left + toggleSize.width / 2 - arrowSize.width / 2 + 'px';
-    }
-
+    arrow.style.left = toggleSize.left - contentSize.left + toggleSize.width / 2 - arrowSize.width / 2 + 'px';
     arrow.classList.remove('invisible');
   };
 
