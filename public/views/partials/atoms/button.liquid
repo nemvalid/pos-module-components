@@ -51,7 +51,7 @@ metadata:
   if weight == 'primary'
     case variant
       when 'normal'
-        assign classes = classes | append: ' border-button-primary hover:border-button-primary-hover bg-button-primary hover:bg-button-primary-hover text-button-primary-foreground hover:text-button-primary-hover-foreground'
+        assign classes = classes | append: ' border-button-primary-stroke hover:border-button-primary-stroke-hover bg-button-primary hover:bg-button-primary-hover text-button-primary-foreground hover:text-button-primary-hover-foreground'
       when 'inverted'
         assign classes = classes | append: ' border-button-primary-foreground bg-button-primary-foreground text-button-primary hover:text-button-primary-hover'
       when 'important'
@@ -63,7 +63,7 @@ metadata:
   elsif weight == 'secondary'
     case variant
       when 'normal'
-        assign classes = classes | append: ' border-button-secondary hover:border-button-secondary-hover text-button-secondary-foreground hover:text-button-secondary-foreground-hover'
+        assign classes = classes | append: ' border-button-secondary-stroke hover:border-button-secondary-stroke-hover text-button-secondary-foreground hover:text-button-secondary-foreground-hover'
       when 'inverted'
         assign classes = classes | append: ' border-inverted text-inverted'
       when 'important'
