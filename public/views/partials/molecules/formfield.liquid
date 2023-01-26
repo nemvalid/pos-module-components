@@ -12,7 +12,18 @@ metadata:
     input_params:
       name: 'text-input-with-label-example'
       placeholder: Type here
-      type: 'text'
+      type:
+        - text
+        - textarea
+        - email
+        - password
+        - search
+        - tel
+        - date
+        - number
+        - hidden
+        - select
+        - hcaptcha
     label_params:
       content: Text input with label
     description_params:
@@ -59,7 +70,6 @@ metadata:
 
 %}
 <{{tag}} class="flex flex-col items-start gap-1 {{classes}}">
-
   <label for="{{input_params.name}}" class="leading-tight {% if input_params.type == 'checkbox' %}flex gap-2{% endif %}">
     {% liquid
     if input_params.type == 'checkbox'
@@ -79,7 +89,6 @@ metadata:
       endif
     endunless
   %}
-
   {% if description_params.content or validation.messages.size > 0 %}
     <div id="{{input_params.name}}-desc" class="flex gap-2">
 
