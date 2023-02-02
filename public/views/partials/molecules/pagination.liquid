@@ -32,7 +32,7 @@ metadata:
     assign endPage = active | plus: limit
   endif
 
-  if count == maxCount
+  if count <= maxCount
     assign startPage = 1
     assign endPage = count
   endif
