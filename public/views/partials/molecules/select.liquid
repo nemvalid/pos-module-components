@@ -13,6 +13,7 @@ metadata:
         value: value1
       - label: Option 2
         value: value2
+    attributes: {}
   styleguide:
     - multiple: false
       options:
@@ -51,6 +52,7 @@ metadata:
   assign name = name | default: params.name | default: "mySelect"
   assign multiple = multiple | default: params.multiple | default: false
   assign value = value | default: params.value
+  assign attributes = attributes | default: params.attributes
 %}
 
 {% if multiple == true %}
@@ -83,7 +85,7 @@ metadata:
       {% liquid
         assign opt_id = id | append: '_' | append: option.value
         assign input_name = name | append: '[]'
-        assign input_params = '{}' | parse_json | hash_merge: value: option.value, id: opt_id
+        assign input_params = '{}' | parse_json | hash_merge: value: option.value, id: opt_id, attributes: attributes
         if value contains option.value
           hash_assign input_params['checked'] = true
         endif
@@ -96,7 +98,15 @@ metadata:
     </div>
   </div>
 
-  <select class="pos-select--multi-native" name="{{name}}[]" multiple aria-labelledby="{{name}}">
+  <select
+    class="pos-select--multi-native"
+    name="{{name}}[]"
+    multiple
+    aria-labelledby="{{name}}"
+    {% for attribute in attributes %}
+      {{ attribute[0] | html_safe }}="{{ attribute[1] | html_safe }}"
+    {% endfor %}
+    >
     {% for option in options %}
     <option value="{{option.value}}" {% if value contains option.value %}selected{% endif %}>{{option.label}}</option>
     {% endfor %}
@@ -137,7 +147,14 @@ metadata:
     </div>
   </div>
 
-  <select class="pos-select--simple-native" name="{{name}}" aria-labelledby="{{name}}">
+  <select
+    class="pos-select--simple-native"
+    name="{{name}}"
+    aria-labelledby="{{name}}"
+    {% for attribute in attributes %}
+      {{ attribute[0] | html_safe }}="{{ attribute[1] | html_safe }}"
+    {% endfor %}
+    >
     {% for option in options %}
     <option value="{{option.value}}" {% if value == option.value %}selected{% endif %}>{{option.label}}</option>
     {% endfor %}

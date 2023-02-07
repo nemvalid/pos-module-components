@@ -11,6 +11,7 @@ metadata:
     disabled:
       - false
       - true
+    attributes: {}
 ---
 {% liquid
   assign checked = checked | default: params.checked | default: false
@@ -18,6 +19,7 @@ metadata:
   assign name = name | default: params.name
   assign value = value | default: params.value
   assign disabled = disabled | default: params.disabled | default: false
+  assign attributes = attributes | default: params.attributes
 
   assign container_classes = 'block relative '
   assign input_classes = 'hidden'
@@ -28,6 +30,10 @@ metadata:
     type="checkbox"
     id="{{id}}"
     name="{{name}}"
+    aria-labelledby="{{name}}"
+    {% for attribute in attributes %}
+      {{ attribute[0] | html_safe }}="{{ attribute[1] | html_safe }}"
+    {% endfor %}
     {% if value %}value="{{value}}"{% endif %}
     {% if checked %}checked{% endif %}
     {% if disabled %}disabled{% endif %}
