@@ -185,6 +185,8 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
       const value = option.getAttribute("data-value");
       option.addEventListener('click', (event) => {
         nativeSelect.value = value;
+        const changeevent = new Event('change');
+        nativeSelect.dispatchEvent(changeevent);
         toggleOpen(event);
         singleSelectTagSelect();
       });
