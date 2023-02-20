@@ -14,12 +14,14 @@ metadata:
       - false
       - true
     content: chip
+    classes: ''
 ---
 {% liquid
   assign tag = tag | default: params.tag | default: 'div'
   assign closable = closable | default: params.closable | default: false
   assign variant = variant | default: params.variant | default: 'default'
   assign content = content | default: params.content
+  assign wrapper_classes = classes | default: params.classes
 
   assign classes = 'px-3 py-1 leading-5 rounded-md flex items-center align-center border '
 
@@ -39,7 +41,7 @@ metadata:
 
   assign icon_params = '{}' | parse_json | hash_merge: name: 'x', class: 'w-3 h-3 ml-2 '
 %}
-<div class="inline-block">
+<div class="inline-block {{wrapper_classes}}">
   <{{tag}} class="{{classes}}">
     {{content}}
     {% if closable == true %}
