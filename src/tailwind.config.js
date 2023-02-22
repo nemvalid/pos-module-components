@@ -94,14 +94,8 @@ module.exports = {
       },
       borderRadius: {
         'surface': `var(--surface, ${defaultBorders.radiuses.surface})`,
-        'buttonx': `var(--button, ${defaultBorders.radiuses.button})`,
-        'button': '10px',
+        'button': `var(--button, ${defaultBorders.radiuses.button})`,
         'input': `var(--input, ${defaultBorders.radiuses.input})`
-      },
-      extend: {
-        borderRadius: {
-          'button': '10px'
-        }
       }
     },
   },
