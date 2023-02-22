@@ -1,5 +1,6 @@
 const defaultColors = require('./colors.default');
 const defaultFonts = require('./fonts.default');
+const defaultBorders = require('./borders.default');
 
 function parseColor(colorName) {
   return ({ opacityVariable, opacityValue }) => {
@@ -90,6 +91,17 @@ module.exports = {
       },
       ringWidth: {
         '1': '1px',
+      },
+      borderRadius: {
+        'surface': `var(--surface, ${defaultBorders.radiuses.surface})`,
+        'buttonx': `var(--button, ${defaultBorders.radiuses.button})`,
+        'button': '10px',
+        'input': `var(--input, ${defaultBorders.radiuses.input})`
+      },
+      extend: {
+        borderRadius: {
+          'button': '10px'
+        }
       }
     },
   },
