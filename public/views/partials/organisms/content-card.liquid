@@ -62,15 +62,20 @@ metadata:
 
 {% capture card_content %}
   <div class="h-full flex flex-col">
-    <div>
+    <div class="relative w-full h-0 pt-[calc(100%*(9/16))]">
       {% if url != blank %}
       <a href="{{url}}">
       {% endif %}
         <picture>
-          {% if avifSrcSet != blank %}
-          <source type="image/avif" srcset="{{avifSrcSet}}">
+          {% if avifSrcSet != blank and imgSrc != blank %}
+            <source type="image/avif" srcset="{{avifSrcSet}}">
+            {% assign src = imgSrc %}
+            {% assign srcset = imgSrcSet %}
+          {% else %}
+            {% assign src = 'modules/components/images/Placeholder_image.png' | asset_url %}
+            {% assign srcset = '' %}
           {% endif %}
-          <img src="{{imgSrc}}" srcset="{{imgSrcSet}}" class="w-full">
+          <img src="{{src}}" srcset="{{srcset}}" class="absolute w-full h-full object-cover top-0" width="476" height="268">
         </picture>
       {% if url != blank %}
       </a>
