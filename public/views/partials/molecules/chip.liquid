@@ -23,7 +23,7 @@ metadata:
   assign content = content | default: params.content
   assign wrapper_classes = classes | default: params.classes
 
-  assign classes = 'px-3 py-1 leading-5 rounded-md flex items-center align-center border '
+  assign classes = 'px-3 py-1 leading-5 rounded-surface flex items-center align-center border '
 
   if variant == 'clickable'
     assign classes = classes | append: ' text-interactive-text border-divider bg-highlighted'
