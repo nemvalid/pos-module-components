@@ -98,7 +98,7 @@ module.exports = {
         'input': `var(--radius-input, ${defaultBorders.radiuses['radius-input']})`
       },
       borderWidth: {
-        'secondary': `var(--width-secondary, ${defaultBorders.width['width-secondary']})`
+        'secondary': `var(--border-width-secondary, ${defaultBorders.width['width-secondary']})`
       }
     },
   },
