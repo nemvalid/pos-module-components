@@ -16,7 +16,7 @@ metadata:
   assign classes = classes | default: params.classes
   assign attributes = attributes | default: params.attributes
 
-  assign classes = 'p-6 rounded shadow-card ' | append: classes
+  assign classes = 'p-6 rounded-surface shadow-card ' | append: classes
 
   if variant == 'highlighted'
     assign classes = classes | append: ' bg-highlighted'

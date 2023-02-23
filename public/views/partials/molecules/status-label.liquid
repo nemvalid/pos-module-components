@@ -58,7 +58,7 @@ metadata:
   assign alignment = alignment | default: params.alignment | default: 'right'
   assign severity = severity | default: params.severity | default: 'info'
   assign content = content | default: params.content
-  assign classes = classes | default: params.classes | default: 'px-2 py-1 h-6 rounded border border-divider bg-panel'
+  assign classes = classes | default: params.classes | default: 'px-2 py-1 h-6 rounded-surface border border-divider bg-panel'
 
   if alignment == "left"
     assign reverse = " flex-row-reverse"

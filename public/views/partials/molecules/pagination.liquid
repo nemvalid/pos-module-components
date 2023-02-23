@@ -67,7 +67,7 @@ metadata:
       {% if i >= startPage and i <= endPage %}
         <li>
           {% if active == i %}
-            <a href="{{url}}{{i}}" class="{{classes}} rounded border border-interactive-graphic" aria-label="Current Page, Page {{i}}" aria-current="true">{{i}}</a>
+            <a href="{{url}}{{i}}" class="{{classes}} rounded-surface border border-interactive-graphic" aria-label="Current Page, Page {{i}}" aria-current="true">{{i}}</a>
           {% else %}
             <a href="{{url}}{{i}}" class="{{classes}}" aria-label="Goto Page {{i}}">{{i}}</a>
           {% endif %}
