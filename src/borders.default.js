@@ -1,7 +1,10 @@
 module.exports = {
   radiuses: {
-    surface: "4px",
-    button: "4px",
-    input: "0px"
+    "radius-surface": "4px",
+    "radius-button": "4px",
+    "radius-input": "0px"
+  },
+  width: {
+    "width-secondary": "2px"
   }
 }

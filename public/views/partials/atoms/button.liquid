@@ -49,6 +49,7 @@ metadata:
   endif
 
   if weight == 'primary'
+    assign classes = classes | append: ' border'
     case variant
       when 'normal'
         assign classes = classes | append: ' border-button-primary-stroke hover:border-button-primary-stroke-hover bg-button-primary hover:bg-button-primary-hover text-button-primary-foreground hover:text-button-primary-hover-foreground'
@@ -61,6 +62,7 @@ metadata:
     endcase
 
   elsif weight == 'secondary'
+    assign classes = classes | append: ' border-secondary'
     case variant
       when 'normal'
         assign classes = classes | append: ' border-button-secondary-stroke hover:border-button-secondary-stroke-hover text-button-secondary-foreground hover:text-button-secondary-foreground-hover'
@@ -79,9 +81,9 @@ metadata:
 
 
   if size == 'small'
-    assign classes = classes | prepend: 'h-7 px-4 py-1 border text-sm leading-[1.43] '
+    assign classes = classes | prepend: 'h-7 px-4 py-1 text-sm leading-[1.43] '
   else
-    assign classes = classes | prepend: 'h-11 px-4 py-2.5 border-2 leading-tight '
+    assign classes = classes | prepend: 'h-11 px-4 py-2.5 leading-tight '
   endif
 %}
 <{{tag}}

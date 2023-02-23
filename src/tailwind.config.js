@@ -93,9 +93,12 @@ module.exports = {
         '1': '1px',
       },
       borderRadius: {
-        'surface': `var(--surface, ${defaultBorders.radiuses.surface})`,
-        'button': `var(--button, ${defaultBorders.radiuses.button})`,
-        'input': `var(--input, ${defaultBorders.radiuses.input})`
+        'surface': `var(--radius-surface, ${defaultBorders.radiuses['radius-surface']})`,
+        'button': `var(--radius-button, ${defaultBorders.radiuses['radius-button']})`,
+        'input': `var(--radius-input, ${defaultBorders.radiuses['radius-input']})`
+      },
+      borderWidth: {
+        'secondary': `var(--width-secondary, ${defaultBorders.width['width-secondary']})`
       }
     },
   },
