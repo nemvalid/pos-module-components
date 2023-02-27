@@ -57,8 +57,11 @@ metadata:
   assign classes = classes | default: params.classes
   assign validation = validation | default: params.validation
   assign input_params = input_params | default: params.input_params
+  assign attributes = '{}' | parse_json
+  assign input_attributes = input_params.attributes | default: attributes
 
-  assign input_attributes = '{}' | parse_json
+  assign id = input_attributes.id | default: input_params.name
+
   hash_assign input_attributes['aria-describedby'] = '' | append: input_params.name | append: '-desc'
 
   assign input_params = input_params | hash_merge: attributes: input_attributes
@@ -70,7 +73,7 @@ metadata:
 
 %}
 <{{tag}} class="flex flex-col items-start gap-1 {{classes}}">
-  <label for="{{input_params.name}}" class="leading-tight {% if input_params.type == 'checkbox' %}flex gap-2{% endif %}">
+  <label for="{{id}}" class="leading-tight {% if input_params.type == 'checkbox' %}flex gap-2{% endif %}">
     {% liquid
     if input_params.type == 'checkbox'
       theme_render_rc 'components/atoms/checkbox', params: input_params
