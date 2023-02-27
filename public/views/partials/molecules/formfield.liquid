@@ -57,9 +57,11 @@ metadata:
   assign classes = classes | default: params.classes
   assign validation = validation | default: params.validation
   assign input_params = input_params | default: params.input_params
-  assign input_attributes = input_params.attributes | default: '{}' | parse_json
 
-  assign id = input_attributes.id | default: input_params.name
+  assign id = input_params.name
+  if input_params.attributes
+    assign id = input_params.attributes.id | default: input_params.name
+  endif
 
   hash_assign input_attributes['aria-describedby'] = '' | append: input_params.name | append: '-desc'
 
