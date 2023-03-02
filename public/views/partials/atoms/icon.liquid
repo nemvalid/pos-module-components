@@ -313,4 +313,19 @@ metadata:
     <path fill="none" fill-rule="evenodd" clip-rule="evenodd" d="M18.75 8.75H27.5C29.5711 8.75 31.25 7.07107 31.25 5C31.25 2.92893 29.5711 1.25 27.5 1.25H18.75V8.75Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 
+  {% comment %}
+
+  TODO, WIP: new icons
+  Every icon should be replaced whith these:
+
+  https://www.figma.com/file/xT1oHhZNSjr5DeKz7PbAoX/PCBS-Design?node-id=9091%3A134436&t=8ROh4lBSwFctgg1r-0
+
+  {% endcomment %}
+
+  {% when 'messages' or 'all' %}
+  <svg data-icon="messages"  {{ attrs | html_safe }}>
+    <path fill="none" fill-rule="evenodd" clip-rule="evenodd" d="M12.75 0.750016C8.93933 0.744521 5.42568 2.80695 3.5728 6.13683C1.71991 9.4667 1.81953 13.5397 3.833 16.775L0.75 23.25L7.224 20.167C11.0102 22.521 15.8701 22.2274 19.3454 19.4347C22.8206 16.642 24.1533 11.9591 22.6694 7.75503C21.1854 3.55093 17.2083 0.742339 12.75 0.750016Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+
 {% endcase %}

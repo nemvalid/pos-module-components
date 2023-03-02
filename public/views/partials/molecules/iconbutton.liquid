@@ -58,7 +58,7 @@ metadata:
   assign type = type | default: params.type
 
   if content == blank
-    assign classes = classes | prepend: 'px-2'
+    assign classes = classes | prepend: 'px-2 '
   endif
 
   assign wrapper_classes = "flex items-center gap-" | append: gap
