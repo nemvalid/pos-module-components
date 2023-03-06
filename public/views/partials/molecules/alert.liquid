@@ -31,6 +31,7 @@ metadata:
   assign severity = severity | default: params.severity | default: 'info'
   assign variant = variant | default: params.variant | default: 'normal'
   assign content = content | default: params.content
+  assign attributes = attributes | default: params.attributes
 
   assign classes = 'px-2 py-1 leading-5 rounded-md shadow-card flex items-center align-center w-96 h-10 '
 
@@ -56,11 +57,15 @@ metadata:
 
   assign icon_params = '{}' | parse_json | hash_merge: name: icons[severity].name, class: icon_classes
 %}
-<div class="inline-block">
-<{{tag}} class="{{classes}}">
-    {% if icon == true %}
-      {% theme_render_rc 'components/atoms/icon', params: icon_params %}
-    {% endif %}
-    {{content}}
-</{{tag}}>
+<div class="inline-block"
+  {% for attribute in attributes %}
+    {{ attribute[0] | html_safe }}="{{ attribute[1] | html_safe }}"
+  {% endfor %}
+>
+  <{{tag}} class="{{classes}}">
+      {% if icon == true %}
+        {% theme_render_rc 'components/atoms/icon', params: icon_params %}
+      {% endif %}
+      {{content}}
+  </{{tag}}>
 </div>

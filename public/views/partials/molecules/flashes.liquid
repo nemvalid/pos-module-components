@@ -1,0 +1,76 @@
+---
+metadata:
+  name: flashes
+  description: component for displaying flash messages
+  params:
+    position: "fixed"
+    error: null
+    notice: null
+    info: null
+    autohide: true
+
+  styleguide:
+      - position: "relative"
+        error: "Error message"
+        notice: "Notice message"
+        info: "Info message"
+        autohide: false
+---
+{% liquid
+  assign position = position | default: params.position | default: 'fixed'
+  assign error = error | default: params.error
+  assign notice = notice | default: params.notice
+  assign info = info | default: params.info
+  assign autohide = autohide | default: params.autohide
+%}
+<div
+  data-pos-component="flashes"
+  class="{{ position }} bottom-2 left-0 z-50"
+>
+  <template data-flash-template>
+    <div class="px-4 overflow-hidden text-content-inverted" data-flash>
+      <div class="min-w-80 md:max-w-md mb-2 mt-2 relative transition transform">
+        {% capture flash_content %}
+          <div class="mx-3 font-semibold" data-flash-content></div>
+        {% endcapture %}
+        {% liquid
+          assign flash_content = flash_content | html_safe
+
+          assign error_attributes = null | hash_merge: data-flash-error: null
+          theme_render_rc 'modules/components/molecules/alert', severity: 'error', content: flash_content, attributes: error_attributes
+
+          assign success_attributes = null | hash_merge: data-flash-success: null
+          theme_render_rc 'modules/components/molecules/alert', severity: 'success', content: flash_content, attributes: success_attributes
+
+          assign info_attributes = null | hash_merge: data-flash-info: null
+          theme_render_rc 'modules/components/molecules/alert', severity: 'info', content: flash_content, attributes: info_attributes
+        %}
+        <button
+          title="{{ 'app.close' | t }}"
+          class="p-4 absolute right-0 top-0 hover:text-interaction-hover"
+          data-flash-close
+        >
+          {% theme_render_rc 'modules/components/atoms/icon', name: 'x', class: 'w-2' %}
+        </button>
+
+      </div>
+    </div>
+  </template>
+  <script>
+    document.addEventListener('apiFlashReady', () => {
+
+      {% if error %}
+        new posComponents.flash('error', {% print error | markdown | json %}, { delay: 1000 });
+      {% endif %}
+
+      {% if notice %}
+        new posComponents.flash('success', {% print notice | markdown | json  %}, { delay: 1000 {% if autohide != null %}, autohide: {{ autohide }} {% endif %} });
+      {% endif %}
+
+      {% if info %}
+        new posComponents.flash('info', {% print info | markdown | json %}, { delay: 1000 });
+      {% endif %}
+
+    });
+  </script>
+</div>
