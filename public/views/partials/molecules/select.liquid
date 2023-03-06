@@ -15,6 +15,7 @@ metadata:
         value: value2
     attributes: {}
     placeholder:
+    classes: ''
   styleguide:
     - multiple: false
       options:
@@ -55,11 +56,12 @@ metadata:
   assign value = value | default: params.value
   assign attributes = attributes | default: params.attributes
   assign placeholder = placeholder | default: params.placeholder | default: 'Select an option'
+  assign classes = classes | default: params.classes
 %}
 
 {% if multiple == true %}
-<div data-pos-component="Select" class="relative inline-block" id="{{id}}">
-  <div class="pos-select pos-select--multi-custom">
+<div data-pos-component="Select" class="relative inline-block {{classes}}" id="{{id}}">
+  <div class="pos-select pos-select--multi-custom w-full">
     <div class="pos-select__head cursor-pointer flex items-center justify-between border border-input-border bg-panel py-2 px-2 h-11" tabindex="0" aria-hidden="true">
       <div class="{% if value %}hidden {% endif %}pos-select__placeholder cursor-pointer">{{placeholder}}</div>
       <div class="pos-select__tags flex">
@@ -82,7 +84,7 @@ metadata:
       </div>
     </div>
 
-    <div class="pos-select__options hidden absolute max-h-48 overflow-y-auto bg-panel shadow-card px-1 py-2 z-50" aria-hidden="true">
+    <div class="pos-select__options hidden absolute max-h-48 overflow-y-auto bg-panel shadow-card px-1 py-2 z-50 w-full" aria-hidden="true">
       {% for option in options %}
       {% liquid
         assign opt_id = id | append: '_' | append: option.value
@@ -117,8 +119,8 @@ metadata:
 {% endif %}
 
 {% if multiple == false %}
-<div data-pos-component="Select" class="relative" id="{{id}}">
-  <div class="pos-select pos-select--simple-custom" aria-hidden="true">
+<div data-pos-component="Select" class="relative {{classes}}" id="{{id}}">
+  <div class="pos-select pos-select--simple-custom w-full" aria-hidden="true">
     <div class="pos-select__head cursor-pointer flex items-center justify-between border border-input-border bg-panel py-2 px-2 h-11" tabindex="0">
       <div class="{% if value %}hidden {% endif %}pos-select__placeholder cursor-pointer">{{placeholder}}</div>
       <div class="pos-select__tags flex">
@@ -140,7 +142,7 @@ metadata:
       </div>
     </div>
 
-    <div class="pos-select__options hidden absolute max-h-48 overflow-y-auto bg-panel shadow-card px-1 py-2 z-50">
+    <div class="pos-select__options hidden absolute max-h-48 overflow-y-auto bg-panel shadow-card px-1 py-2 z-50 w-full">
       {% for option in options %}
       <div class="{% if value == option.value %}bg-highlighted {% endif %}flex items-center py-2 px-4 cursor-pointer hover:text-inverted hover:bg-interactive-hover" data-value="{{option.value}}">
         {{option.label}}
