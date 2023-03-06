@@ -1,0 +1,27 @@
+---
+metadata:
+  name: flash
+  description: a notification message that is floating, requires molecules/flashes-area to be rendered
+  params:
+    error: null
+    notice: null
+    info: null
+    autohide: true
+---
+<script>
+  document.addEventListener('apiFlashReady', () => {
+
+    {% if error %}
+      new posComponents.flash('error', {% print error | markdown | json %}, { delay: 1000 });
+    {% endif %}
+
+    {% if notice %}
+      new posComponents.flash('success', {% print notice | markdown | json  %}, { delay: 1000 {% if autohide != null %}, autohide: {{ autohide }} {% endif %} });
+    {% endif %}
+
+    {% if info %}
+      new posComponents.flash('info', {% print info | markdown | json %}, { delay: 1000 });
+    {% endif %}
+
+  });
+</script>
