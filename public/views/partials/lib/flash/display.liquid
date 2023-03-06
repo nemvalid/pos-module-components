@@ -5,7 +5,6 @@
   render 'modules/components/molecules/flashes-area'
   if context.session.sflash != blank
     assign flash = context.session.sflash | parse_json
-  echo flash
     render 'modules/components/molecules/flash', error: flash.error, notice: flash.notice, info: flash.info
 
     if context.location.pathname != flash.from or flash.force_clear
