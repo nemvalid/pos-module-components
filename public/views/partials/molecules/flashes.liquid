@@ -3,25 +3,34 @@ metadata:
   name: flashes
   description: component for displaying flash messages
   params:
+    message: ""
+    severity:
+      - info
+      - error
+      - success
     position: "fixed"
-    error: null
-    notice: null
-    info: null
     autohide: true
+    delay: 1000
 
   styleguide:
       - position: "relative"
-        error: "Error message"
-        notice: "Notice message"
-        info: "Info message"
+        message: "Info message"
+        autohide: false
+      - position: "relative"
+        message: "Error message"
+        severity: 'error'
+        autohide: false
+      - position: "relative"
+        message: "Success message"
+        severity: 'success'
         autohide: false
 ---
 {% liquid
   assign position = position | default: params.position | default: 'fixed'
-  assign error = error | default: params.error
-  assign notice = notice | default: params.notice
-  assign info = info | default: params.info
   assign autohide = autohide | default: params.autohide
+  assign delay = delay | default: params.delay | default: 1000
+  assign message = message | default: params.message | default: null
+  assign severity = severity | default: params.severity | default: 'info'
 %}
 <div
   data-pos-component="flashes"
@@ -52,25 +61,14 @@ metadata:
         >
           {% theme_render_rc 'modules/components/atoms/icon', name: 'x', class: 'w-2' %}
         </button>
-
       </div>
     </div>
   </template>
-  <script>
-    document.addEventListener('apiFlashReady', () => {
-
-      {% if error %}
-        new posComponents.flash('error', {% print error | markdown | json %}, { delay: 1000 });
-      {% endif %}
-
-      {% if notice %}
-        new posComponents.flash('success', {% print notice | markdown | json  %}, { delay: 1000 {% if autohide != null %}, autohide: {{ autohide }} {% endif %} });
-      {% endif %}
-
-      {% if info %}
-        new posComponents.flash('info', {% print info | markdown | json %}, { delay: 1000 });
-      {% endif %}
-
-    });
-  </script>
+  {% if message %}
+    <script>
+      document.addEventListener('apiFlashReady', () => {
+        new posComponents.flash('{{ severity }}', {% print message | markdown | json %}, { delay: {{ delay | json }} {% if severity == 'success' and autohide != null %}, autohide: {{ autohide }} {% endif %} });
+      });
+    </script>
+  {% endif %}
 </div>

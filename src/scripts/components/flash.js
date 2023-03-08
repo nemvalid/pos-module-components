@@ -2,7 +2,7 @@
   handles showing the floating notifications
 
   usage:
-    new api.flash('type', 'message');
+    new posComponents.flash('type', 'message');
     or
     let notification = new api.flash('type', 'message')
     notification.remove();
