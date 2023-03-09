@@ -1,0 +1,48 @@
+---
+metadata:
+  name: Notification
+  params:
+    actor: {}
+    icon: ''
+    message: ''
+    date: ''
+---
+{% liquid
+  assign actor = actor | default: params.actor
+  assign message = message | default: params.message
+  assign date = date | default: params.date
+  assign actor_url = "/profile/" | append: actor.slug
+%}
+{% capture content %}
+<article class="flex flex-col relative" id="object-{{payload.object.id}}" data-tc="private-feed">
+  <header class="mb-3 last:mb-0 flex items-center gap-4">
+    <div class="relative inline-block mr-4">
+    {% if actor_url %}
+      <a href="{{ actor_url }}" class="flex-shrink-0">
+    {% endif %}
+      {% theme_render_rc 'components/atoms/avatar', size: 'm', name: actor.name, imageSrc: actor.avatar.photo.versions.sm %}
+    {% if actor_url %}
+      </a>
+    {% endif %}
+
+      <div class="absolute top-5 left-6 rounded-full bg-colorful p-1">
+        {% theme_render_rc 'components/atoms/icon', name: icon, class: 'w-3 h-3 text-colorful-foreground'  %}
+      </div>
+    </div>
+
+    <div>
+      {% if actor_url %}
+        {%- capture info -%}[{{ payload.type }}] [{{ payload.actor.type }}#{{ payload.actor.id }}][{{ payload.object.type }}#{{ payload.object.id }}][{{ payload.target.type }}#{{ payload.target.id }}]{%- endcapture -%}
+        <a href="{{ actor_url }}" title="{{ info | escape }}" class="font-semibold text-content">{{ actor.name }}</a>
+      {% else %}
+        {{ actor.name }}
+      {% endif %}
+
+      {% print message %}
+    </div>
+  </header>
+</article>
+{% endcapture %}
+
+{% theme_render_rc 'components/atoms/card', content: content %}
+
