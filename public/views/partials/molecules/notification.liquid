@@ -2,23 +2,45 @@
 metadata:
   name: Notification
   params:
-    actor: {}
+    name: ''
+    imgSrc: ''
+    actor_url: ''
     icon: ''
     message: ''
     date: ''
     size:
       - normal
       - small
+    classes: ''
+  styleguide:
+    - name: "John Doe"
+      imgSrc: "https://i.pravatar.cc/150?img=18"
+      icon: "heart"
+      message: "started following you"
+      date: "2 days ago"
+      size: 'normal'
+    - name: "Jane Doe"
+      imgSrc: "https://i.pravatar.cc/150?img=19"
+      icon: "messages"
+      message: "started following you"
+      date: "2 days ago"
+      size: 'small'
+      classes: "w-80"
 ---
 {% liquid
-  assign actor = actor | default: params.actor
+  assign name = name | default: params.name
+  assign imgSrc = imgSrc | default: params.imgSrc
+  assign actor_url = actor_url | default: params.actor_url
   assign message = message | default: params.message
   assign date = date | default: params.date
+  assign icon = icon | default: params.icon
+  assign date = date | default: params.date
   assign size = size | default: params.size | default: 'normal'
-  assign actor_url = "/profile/" | append: actor.slug
+  assign classes = classes | default: params.classes
 
+  assign card_classes = classes
   if size == 'small'
-    assign card_classes = 'p-2'
+    assign card_classes = card_classes | append: ' p-2'
   endif
 %}
 {% capture content %}
@@ -29,7 +51,7 @@ metadata:
       {% if actor_url %}
         <a href="{{ actor_url }}" class="flex-shrink-0">
       {% endif %}
-        {% theme_render_rc 'components/atoms/avatar', size: 'm', name: actor.name, imageSrc: actor.avatar.photo.versions.sm %}
+        {% theme_render_rc 'components/atoms/avatar', size: 'm', name: name, imageSrc: imgSrc %}
       {% if actor_url %}
         </a>
       {% endif %}
@@ -42,23 +64,22 @@ metadata:
       <div>
         <div>
           {% if actor_url %}
-            {%- capture info -%}[{{ payload.type }}] [{{ payload.actor.type }}#{{ payload.actor.id }}][{{ payload.object.type }}#{{ payload.object.id }}][{{ payload.target.type }}#{{ payload.target.id }}]{%- endcapture -%}
-            <a href="{{ actor_url }}" title="{{ info | escape }}" class="font-semibold text-content">{{ actor.name }}</a>
+            <a href="{{ actor_url }}" class="font-semibold text-content">{{ name }}</a>
           {% else %}
-            {{ actor.name }}
+            {{ name }}
           {% endif %}
 
           {% print message %}
         </div>
         {% if size == 'small' %}
-        <div>
+        <div class="text-supplementary text-xs">
           {% print date %}
         </div>
         {% endif %}
       </div>
     </div>
     {% if size == 'normal' %}
-    <div>
+    <div class="text-supplementary text-xs">
       {% print date %}
     </div>
     {% endif %}
