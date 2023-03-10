@@ -6,12 +6,20 @@ metadata:
     icon: ''
     message: ''
     date: ''
+    size:
+      - normal
+      - small
 ---
 {% liquid
   assign actor = actor | default: params.actor
   assign message = message | default: params.message
   assign date = date | default: params.date
+  assign size = size | default: params.size | default: 'normal'
   assign actor_url = "/profile/" | append: actor.slug
+
+  if size == 'small'
+    assign card_classes = 'p-2'
+  endif
 %}
 {% capture content %}
 <article class="flex flex-col relative">
@@ -32,22 +40,31 @@ metadata:
       </div>
 
       <div>
-        {% if actor_url %}
-          {%- capture info -%}[{{ payload.type }}] [{{ payload.actor.type }}#{{ payload.actor.id }}][{{ payload.object.type }}#{{ payload.object.id }}][{{ payload.target.type }}#{{ payload.target.id }}]{%- endcapture -%}
-          <a href="{{ actor_url }}" title="{{ info | escape }}" class="font-semibold text-content">{{ actor.name }}</a>
-        {% else %}
-          {{ actor.name }}
-        {% endif %}
+        <div>
+          {% if actor_url %}
+            {%- capture info -%}[{{ payload.type }}] [{{ payload.actor.type }}#{{ payload.actor.id }}][{{ payload.object.type }}#{{ payload.object.id }}][{{ payload.target.type }}#{{ payload.target.id }}]{%- endcapture -%}
+            <a href="{{ actor_url }}" title="{{ info | escape }}" class="font-semibold text-content">{{ actor.name }}</a>
+          {% else %}
+            {{ actor.name }}
+          {% endif %}
 
-        {% print message %}
+          {% print message %}
+        </div>
+        {% if size == 'small' %}
+        <div>
+          {% print date %}
+        </div>
+        {% endif %}
       </div>
     </div>
+    {% if size == 'normal' %}
     <div>
       {% print date %}
     </div>
+    {% endif %}
   </div>
 </article>
 {% endcapture %}
 
-{% theme_render_rc 'components/atoms/card', content: content %}
+{% theme_render_rc 'components/atoms/card', content: content, classes: card_classes %}
 
