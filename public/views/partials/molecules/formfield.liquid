@@ -28,6 +28,7 @@ metadata:
       content: Text input with label
     description_params:
       content: This is a description
+      icon: This is the icon name
     multiple:
       - true
       - false
@@ -49,6 +50,7 @@ metadata:
         content: Form label
       description_params:
         content: This is a FormField description
+        icon: info
 
 ---
 {% liquid
@@ -110,7 +112,12 @@ metadata:
         {% endif %}
 
         <div class="leading-none">
-          {% theme_render_rc 'components/atoms/sidenote', params: description_params %}
+          <div class="flex">
+            {% if description_params.icon != blank %}
+              {% theme_render_rc 'components/atoms/icon', name: description_params.icon, class: 'w-4 mr-2' %}
+            {% endif %}
+            {% theme_render_rc 'components/atoms/sidenote', params: description_params %}
+          </div>
 
           {% if validation.passed == false %}
             <ul>
