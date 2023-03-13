@@ -29,7 +29,6 @@ function defaultColorsHex() {
     // tailwind tends to convert the hex colors into rgb, but by appending semicolon at the end it does not
     // while it still can be used in CSS
     defaultColorsHex[key + '-hex'] = rgbToHex(rgb[0], rgb[1], rgb[2]) + ';';
-    console.log(key + ': ' + defaultColorsHex[key + '-hex']);
   });
 
   return defaultColorsHex;
@@ -55,7 +54,7 @@ module.exports = {
         'sans': ['var(--pos-fonts-default)', ...defaultFonts.default]
       },
       colors: {
-        'prominent': '#f0f0f0',
+        'prominent': parseColor('prominent'),
         'normal': parseColor('normal'),
         'supplementary': parseColor('supplementary'),
         'graphic': parseColor('graphic'),
