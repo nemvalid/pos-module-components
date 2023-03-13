@@ -14,6 +14,27 @@ function parseColor(colorName) {
   };
 }
 
+function defaultColorsHex() {
+  let defaultColorsHex = {};
+
+  const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
+    x = parseInt(x);
+    let hex = x.toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+  }).join('');
+
+  Object.keys(defaultColors).forEach(key => {
+    const rgb = defaultColors[key].split(', ');
+
+    // tailwind tends to convert the hex colors into rgb, but by appending semicolon at the end it does not
+    // while it still can be used in CSS
+    defaultColorsHex[key + '-hex'] = rgbToHex(rgb[0], rgb[1], rgb[2]) + ';';
+    console.log(key + ': ' + defaultColorsHex[key + '-hex']);
+  });
+
+  return defaultColorsHex;
+}
+
 // const safelist = [
 //   {
 //     pattern: new RegExp(`.+-(${Object.keys(defaultColors).join('|')})$`)
@@ -34,7 +55,7 @@ module.exports = {
         'sans': ['var(--pos-fonts-default)', ...defaultFonts.default]
       },
       colors: {
-        'prominent': parseColor('prominent'),
+        'prominent': '#f0f0f0',
         'normal': parseColor('normal'),
         'supplementary': parseColor('supplementary'),
         'graphic': parseColor('graphic'),
@@ -80,7 +101,9 @@ module.exports = {
         'confirmation-disabled': parseColor('confirmation-disabled'),
         'warning': parseColor('warning'),
         'warning-hover': parseColor('warning-hover'),
-        'warning-disabled': parseColor('warning-disabled')
+        'warning-disabled': parseColor('warning-disabled'),
+
+        ...defaultColorsHex()
       },
       borderColor: {
         DEFAULT: parseColor('divider')
