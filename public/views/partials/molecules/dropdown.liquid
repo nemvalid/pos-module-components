@@ -42,7 +42,7 @@ metadata:
   assign label_classes = label_classes | default: params.label_classes
   assign label_attributes = label_attributes | default: params.label_attributes
   assign dropdown_attributes = dropdown_attributes | default: params.dropdown_attributes
-  assign dropdown_classes = "shadow-large " | append: dropdown_classes | strip
+  assign dropdown_classes = "shadow-large inline-block md:block " | append: dropdown_classes | strip
   assign arrow = arrow | default: params.arrow
   if arrow == null
     assign arrow = true
