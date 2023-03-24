@@ -1,0 +1,16 @@
+{% capture colors %}
+{
+  "interactive-text": "#1d4ed8",
+  "panel": "#ffffff",
+  "base": "#f3f4f6",
+  "button-primary": "#1d4ed8",
+  "interactive-hover": "#3466e3",
+}
+{% endcapture %}
+
+{% liquid
+
+assign colors = colors | parse_json
+return colors
+
+%}

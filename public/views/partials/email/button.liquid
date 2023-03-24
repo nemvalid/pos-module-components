@@ -1,0 +1,27 @@
+---
+metadata:
+  name: Email Button
+  params:
+    content: Call to action
+    url: http://platformos.com
+    style: ''
+---
+{% liquid
+  function colors = 'modules/components/lib/colors'
+
+  assign content = content | default: params.content
+  assign url = url | default: params.url
+
+  assign style = style | default: params.style
+%}
+<table style="display: inline-block; {{ style }}">
+  <tr>
+    <td style="height: 44px; border-radius: 4px; background-color: {{colors['button-primary']}}; text-align: center;">
+      <a href="{{ url }}" style="padding: 10px 16px; display: inline-block; border-radius: 4px; background-color: {{colors['button-primary']}}; font-size: 16px; color: {{colors.panel}};">
+        <!--[if mso]> &nbsp; <![endif]-->
+        {{ content }}
+        <!--[if mso]> &nbsp; <![endif]-->
+      </a>
+    </td>
+  </tr>
+</table>

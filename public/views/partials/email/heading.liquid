@@ -1,0 +1,44 @@
+---
+metadata:
+  name: Email Heading
+  params:
+    tag: ''
+    level:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+    style: ''
+    content: I'm a heading
+---
+{% liquid
+  assign level = level | default: params.level | default: 2
+  assign defaultTag = 'h' | append: level
+  assign tag = tag | default: params.tag | default: defaultTag
+  assign attributes = attributes | default: params.attributes
+  assign content = content | default: params.content
+
+  assign style = 'margin: 0; font-weight: bold; ' | append: style | default: params.style
+
+
+  if level == 1
+    assign style = style | append: ' font-size: 48px; line-height: 1;'
+  elsif level == 2
+    assign style = style | append: ' margin-bottom: 24px; font-size: 30px; line-height: 36px;'
+  elsif level == 3
+    assign style = style | append: ' font-size: 24px; line-height: 32px;'
+  elsif level == 4
+    assign style = style | append: ' margin-bottom: 8px; font-size: 20px; line-height: 28px; font-weight: 500;'
+  elsif level == 5
+    assign style = style | append: ' font-size: 20px; line-height: 28px; font-weight: 500;'
+  elsif level == 6
+    assign style = style | append: ' font-size: 20px; line-height: 28px; font-weight: 500;'
+  endif
+%}
+<{{tag}}
+  style="{{style}}"
+>{% print content %}</{{tag}}>
+
+

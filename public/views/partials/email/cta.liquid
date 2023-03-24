@@ -1,0 +1,31 @@
+---
+metadata:
+  name: Email Call to Action
+  params:
+    title: Call to action
+    cta: Visit platformOS
+    url: http://platformos.com
+    style: ''
+---
+{% liquid
+  function colors = 'modules/components/lib/colors'
+
+  assign title = title | default: params.title
+  assign cta = cta | default: params.cta
+  assign url = url | default: params.url
+  assign style = style | default: params.style
+
+  assign style = 'width: 100%; margin-top: 24px; margin-bottom: 24px; padding: 24px; border-radius: 4px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); background-color: {{colors.panel}}; text-align: center; ' | append: style
+%}
+<table style="width: 100%;">
+  <tr>
+    <td style="{{style}}">
+
+      {% assign title = 'app.emails.passwords.reset.title' | t %}
+      {% theme_render_rc 'components/email/heading', content: title, level: 4 %}
+
+      {% theme_render_rc 'components/email/button', content: cta, url: url %}
+
+    </td>
+  </tr>
+</table>
