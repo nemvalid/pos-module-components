@@ -47,6 +47,9 @@ metadata:
   if tag == 'a'
     assign classes = classes | prepend: 'pos-clean '
   endif
+  if disabled
+    assign classes = classes | prepend: 'opacity-30 pointer-events-none '
+  endif
 
   if weight == 'primary'
     assign classes = classes | append: ' border'
@@ -91,7 +94,7 @@ metadata:
   {% for attribute in attributes %}
     {{ attribute[0] | html_safe }}="{{ attribute[1] | html_safe }}"
   {% endfor %}
-  {% if href %}href="{{href}}"{% endif %}
+  {% if href and disabled != true %}href="{{href}}"{% endif %}
   {% if tag == 'button' and disabled %}disabled{% endif %}
   {% if tag == 'button' %}type="{{type}}"{% endif %}
 >{{content | html_safe}}</{{tag}}>
