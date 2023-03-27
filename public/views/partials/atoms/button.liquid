@@ -14,6 +14,7 @@ metadata:
       - important
       - confirmation
       - inverted
+      - declination
     filled:
       - false
       - true
@@ -75,6 +76,8 @@ metadata:
         assign classes = classes | append: ' border-important hover:border-important-hover text-important hover:text-important-hover'
       when 'confirmation'
         assign classes = classes | append: ' border-confirmation hover:border-confirmation-hover text-confirmation hover:text-confirmation-hover'
+      when 'declination'
+        assign classes = classes | append: ' border-button-secondary-stroke hover:border-button-secondary-stroke-hover text-button-secondary-foreground hover:text-button-secondary-foreground-hover hover:bg-warning-disabled'
     endcase
 
     if filled
