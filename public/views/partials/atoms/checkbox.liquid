@@ -33,9 +33,9 @@ metadata:
   assign input_classes = 'h-0 w-0 absolute top-0 left-0 '
   assign checkmark_classes = 'pos-checkmark border w-4 h-4 border-input-border bg-input cursor-pointer block '
 
-  if focusable != false
+  unless focusable
     assign input_classes = input_classes | append: ' hidden'
-  endif
+  endunless
 %}
 <label class="{{container_classes}}">
   <input class="{{input_classes}}"
