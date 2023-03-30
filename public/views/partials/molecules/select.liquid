@@ -89,7 +89,7 @@ metadata:
       {% liquid
         assign opt_id = id | append: '_' | append: option.value
         assign input_name = name | append: '[]'
-        assign input_params = '{}' | parse_json | hash_merge: value: option.value, id: opt_id, attributes: attributes
+        assign input_params = '{}' | parse_json | hash_merge: value: option.value, id: opt_id, attributes: attributes, focusable: false
         if value contains option.value
           hash_assign input_params['checked'] = true
         endif

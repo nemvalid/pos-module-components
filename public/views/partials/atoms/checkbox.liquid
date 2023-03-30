@@ -11,6 +11,9 @@ metadata:
     disabled:
       - false
       - true
+    focusable:
+      - false
+      - true
     attributes: {}
 ---
 {% liquid
@@ -20,10 +23,19 @@ metadata:
   assign value = value | default: params.value
   assign disabled = disabled | default: params.disabled | default: false
   assign attributes = attributes | default: params.attributes
+  assign focusable = focusable | default: params.focusable
+
+  if focusable != false
+    assign focusable = true
+  endif
 
   assign container_classes = 'block relative '
-  assign input_classes = 'h-0 w-0 absolute top-0 left-0'
+  assign input_classes = 'h-0 w-0 absolute top-0 left-0 '
   assign checkmark_classes = 'pos-checkmark border w-4 h-4 border-input-border bg-input cursor-pointer block '
+
+  if focusable != false
+    assign input_classes = input_classes | append: ' hidden'
+  endif
 %}
 <label class="{{container_classes}}">
   <input class="{{input_classes}}"
@@ -31,7 +43,6 @@ metadata:
     id="{{id}}"
     name="{{name}}"
     aria-labelledby="{{name}}"
-    tabindex="0"
     {% for attribute in attributes %}
       {{ attribute[0] | html_safe }}="{{ attribute[1] | html_safe }}"
     {% endfor %}
