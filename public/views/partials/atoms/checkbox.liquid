@@ -22,7 +22,7 @@ metadata:
   assign attributes = attributes | default: params.attributes
 
   assign container_classes = 'block relative '
-  assign input_classes = 'hidden'
+  assign input_classes = 'h-0 w-0 absolute top-0 left-0'
   assign checkmark_classes = 'pos-checkmark border w-4 h-4 border-input-border bg-input cursor-pointer block '
 %}
 <label class="{{container_classes}}">
@@ -31,6 +31,7 @@ metadata:
     id="{{id}}"
     name="{{name}}"
     aria-labelledby="{{name}}"
+    tabindex="0"
     {% for attribute in attributes %}
       {{ attribute[0] | html_safe }}="{{ attribute[1] | html_safe }}"
     {% endfor %}
