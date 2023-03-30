@@ -23,3 +23,9 @@ input:checked[type=checkbox]:not(.pos-clean) ~ .pos-checkmark:after {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
+
+input:focus[type=checkbox]:not(.pos-clean) ~ .pos-checkmark {
+  @apply border-prominent border-2 rounded;
+}
+
+
