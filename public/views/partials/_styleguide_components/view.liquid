@@ -66,6 +66,7 @@
   <div class="flex-1">
     <section class="p-4">
       <div data-styleguide-component="{{component.metadata.name}}" class="relative">
+      {% try %}
         {% if styleguide_stories %}
           {% assign styleguide_stories_type = styleguide_stories | type_of %}
           {% if styleguide_stories_type != 'Array' %}
@@ -114,6 +115,9 @@
         {% else %}
           {% include component.path %}
         {% endif %}
+      {% catch err %}
+        {{err}}
+      {% endtry%}
       </div>
     </section>
   </div>

@@ -75,7 +75,7 @@
                   </clipPath>
                 </defs>
               </svg>
-            {% when 'templates' %}
+            {% when 'templates' or 'pages' %}
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 11L1 5.99999V18L12 23V11V11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 11L23 5.99999V18L12 23V11V11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -90,10 +90,10 @@
           {% for component in component_group[1].results %}
             {% liquid
               assign generated_name = component.path | split: '/' | last | prepend: '⚠️ '
-              assign name = component.metadata.name | default: generated_name
+              assign name = component.metadata.name | default: generated_name | truncate: 30
             %}
             <a href="/styleguide/{{ component.id }}" role="menuitem"
-              class="pos-clean block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md hover:text-gray-700 hover:bg-blue-100">
+              class="pos-clean block px-2 text-sm text-gray-400 transition-colors duration-200 rounded-md hover:text-gray-700 hover:bg-blue-100">
               {{name | humanize }}
             </a>
           {% endfor %}
