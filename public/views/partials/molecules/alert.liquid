@@ -16,6 +16,7 @@ metadata:
       - true
       - false
     content: Fill your profile
+    classes: ''
 ---
 {% parse_json icons %}
 {
@@ -32,8 +33,9 @@ metadata:
   assign variant = variant | default: params.variant | default: 'normal'
   assign content = content | default: params.content
   assign attributes = attributes | default: params.attributes
+  assign wrapper_classes = classes | default: params.classes | default: 'w-96'
 
-  assign classes = 'px-2 py-1 leading-5 rounded-md shadow-card flex items-center align-center w-96 h-10 '
+  assign classes = 'px-2 py-1 leading-5 rounded-md shadow-card flex items-center align-center w-full h-10 '
 
   if variant == 'normal'
     if severity == 'error'
@@ -57,7 +59,7 @@ metadata:
 
   assign icon_params = '{}' | parse_json | hash_merge: name: icons[severity].name, class: icon_classes
 %}
-<div class="inline-block"
+<div class="inline-block {{wrapper_classes}}"
   {% for attribute in attributes %}
     {{ attribute[0] | html_safe }}="{{ attribute[1] | html_safe }}"
   {% endfor %}
@@ -66,6 +68,6 @@ metadata:
       {% if icon == true %}
         {% theme_render_rc 'components/atoms/icon', params: icon_params %}
       {% endif %}
-      {{content}}
+      {{content | html_safe}}
   </{{tag}}>
 </div>
