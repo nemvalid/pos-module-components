@@ -29,7 +29,7 @@ metadata:
         <li class="p-2"><a href='#' class='text-normal'>Lorem ipsum dolor</a></li>
         <li class="p-2"><a href='#' class='text-normal'>Lorem ipsum dolor</a></li>
       </ul>
-    classes: 'w-64'
+    classes: ''
     dropdown_classes: ''
     label_classes: ''
     arrow: true
@@ -42,7 +42,7 @@ metadata:
   assign label_classes = label_classes | default: params.label_classes
   assign label_attributes = label_attributes | default: params.label_attributes
   assign dropdown_attributes = dropdown_attributes | default: params.dropdown_attributes
-  assign dropdown_classes = "shadow-large inline-block md:block " | append: dropdown_classes | strip
+  assign dropdown_classes = "w-full shadow-large inline-block md:block " | append: dropdown_classes | strip
   assign arrow = arrow | default: params.arrow
   if arrow == null
     assign arrow = true
@@ -52,7 +52,7 @@ metadata:
 <div
   x-data="{}"
   data-pos-component="Dropdown"
-  class="relative inline-block"
+  class="md:relative inline-block"
 >
   <button
     class="{{label_classes}}"
@@ -65,7 +65,7 @@ metadata:
   </button>
   <div
     data-dropdown-content
-    class="hidden absolute z-20 mt-3 md:min-w-44 md:top-full start-0 md:start-auto end-0 changes-transform {{classes}}"
+    class="hidden absolute z-20 mt-3 w-screen md:w-auto sm:min-w-44 md:top-full start-0 md:start-auto end-0 changes-transform {{classes}}"
     aria-hidden="true"
   >
     {% unless arrow == false %}

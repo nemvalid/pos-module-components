@@ -2,10 +2,12 @@ const dropdownComponentWrappers = document.querySelectorAll('[data-pos-component
 dropdownComponentWrappers.forEach(dropdownComponentWrapper => {
   const trigger = dropdownComponentWrapper.querySelector('[data-dropdown-trigger]');
   const content = dropdownComponentWrapper.querySelector('[data-dropdown-content]');
+  const closeButton = dropdownComponentWrapper.querySelector('[data-dropdown-close]');
+  const isDrawer = content.getAttribute('data-dropdown-content') === 'drawer';
   const arrow = dropdownComponentWrapper.querySelector('[data-dropdown-arrow]');
   let resizeTimeout;
 
-  const toggle = () => {
+  const toggleDropdown = () => {
     content.classList.toggle('hidden');
     if (content.getAttribute('aria-hidden') === 'true') {
       content.setAttribute('aria-hidden', 'false');
@@ -15,11 +17,27 @@ dropdownComponentWrappers.forEach(dropdownComponentWrapper => {
     positionArrow();
   };
 
+  const toggleDrawer = () => {
+    content.classList.toggle('-translate-x-full');
+    content.classList.toggle('transform-none');
+    if (content.getAttribute('aria-hidden') === 'true') {
+      content.setAttribute('aria-hidden', 'false');
+    } else {
+      content.setAttribute('aria-hidden', 'true');
+    }
+  };
+
 
   const close = (event) => {
     event.stopPropagation();
-    content.classList.add('hidden');
-    content.setAttribute('aria-hidden', 'true');
+
+    if (content.getAttribute('aria-hidden') === 'false') {
+      if (isDrawer) {
+        toggleDrawer();
+      } else {
+        toggleDropdown();
+      }
+    }
   };
 
   const watchClickOutside = (event) => {
@@ -42,7 +60,7 @@ dropdownComponentWrappers.forEach(dropdownComponentWrapper => {
     const contentSize = content.getBoundingClientRect();
     const arrowSize = arrow.getBoundingClientRect();
 
-    arrow.style.left = toggleSize.left - contentSize.left + toggleSize.width / 2 - arrowSize.width / 2 + 'px';
+    arrow.style.left = `${toggleSize.left - contentSize.left + toggleSize.width / 2 - arrowSize.width / 2}px`;
     arrow.classList.remove('invisible');
   };
 
@@ -52,9 +70,18 @@ dropdownComponentWrappers.forEach(dropdownComponentWrapper => {
     resizeTimeout = setTimeout(positionArrow, 200);
   };
 
-  window.addEventListener('resize', positionOnResize);
-  trigger.addEventListener('click', toggle);
+  trigger.addEventListener('click', isDrawer ? toggleDrawer : toggleDropdown);
   document.addEventListener('click', watchClickOutside);
-  content.addEventListener('click', close);
   dropdownComponentWrapper.addEventListener('keydown', supportKeyboardNavigation);
+
+  if (isDrawer) {
+    content.classList.remove('hidden');
+  } else {
+    window.addEventListener('resize', positionOnResize);
+    content.addEventListener('click', close);
+  }
+
+  if (closeButton) {
+    closeButton.addEventListener('click', close);
+  }
 });
