@@ -34,11 +34,11 @@ metadata:
 %}
 <div
   data-pos-component="flashes"
-  class="{{ position }} bottom-2 left-0 z-50"
+  class="{{ position }} bottom-2 left-0 z-50 max-w-full"
 >
   <template data-flash-template>
     <div class="px-4 overflow-hidden text-content-inverted" data-flash>
-      <div class="min-w-80 md:max-w-md mb-2 mt-2 relative transition transform">
+      <div class="min-w-80 max-w-full mb-2 mt-2 relative transition transform">
         {% capture flash_content %}
           <div class="mx-3 font-semibold" data-flash-content></div>
         {% endcapture %}
