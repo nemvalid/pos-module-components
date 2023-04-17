@@ -20,7 +20,7 @@ metadata:
 ---
 {% liquid
   assign input_params = input_params | default: params.input_params | hash_merge: classes: 'w-full pr-8'
-  assign button_params = button_params | default: params.button_params | hash_merge: classes: '-ml-7'
+  assign button_params = button_params | default: params.button_params | hash_merge: classes: 'rounded-none rounded-r-button'
 
   assign classes = classes | default: params.classes | default: 'w-full'
 
