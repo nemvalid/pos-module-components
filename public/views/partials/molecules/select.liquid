@@ -103,7 +103,7 @@ metadata:
   </div>
 
   <select
-    class="pos-select--multi-native"
+    class="pos-select--multi-native h-11 border border-input-border bg-panel {{classes}}"
     name="{{name}}[]"
     multiple
     aria-labelledby="{{name}}"
@@ -152,7 +152,7 @@ metadata:
   </div>
 
   <select
-    class="pos-select--simple-native"
+    class="pos-select--simple-native h-11 border border-input-border bg-panel {{classes}}"
     name="{{name}}"
     aria-labelledby="{{name}}"
     {% for attribute in attributes %}
@@ -160,7 +160,9 @@ metadata:
     {% endfor %}
     >
     {% for option in options %}
-    <option value="{{option.value}}" {% if value == option.value %}selected{% endif %}>{{option.label}}</option>
+    <option
+      class="bg-panel"
+      value="{{option.value}}" {% if value == option.value %}selected{% endif %}>{{option.label}}</option>
     {% endfor %}
   </select>
 </div>
