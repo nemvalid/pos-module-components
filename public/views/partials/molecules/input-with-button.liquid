@@ -20,12 +20,13 @@ metadata:
 ---
 {% liquid
   assign input_params = input_params | default: params.input_params | hash_merge: classes: 'w-full pr-8'
-  assign button_params = button_params | default: params.button_params | hash_merge: classes: 'rounded-none rounded-r-button'
+  assign button_classes = button_params.classes | prepend: 'rounded-none rounded-r-button '
+  assign button_params = button_params | default: params.button_params | hash_merge: classes: button_classes
 
   assign classes = classes | default: params.classes | default: 'w-full'
 
 %}
-<div class="inline-flex {{classes}}">
+<div class="inline-flex items-end {{classes}}">
   {% theme_render_rc 'components/atoms/input', params: input_params %}
   {% theme_render_rc 'components/atoms/button', params: button_params %}
 </div>
