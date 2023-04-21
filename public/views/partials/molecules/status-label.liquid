@@ -71,7 +71,7 @@ metadata:
   assign icon_params = null | hash_merge: name: icons[severity].name, class: icon_classes
 %}
 <div class="inline-block {{classes}}">
-  <div class="flex items-center align-center {{reverse}}">
+  <div class="flex items-center align-center {{reverse}}" data-tc="statusLabel">
       {% if icon == true %}
         <div>
           {% theme_render_rc 'components/atoms/icon', params: icon_params %}
