@@ -33,8 +33,8 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
   };
 
   const updateCustomSelectHovered = (newIndex) => {
-    const prevOption = options.children[optionHoveredIndex];
-    const option = options.children[newIndex];
+    const prevOption = options.querySelector('ul')?.children[optionHoveredIndex];
+    const option = options.querySelector('ul')?.children[newIndex];
 
     if (prevOption) {
       prevOption.classList.remove("bg-highlighted");
@@ -62,15 +62,18 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
 
     // press Enter or space -> select the option
     if (event.keyCode === 13 || event.keyCode === 32) {
-      event.preventDefault();
-      if (optionHoveredIndex == -1) {
-        toggleOpen(event);
-      } else {
-        const checkbox = options.children[optionHoveredIndex].querySelector('[type="checkbox"]');
-        if (checkbox) {
-          checkbox.click();
+      // don't react if user focused the filtering input
+      if(!document.activeElement.matches('input')){
+        event.preventDefault();
+        if (optionHoveredIndex == -1) {
+          toggleOpen(event);
         } else {
-          options.children[optionHoveredIndex].click();
+          const checkbox = options.children[optionHoveredIndex].querySelector('[type="checkbox"]');
+          if (checkbox) {
+            checkbox.click();
+          } else {
+            options.children[optionHoveredIndex].click();
+          }
         }
       }
     }
@@ -163,7 +166,7 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
         }
       });
 
-      const options = selectComponentWrapper.querySelectorAll('.pos-select__options > div');
+      const options = selectComponentWrapper.querySelectorAll('.pos-select__option');
       options.forEach(option => {
         const optionValue = option.getAttribute("data-value");
         if (optionValue == nativeSelect.value) {
@@ -181,7 +184,7 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
     };
 
     /* single select - custom select*/
-    selectComponentWrapper.querySelectorAll('.pos-select__options > div').forEach(option => {
+    selectComponentWrapper.querySelectorAll('.pos-select__options .pos-select__option').forEach(option => {
       const value = option.getAttribute("data-value");
       option.addEventListener('click', (event) => {
         nativeSelect.value = value;
@@ -197,5 +200,25 @@ selectComponentWrappers.forEach(selectComponentWrapper => {
       singleSelectTagSelect();
     });
   }
+
+  /* filtering the options list */
+  const filter = selectComponentWrapper.querySelector('.pos-select__filter');
+
+  if(filter){
+
+    const options_available = selectComponentWrapper.querySelectorAll('.pos-select__option');
+
+    filter.addEventListener('keyup', (event) => {
+      options_available.forEach(option => {
+        if(option.textContent.toLowerCase().trim().includes(event.target.value.toLowerCase().trim())){
+          option.classList.remove('hidden');
+        } else {
+          option.classList.add('hidden');
+        }
+      });
+    });
+
+  }
+
 
 });
