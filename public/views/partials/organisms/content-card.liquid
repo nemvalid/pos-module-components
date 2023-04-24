@@ -52,12 +52,11 @@ metadata:
   assign url = url | default: params.url
 
   assign classes = classes | append: ' overflow-hidden p-0 '
+  assign titleClasses = titleClasses | append: ' break-words '
 
   if animation == true
     assign classes = classes | append: 'hover:scale-105 duration-500 hover:shadow-large '
   endif
-
-  assign heading_params = null | hash_merge: content: title, classes: titleClasses, level: 4
 %}
 
 {% capture card_content %}
@@ -87,7 +86,7 @@ metadata:
         {% if url != blank %}
         <a href="{{url}}">
         {% endif %}
-          {% theme_render_rc 'components/atoms/heading', params: heading_params %}
+          {% theme_render_rc 'components/atoms/heading', content: title, classes: titleClasses, level: 4 %}
         {% if url != blank %}
         </a>
         {% endif %}
