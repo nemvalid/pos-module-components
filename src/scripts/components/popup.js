@@ -36,28 +36,31 @@ popupOpeners.forEach(opener => {
   });
 });
 
-const popups = document.querySelectorAll('[data-popup-id]');
-popups.forEach(popup => {
-  const popupId = popup.getAttribute('data-popup-id');
-  const closed = popup.getAttribute('data-closed');
-  const closable = popup.getAttribute('data-closable');
-  if (closable === "true" ) {
-    // popup close by ESC
-    popup.addEventListener("keydown", event => {
-      if (event.keyCode === 27) {
-        closePopup(popupId);
-      }
-    });
-    // click out
-    document.addEventListener("click", (event) => {
-      const didClickedOutside = !popup.contains(event.target);
-      if (didClickedOutside) {
-        closePopup(popupId);
-      }
-    });
-  }
-  // auto-open
-  if (closed === "false") {
-    togglePopup(popupId);
-  }
-});
+const componentModule = (elements) => {
+  elements.forEach(popup => {
+    const popupId = popup.getAttribute('data-popup-id');
+    const closed = popup.getAttribute('data-closed');
+    const closable = popup.getAttribute('data-closable');
+    if (closable === "true" ) {
+      // popup close by ESC
+      popup.addEventListener("keydown", event => {
+        if (event.keyCode === 27) {
+          closePopup(popupId);
+        }
+      });
+      // click out
+      document.addEventListener("click", (event) => {
+        const didClickedOutside = !popup.contains(event.target);
+        if (didClickedOutside) {
+          closePopup(popupId);
+        }
+      });
+    }
+    // auto-open
+    if (closed === "false") {
+      togglePopup(popupId);
+    }
+  });
+};
+
+export default componentModule;
