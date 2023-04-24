@@ -38,7 +38,7 @@ metadata:
   assign classes = classes | default: params.classes
 %}
 
-<div data-pos-component="Accordion" class="inline-block {{classes}}" data-pos-accordion-multiopen="{{multiOpen}}">
+<div data-pos-component="accordion" class="inline-block {{classes}}" data-pos-accordion-multiopen="{{multiOpen}}">
 {% for option in options %}
   <button class="pos-accordion__title z-10 relative rounded shadow-card bg-panel h-11 cursor-pointer flex items-center px-2 w-full" aria-expanded="false" id="{{id}}{{forloop.index}}" aria-controls="{{id}}{{forloop.index}}Panel">
     {% assign icon_params = null | hash_merge: name: 'dashUp' %}

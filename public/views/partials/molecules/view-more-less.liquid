@@ -28,7 +28,7 @@ metadata:
 
 %}
 {% if  content[0] %}
-  <div data-pos-component="more-less">
+  <div data-pos-component="moreless">
     <div class="more-less__short">
       {% for i in (0..limit) %}
         {{content[i] | html_safe}}
@@ -43,7 +43,7 @@ metadata:
     </div>
   </div>
 {% else %}
-  <div data-pos-component="more-less">
+  <div data-pos-component="moreless">
     {% if content.size > limit %}
       <div class="more-less__short">
         {{ content | html_safe | truncate: limit, "... " }}<a class="more-less__button--more" href="#">{{more_text | html_safe}}</a>
