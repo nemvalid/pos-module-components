@@ -87,7 +87,7 @@ metadata:
   assign classes = 'border border-input-border bg-input ' | append: classes
 
   assign input_classes = 'w-full pr-8 border-0 '
-  assign button_classes = 'rounded '
+  assign button_classes = 'rounded-button '
   assign button_size = 'normal'
 
   if size == 'lg'
@@ -97,7 +97,7 @@ metadata:
   elsif size == 'sm'
     assign classes = classes | append: ' pl-2 h-7 '
     if button == true
-      assign classes = classes | append: ' rounded-r '
+      assign classes = classes | append: ' rounded-r-button border-r-0 '
     endif
     assign input_classes = input_classes | append: ' h-6 '
     assign string_button_classes = button_classes | append: ' w-20 h-7 '
@@ -105,7 +105,7 @@ metadata:
     assign button_size = 'small'
   else
     if button == true
-      assign classes = classes | append: ' rounded-r '
+      assign classes = classes | append: ' rounded-r-button border-r-0 '
     endif
     assign classes = classes | append: ' pl-2 h-11 '
     assign string_button_classes = button_classes | append: ' w-20 h-11 '
