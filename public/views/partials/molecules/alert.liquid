@@ -64,7 +64,7 @@ metadata:
     {{ attribute[0] | html_safe }}="{{ attribute[1] | html_safe }}"
   {% endfor %}
 >
-  <{{tag}} class="{{classes}}">
+  <{{tag}} class="{{classes}}" data-tc="alert">
       {% if icon == true %}
         {% theme_render_rc 'components/atoms/icon', params: icon_params %}
       {% endif %}
