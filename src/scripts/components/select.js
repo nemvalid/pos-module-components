@@ -107,6 +107,8 @@ const componentModule = (elements) => {
 
     /* multiselect */
     const nativeMultiSelect = selectComponentWrapper.querySelector('.pos-select--multi-native');
+    const counter = selectComponentWrapper.querySelector('.pos-select__tags_counter');
+
     if (nativeMultiSelect) {
       selectComponentWrapper.querySelectorAll('[type="checkbox"]').forEach(checkbox => {
         /* multi select - custom select*/
@@ -122,6 +124,16 @@ const componentModule = (elements) => {
             placeholder.classList.add('hidden');
           } else {
             placeholder.classList.remove('hidden');
+          }
+
+          // update the counter for combined variant
+          if(counter){
+            if(checkedBoxes.length){
+              counter.classList.remove('hidden');
+            } else {
+              counter.classList.add('hidden');
+            }
+            counter.children[0]?.children[0]?.textContent = checkedBoxes.length + counter.dataset.label;
           }
         });
       });

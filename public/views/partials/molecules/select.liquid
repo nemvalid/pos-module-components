@@ -8,13 +8,17 @@ metadata:
     multiple:
       - true
       - false
+    combined:
+      - true
+      - false
     options:
       - label: Option 1
         value: value1
       - label: Option 2
         value: value2
     attributes: {}
-    placeholder:
+    placeholder: ''
+    selected_label: ''
     filter: false
     filter_placeholder: 'Type to filter options'
     classes: ''
@@ -55,17 +59,34 @@ metadata:
         value: value2
       - label: Option 3
         value: value3
+    - multiple: true
+      id: 'mySelect5'
+      filter: true
+      combined: true
+      value:
+        - value1
+        - value2
+      options:
+      - label: Option 1
+        value: value1
+      - label: Option 2
+        value: value2
+      - label: Option 3
+        value: value3
 ---
 {% liquid
   assign options = options | default: params.options | parse_json | default: '[]' | parse_json
   assign id = id | default: params.id | default: "mySelect"
   assign name = name | default: params.name | default: "mySelect"
   assign multiple = multiple | default: params.multiple | default: false
+  assign combined = combined | default: params.combined | default: false
+  assign overflow = overflow | default: params.overflow | default: 'visible'
   assign filter = filter | default: params.filter | default: false
   assign filter_placeholder = filter_placeholder | default: params.filter_placeholder | default: 'Type to filter options'
   assign value = value | default: params.value
   assign attributes = attributes | default: params.attributes
   assign placeholder = placeholder | default: params.placeholder | default: 'Select an option'
+  assign selected_label = selected_label | default: params.selected_label | default: 'selected'
   assign classes = classes | default: params.classes
 %}
 
@@ -75,11 +96,30 @@ metadata:
     <div class="pos-select__head cursor-pointer flex items-center justify-between border border-input-border bg-panel py-2 px-2 h-11" tabindex="0">
       <div class="{% if value %}hidden {% endif %}pos-select__placeholder cursor-pointer">{{placeholder}}</div>
       <div class="pos-select__tags flex">
+
+        {% if combined %}
+          <div class="pos-select__tags_counter {% unless value %}hidden{% endunless %}" data-label=" {{ selected_label }}">
+            {% liquid
+              if value[1]
+                assign chip_content = value.size
+              elsif value
+                assign chip_content = 1
+              else
+                assign chip_content = 0
+              endif
+
+              assign chip_content = chip_content | append: ' ' | append: selected_label
+            %}
+            {% assign chip_params = '{}' | parse_json | hash_merge: content: chip_content %}
+            {% theme_render_rc 'components/molecules/chip', params: chip_params %}
+          </div>
+        {% endif %}
+
         {% for option in options %}
-        <div class="{% unless value contains option.value%}hidden {% endunless %}mr-2 cursor-pointer" data-value="{{option.value}}">
-          {% assign chip_params = '{}' | parse_json | hash_merge: closable: true, variant: 'clickable', content: option.label %}
-          {% theme_render_rc 'components/molecules/chip', params: chip_params %}
-        </div>
+          <div class="{% if combined %} !hidden {% endif %} {% unless value contains option.value%}hidden {% endunless %}mr-2 cursor-pointer" data-value="{{option.value}}">
+            {% assign chip_params = '{}' | parse_json | hash_merge: closable: true, variant: 'clickable', content: option.label %}
+            {% theme_render_rc 'components/molecules/chip', params: chip_params %}
+          </div>
         {% endfor %}
       </div>
       <div class="pos-select__opener ml-3 cursor-pointer">
