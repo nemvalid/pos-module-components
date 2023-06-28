@@ -134,7 +134,6 @@ const componentModule = (elements) => {
               counter.classList.add('hidden');
             }
             counter.children[0]?.children[0]?.textContent = checkedBoxes.length + counter.dataset.label;
-            console.log(counter.dataset);
           }
         });
       });
