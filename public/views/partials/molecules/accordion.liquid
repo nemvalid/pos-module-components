@@ -50,7 +50,7 @@ metadata:
     </div>
   </button>
   <div class="pos-accordion__panel z-0 relative " role="region" id="{{id}}{{forloop.index}}Panel" aria-labelledby="{{id}}{{forloop.index}}">
-    <p class="px-4 pt-3 pb-4 -mt-1 rounded-b shadow-card bg-panel">{{ option.content | html_safe }}</p>
+    <div class="px-4 pt-3 pb-4 -mt-1 rounded-b shadow-card bg-panel">{{ option.content | html_safe }}</div>
   </div>
 {% endfor %}
 </div>
