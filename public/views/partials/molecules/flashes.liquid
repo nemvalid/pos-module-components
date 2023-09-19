@@ -9,6 +9,7 @@ metadata:
       - error
       - success
     position: "fixed"
+    positioning_classes: "bottom-2 left-0"
     autohide: true
     delay: 1000
 
@@ -24,6 +25,9 @@ metadata:
         message: "Success message"
         severity: 'success'
         autohide: false
+      - message: "Info message"
+        positioning_classes: "top-16 left-8"
+        autohide: false
 ---
 {% liquid
   assign position = position | default: params.position | default: 'fixed'
@@ -31,10 +35,11 @@ metadata:
   assign delay = delay | default: params.delay | default: 1000
   assign message = message | default: params.message | default: null
   assign severity = severity | default: params.severity | default: 'info'
+  assign positioning_classes = positioning_classes | default: params.positioning_classes | default: 'bottom-2 left-0'
 %}
 <div
   data-pos-component="flashes"
-  class="{{ position }} top-16 left-8 z-50 max-w-full"
+  class="{{ position }} {{ positioning_classes }} z-50 max-w-full"
 >
   <template data-flash-template>
     <div class="px-4 overflow-hidden text-content-inverted" data-flash>
