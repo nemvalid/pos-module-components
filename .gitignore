@@ -8,3 +8,5 @@ tmp/
 yarn-error.log
 assets/*.css.map
 assets/*.js.map
+modules/components/assets/*.css.map
+modules/components/assets/*.js.map
