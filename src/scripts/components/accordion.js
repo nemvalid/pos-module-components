@@ -1,7 +1,7 @@
 const componentModule = (elements) => {
   elements.forEach(accordionWrapper => {
     const titles = accordionWrapper.querySelectorAll('.pos-accordion__title');
-    const multiOpen = accordionWrapper.getAttribute("data-pos-accordion-multiopen") === "true" ? true : false;
+    const multiOpen = accordionWrapper.getAttribute("data-pos-accordion-multiopen") === "true";
 
     titles.forEach(title => {
       title.addEventListener('click', () => {

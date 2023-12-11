@@ -19,7 +19,7 @@ const componentModule = (elements) => {
       openerIcons[0].classList.toggle('hidden');
       openerIcons[1].classList.toggle('hidden');
 
-      if(popup.ariaHidden === 'true' && filter){
+      if (popup.ariaHidden === 'true' && filter) {
         filterClear();
       }
     };
@@ -32,7 +32,7 @@ const componentModule = (elements) => {
       openerIcons[0].classList.remove('hidden');
       openerIcons[1].classList.add('hidden');
       updateCustomSelectHovered(-1);
-      if(filter){
+      if (filter) {
         filterClear();
       }
     };
@@ -52,7 +52,7 @@ const componentModule = (elements) => {
         prevOption.classList.remove('bg-highlighted');
       }
       if (option) {
-        option.scrollIntoView({behavior: 'smooth', block: 'center'});
+        option.scrollIntoView({ behavior: 'smooth', block: 'center' });
         option.classList.add('bg-highlighted');
       }
 
@@ -70,14 +70,14 @@ const componentModule = (elements) => {
       if (event.keyCode === 38 && optionHoveredIndex > 0) {
         event.preventDefault(); // prevent page scrolling
         updateCustomSelectHovered(optionHoveredIndex - 1);
-      } else if (event.keyCode === 38 && filter && optionHoveredIndex === 0){
+      } else if (event.keyCode === 38 && filter && optionHoveredIndex === 0) {
         filter.focus();
       }
 
       // press Enter or space -> select the option
       if (event.keyCode === 13 || event.keyCode === 32) {
         // don't react if user focused the filtering input
-        if(!document.activeElement.matches('input')){
+        if (!document.activeElement.matches('input')) {
           event.preventDefault();
           if (optionHoveredIndex == -1) {
             toggleOpen(event);
@@ -127,13 +127,15 @@ const componentModule = (elements) => {
           }
 
           // update the counter for combined variant
-          if(counter){
-            if(checkedBoxes.length){
+          if (counter) {
+            if (checkedBoxes.length) {
               counter.classList.remove('hidden');
             } else {
               counter.classList.add('hidden');
             }
-            counter.children[0]?.children[0]?.textContent = checkedBoxes.length + counter.dataset.label;
+            if (counter.children[0]?.children[0]) {
+              counter.children[0].children[0].textContent = checkedBoxes.length + counter.dataset.label;
+            }
           }
         });
       });
@@ -238,17 +240,17 @@ const componentModule = (elements) => {
       });
     };
 
-    if(filter){
+    if (filter) {
       const optionsAvailable = selectComponentWrapper.querySelectorAll('.pos-select__option');
 
       filter.addEventListener('keyup', (event) => {
-        if(event.key === 'ArrowDown'){
+        if (event.key === 'ArrowDown') {
           event.preventDefault();
           head.focus();
         }
 
         optionsAvailable.forEach(option => {
-          if(option.textContent.toLowerCase().trim().includes(event.target.value.toLowerCase().trim())){
+          if (option.textContent.toLowerCase().trim().includes(event.target.value.toLowerCase().trim())) {
             option.classList.remove('hidden');
           } else {
             option.classList.add('hidden');

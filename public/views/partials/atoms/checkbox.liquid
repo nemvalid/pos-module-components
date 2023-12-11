@@ -14,6 +14,9 @@ metadata:
     focusable:
       - false
       - true
+    required:
+      - false
+      - true
     attributes: {}
 ---
 {% liquid
@@ -22,6 +25,7 @@ metadata:
   assign name = name | default: params.name
   assign value = value | default: params.value
   assign disabled = disabled | default: params.disabled | default: false
+  assign required = required | default: params.required | default: false
   assign attributes = attributes | default: params.attributes
   assign focusable = focusable | default: params.focusable
 
@@ -30,7 +34,7 @@ metadata:
   endif
 
   assign container_classes = 'block relative '
-  assign input_classes = 'h-0 w-0 absolute top-0 left-0 '
+  assign input_classes = 'h-1 w-1 absolute left-0 bottom-0 opacity-0 -z-10'
   assign checkmark_classes = 'pos-checkmark border w-4 h-4 border-input-border bg-input cursor-pointer block '
 
   unless focusable
@@ -50,6 +54,7 @@ metadata:
     {% if value %}value="{{value}}"{% endif %}
     {% if checked %}checked{% endif %}
     {% if disabled %}disabled{% endif %}
+    {% if required %}required{% endif %}
   />
   <span class="{{checkmark_classes}}"></span>
 </label>
