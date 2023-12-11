@@ -80,7 +80,7 @@ metadata:
     if input_params.type == 'checkbox'
       theme_render_rc 'components/atoms/checkbox', params: input_params
     endif
-    %} {{label_params.content | html_safe }}
+    %} <span>{{label_params.content | html_safe }}</span>
     {% if input_params.required %} <span class="text-important">*</span>{% endif %}
   </label>
 
