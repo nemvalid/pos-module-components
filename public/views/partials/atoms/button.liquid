@@ -23,6 +23,8 @@ metadata:
     disabled:
       - false
       - true
+    buttonDisabled:
+      - Name of a dynamic variable that the JS framework will use to decide the state of the button
     attributes: {}
     href: ''
     content: Click me
@@ -97,5 +99,6 @@ metadata:
   {% if href and disabled != true %}href="{{href}}"{% endif %}
   {% if tag == 'button' and disabled %}disabled{% endif %}
   {% if tag == 'button' %}type="{{type}}"{% endif %}
+  {% if buttonDisabled != blank %}:disabled="{{buttonDisabled}}"{% endif %}
 >{{content | html_safe}}</{{tag}}>
 
