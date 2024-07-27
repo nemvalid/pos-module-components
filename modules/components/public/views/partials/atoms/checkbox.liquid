@@ -37,13 +37,13 @@ metadata:
     assign input_classes = input_classes | append: ' hidden'
   endunless
 %}
-<label class="{{container_classes}}">
+<label class="{{ container_classes }}">
   <input type="hidden" name="{{name}}" value="" />
-  <input class="{{input_classes}}"
+  <input class="{{ input_classes }}"
     type="checkbox"
     id="{{id}}"
     name="{{name}}"
-    aria-labelledby="{{name}}"
+    aria-labelledby="{{ name }}"
     {% for attribute in attributes %}
       {{ attribute[0] | html_safe }}="{{ attribute[1] | html_safe }}"
     {% endfor %}
@@ -51,6 +51,6 @@ metadata:
     {% if checked %}checked{% endif %}
     {% if disabled %}disabled{% endif %}
   />
-  <span class="{{checkmark_classes}}"></span>
+  <span class="{{ checkmark_classes }}"></span>
 </label>
 
