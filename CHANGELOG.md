@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+## Unreleased
+
+### New
+
+- Molecule mobile-menu-dropdown
+- Fix most of platformos-check offenses
+
 ## 1.0.0
 
 > 10 November 2022
