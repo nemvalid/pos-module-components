@@ -2,7 +2,7 @@
 layout: modules/components/styleguide
 ---
 {% liquid
-  function current_user = 'modules/user/lib/queries/user/current'
+  function current_user = 'modules/user/queries/user/current'
   include 'modules/permission/lib/helpers/can_do_or_unauthorized', requester: current_user, do: 'styleguide.view'
 
   function component_groups = 'modules/components/lib/queries/components/get_all'
