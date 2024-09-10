@@ -51,13 +51,13 @@ metadata:
           assign flash_content = flash_content | html_safe
 
           assign error_attributes = null | hash_merge: data-flash-error: null
-          theme_render_rc 'modules/components/molecules/alert', severity: 'error', content: flash_content, attributes: error_attributes
+          theme_render_rc 'components/molecules/alert', severity: 'error', content: flash_content, attributes: error_attributes
 
           assign success_attributes = null | hash_merge: data-flash-success: null
-          theme_render_rc 'modules/components/molecules/alert', severity: 'success', content: flash_content, attributes: success_attributes
+          theme_render_rc 'components/molecules/alert', severity: 'success', content: flash_content, attributes: success_attributes
 
           assign info_attributes = null | hash_merge: data-flash-info: null
-          theme_render_rc 'modules/components/molecules/alert', severity: 'info', content: flash_content, attributes: info_attributes
+          theme_render_rc 'components/molecules/alert', severity: 'info', content: flash_content, attributes: info_attributes
         %}
         <button
           title="{{ 'app.close' | t }}"
