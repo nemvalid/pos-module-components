@@ -3,7 +3,7 @@ layout: modules/components/styleguide
 slug: styleguide/tokens/colors
 ---
 {% liquid
-  function current_user = 'modules/user/lib/queries/user/current'
+  function current_user = 'modules/user/queries/user/current'
   include 'modules/permission/lib/helpers/can_do_or_unauthorized', requester: current_user, do: 'styleguide.view'
 
   function theme_variables = 'modules/theme-manager/lib/queries/theme_settings/load'
