@@ -4,6 +4,9 @@ metadata:
   params:
     name: 'my-checkbox'
     value: ''
+    required:
+      - false
+      - true
     checked:
       - false
       - true
@@ -24,6 +27,7 @@ metadata:
   assign disabled = disabled | default: params.disabled | default: false
   assign attributes = attributes | default: params.attributes
   assign focusable = focusable | default: params.focusable
+  assign required = required | default: params.required | default: false
 
   if focusable != false
     assign focusable = true
@@ -50,6 +54,7 @@ metadata:
     {% if value %}value="{{value}}"{% endif %}
     {% if checked %}checked{% endif %}
     {% if disabled %}disabled{% endif %}
+    {% if required %}required{% endif %}
   />
   <span class="{{checkmark_classes}}"></span>
 </label>
